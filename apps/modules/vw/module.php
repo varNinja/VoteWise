@@ -75,7 +75,7 @@ class Module implements ModuleDefinitionInterface
                 "host" => $config->vw->database->host,
                 "username" => $config->vw->database->username,
                 "password" => $config->vw->database->password,
-                "dbname" => $config->vw->database->name
+                "dbname" => $config->vw->database->dbname
             ));
         });
     }

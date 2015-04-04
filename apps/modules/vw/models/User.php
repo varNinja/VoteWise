@@ -1,8 +1,9 @@
 <?php
-
+namespace VoteWise\VW\Models;
 use Phalcon\Mvc\Model\Validator\Email as Email;
+use Phalcon\Mvc\Model;
 
-class User extends \Phalcon\Mvc\Model
+class User extends Model
 {
 
     /**

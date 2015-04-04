@@ -15,6 +15,7 @@ class ControllerBase extends Controller
 
     protected function forward($uri){
        $uriParts = explode('/', $uri);
+	   $defaultModule=$this->router->getDefaultModule();
        return $this->dispatcher->forward(
           array(
           'module' => $defaultModule, 

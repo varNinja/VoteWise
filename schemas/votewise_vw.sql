@@ -174,15 +174,15 @@ CREATE TABLE IF NOT EXISTS `rank` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `topc`
+-- Table structure for table `topic`
 --
 -- Creation: Jul 11, 2014 at 10:29 PM
 -- Last update: Jul 11, 2014 at 09:29 PM
 --
 
-DROP TABLE IF EXISTS `topc`;
-CREATE TABLE IF NOT EXISTS `topc` (
-  `topcid` char(12) NOT NULL DEFAULT '0',
+DROP TABLE IF EXISTS `topic`;
+CREATE TABLE IF NOT EXISTS `topic` (
+  `topicid` char(12) NOT NULL DEFAULT '0',
   `desc` varchar(1024) NOT NULL,
   `stop` char(12) NOT NULL,
   `order` char(12) NOT NULL,
@@ -191,8 +191,8 @@ CREATE TABLE IF NOT EXISTS `topc` (
   `updt` datetime DEFAULT NULL,
   `updtid` char(12) NOT NULL DEFAULT '0',
   `delmark` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`topcid`),
-  KEY `topcid` (`topcid`)
+  PRIMARY KEY (`topicid`),
+  KEY `topicid` (`topicid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

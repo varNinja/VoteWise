@@ -8,12 +8,22 @@
 {{ form('session/register', 'id': 'registerForm', 'class': 'form-horizontal', 'onbeforesubmit': 'return false') }}
     <fieldset>
         <div class="control-group">
-            <label class="control-label" for="name">Your Full Name</label>
+            <label class="control-label" for="name">Your First Name</label>
             <div class="controls">
-                {{ text_field('name', 'class': 'input-xlarge') }}
+                {{ text_field('firstname', 'class': 'input-xlarge') }}
                 <p class="help-block">(required)</p>
                 <div class="alert" id="name_alert">
-                    <strong>Warning!</strong> Please enter your full name
+                    <strong>Warning!</strong> Please enter your first name
+                </div>
+            </div>
+        </div>
+		<div class="control-group">
+            <label class="control-label" for="name">Your Last Name</label>
+            <div class="controls">
+                {{ text_field('lastname', 'class': 'input-xlarge') }}
+                <p class="help-block">(required)</p>
+                <div class="alert" id="name_alert">
+                    <strong>Warning!</strong> Please enter your last name
                 </div>
             </div>
         </div>
