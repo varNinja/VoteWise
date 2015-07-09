@@ -330,7 +330,7 @@ footer {
 		margin-right: 3px;
 		margin-left: 2px;
 
-		-webkit-flex: 1 1 10em;
+		-webkit-flex: 1 1 7em;
 		-moz-flex: 1 1 15em;
 		flex: 1 1 15em;
 
@@ -395,7 +395,7 @@ footer {
 	  margin-bottom: 30px;
 	  margin-right: 10px;
 	  margin-left: 10px;
-	  -webkit-flex: 1 1 15em;
+	  -webkit-flex: 1 1 12em;
 	  -moz-flex: 1 1 15em;
 	  flex: 1 1 15em;
 
