@@ -313,8 +313,9 @@ footer {
 
 
   justify-content: space-around;
+  -webkit-justify-content: space-around;
 }
-@media screen and (max-width: 499px){
+@media screen and (max-width: 550px){
 	.flex-item-interests {
 
 		padding: 0px;
@@ -329,7 +330,7 @@ footer {
 		margin-right: 3px;
 		margin-left: 2px;
 
-		-webkit-flex: 1 1 15em;
+		-webkit-flex: 1 1 10em;
 		-moz-flex: 1 1 15em;
 		flex: 1 1 15em;
 
@@ -350,7 +351,7 @@ footer {
 
 }
 
-@media screen and (min-width: 500px) and (max-width: 899px){
+@media screen and (min-width: 551px) and (max-width: 899px){
 	.flex-item-interests {
 
 	  padding: 0px;
@@ -362,7 +363,7 @@ footer {
 	  height: 100%;
 	  margin-top: 10px;
 	  margin-bottom: 30px;
-	  -webkit-flex: 1 1 15em;
+	  -webkit-flex: 1 1 10em;
 	  -moz-flex: 1 1 15em;
 	  flex: 1 1 15em;
 
