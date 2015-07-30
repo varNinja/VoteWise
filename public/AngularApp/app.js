@@ -11,6 +11,11 @@ app.config(['$routeProvider', function($routeProvider) {
         controller: 'NavigatorCtrl'
       })
 
+      .when('/comparisons', {
+        templateUrl: 'comparisonPages/comparison.html',
+        controller: 'ComparisonCtrl'
+      })
+
       .when('/login', {
         templateUrl: 'loginRegister/login.html',
         controller: 'AuthCtrl'
