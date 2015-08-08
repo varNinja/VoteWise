@@ -10,49 +10,99 @@
 	</ul>
 	</div>
 </nav>
-<div class="main">
+<div class="main box">
+<br>
+<div class="comparisons">
+	<p>{{set.question}}</p>
+  <br>
+  <div class="comparisons-background">
+  	<a href="#/cl-background">
+  		go to background
+  	</a>
+  </div>
+</div>
+<br>
 
-<div class="questions">{{question}}</div>
+<div>
+ 
+    <div class="currentUserAnswer" style="display:inline; margin:0 auto">
+      <p style="font-size:1.5em; display:inline-block; margin:0 auto"> You: </p>
+      <div style="display:inline; float:right; position:relative; left: 20px">
+        <p class="fa fa-li" style="display:inline; position:relative" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[0], red:!currentUser.You.questionAnswer[0], 'fa-check-square':currentUser.You.questionAnswer[0], 'fa-square':!currentUser.You.questionAnswer[0]}">&nbsp&nbsp&nbsp</p> 
+        <p class="fa fa-li" style="display:inline; position:relative" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[1], red:!currentUser.You.questionAnswer[1], 'fa-check-square':currentUser.You.questionAnswer[1], 'fa-square':!currentUser.You.questionAnswer[1]}">&nbsp&nbsp&nbsp</p> 
+        <p class="fa fa-li" style="display:inline; position:relative" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[2], red:!currentUser.You.questionAnswer[2], 'fa-check-square':currentUser.You.questionAnswer[2], 'fa-square':!currentUser.You.questionAnswer[2]}">&nbsp&nbsp&nbsp</p> 
+        <p class="fa fa-li" style="display:inline; position:relative" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[3], red:!currentUser.You.questionAnswer[3], 'fa-check-square':currentUser.You.questionAnswer[3], 'fa-square':!currentUser.You.questionAnswer[3]}">&nbsp&nbsp&nbsp</p> 
+        <p class="fa fa-li" style="display:inline; position:relative" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[4], red:!currentUser.You.questionAnswer[4], 'fa-check-square':currentUser.You.questionAnswer[4], 'fa-square':!currentUser.You.questionAnswer[4]}">&nbsp&nbsp&nbsp</p>
+        <p class="fa fa-li" style="display:inline; position:relative" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[5], red:!currentUser.You.questionAnswer[5], 'fa-check-square':currentUser.You.questionAnswer[5], 'fa-square':!currentUser.You.questionAnswer[5]}"></p>
+      </div> 
+    </div> 
+    <br><br>
+    <div>
+      <p style="display:inline; float:left; position:relative; left: 80px; font-size:100%">&nbsp&nbsp&nbsp&nbspAgree&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<i style="font-size:70%">Ambivalent</i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDisagree</p>
+    </div>
+  
 
-<div class="v-left" style="font-size: 1em">
-	<a href="#/cl-background">
-		<h1>go to background</h1>
-	</a>
+  <!-- <div ng-repeat="(key, user) in currentUser track by $index" display="inline">
+      <div class="result">
+      <ul>
+          <li ng-repeat="answer in profile.questionAnswer track by $index"><i class="fa" ng-class="{green:answer, red:!answer, 'fa-check-square':answer, 'fa-square':!answer}"></i></li>
+          <hr style="position: relative; right: 115px; width: 320px">
+      </ul>
+      </div>
+
+  </div> -->
+
 </div>
 
-<form>
-	<h4>disagree/agree</h4>
-	<div class="left poll">
-		<p class="left">Completely Disagree</p>
-		<div class="clearFix"></div>
-		<input type="radio" name="radio" ng-model="question.stance" ng-value="-3" checked>
-		<input type="radio" name="radio" ng-model="question.stance" ng-value="-2">
-		<input type="radio" name="radio" ng-model="question.stance" ng-value="-1">
-	</div>
-	
-	<div class="right poll">
-		<p class="right">Completely Agree</p>
-		<div class="clearFix"></div>
-		<input type="radio" name="radio" ng-model="question.stance" ng-value="3">
-		<input type="radio" name="radio" ng-model="question.stance" ng-value="2">
-		<input type="radio" name="radio" ng-model="question.stance" ng-value="1">
-	</div>
-	<input type="radio" name="radio" ng-model="question.stance" ng-value="0" class="no-comment"><span>I can't answer this question</span>
-	<h4>importance</h4>
 
-	<input type="button" value="Not Important" ng-click="question.importance = 'notImportant'">
-	<input type="button" value="Important"  ng-click="question.importance = 'important'">
-	<input type="button" value="Extremely"  ng-click="question.importance = 'veryImportant'">
-	<input type="button" value="test" ng-click="importance()">
-	<div class="clearFix"></div>
-	<input type="button" class="comments" value="ADD COMMENTS">
-	
-	<div class="fa fa-arrow-circle-right fa-3x"></div>
+<div class="politicianAnswers">
+<!--   <div>
+    <div class="result1" style="display:inline; margin:0 auto">
+      <div><br><br><br>
+      </div>
+      <div ng-repeat="(key, profile) in profileCompare">
+        <p style="font-size:100%">{{key}}:</p>
+        <p style="font-size:80%">{{profile.questionImportance}},</p>
+        <p style="font-size:100%; font-weight: bold"> comments </p>
+        <br>
+      </div>
+    </div>
+  </div> -->
 
-</form>
+    <div class="result">
+      
+    </div>
+    <div ng-repeat="(key, profile) in profileCompare">
+        <div class="result">
 
+        <ul> 
+
+            <li ng-repeat="answer in profile.questionAnswer track by $index" style="top:10px; right:30px;"><i class="fa" ng-class="{green:answer, red:!answer, 'fa-check-square':answer, 'fa-square':!answer}"></i></li>
+         	<li style="position: relative; width: 97px; right:28px"> 
+              {{key}}: <br> &nbsp&nbsp
+              <i style="font-size: 80%; text-align:center">{{profile.questionImportance}}</i> <br>
+              {{profile.office}}
+              <br>
+              Comments
+              </li> 
+            <hr style="position: relative; width: 300px;">
+
+           
+        </ul>
+        </div>
+
+    </div>
 </div>
 
 
-			
+
+    <!-- <div class="result" style="display:inline">
+      <ul>
+        <li>Agree</li><li></li><li></li><li></li><li>Disagree</li>
+      </ul>
+    </div> -->
+
+
+
+
 </div>

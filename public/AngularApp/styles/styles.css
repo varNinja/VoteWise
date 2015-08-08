@@ -28,9 +28,9 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-body {
-	line-height: 1;
-}
+
+
+
 ol, ul {
 	list-style: none;
 }
@@ -47,6 +47,49 @@ table {
 	border-spacing: 0;
 }
 
+.nameAndImportance {
+border:1px solid silver;
+float:left;
+margin:2px;
+min-height:100px;
+padding:2px;
+width:50px;
+display: inline-block;
+};
+
+.testItem {
+border:1px solid silver;
+float:left;
+margin:2px;
+min-height:100px;
+padding:2px;
+width:50px;
+display: inline-block;
+};
+
+.skinnyVerticle {
+	margin:2px;
+	padding:2px;
+	width:50px;
+	min-height: 100px;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  border:1px solid silver;
+}
+
+.opinion {
+border:1px solid silver;
+float:left;
+margin:5px;
+min-height:100px;
+padding:5px;
+width:300px;
+display: inline block;
+};
+
 
 
 /*------
@@ -61,6 +104,7 @@ table {
 *-------*/
 
 body {
+	line-height: 1;
 	background-color: #c4e2fa;
 	text-align: center;
 	font-family: 'Gentium Basic', serif;
@@ -81,12 +125,7 @@ a:hover {
 	cursor: pointer;
 }
 
-.main{
-	width:22.5rem;
-	margin: 0 auto;
-	position: relative;
 
-}
 /*
 .backgroundImage {
 	position: absolute;
@@ -110,8 +149,6 @@ a:hover {
 	width: 100%;
 	height: 150%;
 }*/
-
-
 
 footer {
 	height: 5.625rem;
@@ -278,14 +315,11 @@ footer {
 	height:13.4375rem;
 }
 
-
 .voterbox {
 	background-image: url("../img/VOTER.svg");
 	background-repeat: no-repeat;
 	float: left;
 }
-
-
 
 .politicianbox {
 	background-image: url("../img/POLITICIAN.svg");
@@ -314,7 +348,108 @@ footer {
   justify-content: space-around;
   -webkit-justify-content: space-around;
 }
+
+.politicianAnswers {
+	width:360px;
+	height:360px;
+	overflow: scroll;
+}
+
 @media screen and (max-width: 550px){
+	.main{
+		width:22.5rem;
+		margin: 0 auto;
+		position: relative;
+	}
+
+	.currentUserAnswer div p {
+		font-size: 1.5em;
+	}
+
+	.comparisons {
+		font-size: 1rem;
+		margin-bottom: 1rem;
+		line-height: 100%;
+		/*word-spacing: px;*/
+		/*letter-spacing: .05rem;*/
+	}
+
+	.comparisons p {
+		text-transform: none;
+		text-align: justify;
+		line-height: 1.2rem;
+		width: 80%;
+		margin: 0 auto;
+	}
+
+	.result {
+	    float: right;
+	    width: 100%;
+	    display: inline-block
+	    ;
+	}
+
+	.result ul li{
+	    display: inline-block;
+	    list-style-type: none;
+	    padding: 1em;
+	    width: .4em;
+	    text-align: right;
+	    font-size:1em;
+	    position:relative;
+	    float:right ;
+	}
+
+	.result tr td table{
+		display: inline-block;
+		padding: 4em;
+		width: 1em;
+		display: ;
+	}
+	.result-b {
+	    float: right;
+	    width: 100%;
+	    display: inline-block;
+	}
+
+	.result-b ul li{
+	    display: inline-block;
+	    list-style-type: none;
+	    padding: 1em;
+	    width: .4em;
+	    text-align: right;
+	    font-size:1em;
+	    position:relative;
+	    float:right ;
+	}
+
+	.result-b tr td table{
+		display: inline-block;
+		padding: 4em;
+		width: 1em;
+		display: ;
+	}
+
+
+	.result1 {
+	    float: left;
+	    width: 34%;
+	    position:relative;
+	    left: 10px;
+
+	}
+
+	.result1 ul li{
+	    display: inline-block;
+	    list-style-type: none;
+	    padding: 1em;
+	    width: .4em;
+	    text-align: right;
+	    font-size:1em;
+	    position:relative;
+	    right:25px;
+	}
+
 	.flex-item-interests {
 
 		padding: 0px;
@@ -351,6 +486,79 @@ footer {
 }
 
 @media screen and (min-width: 551px) and (max-width: 899px){
+	
+	.main{
+		width:40rem;
+		margin: 0 auto;
+		position: relative;
+		font-weight: 700;
+	}
+
+	.comparisons {
+		font-size: 1.4rem;
+		margin-bottom: 1rem;
+		line-height: 140%;
+		/*word-spacing: px;*/
+		/*letter-spacing: .05rem;*/
+	}
+
+	.comparisons p {
+		text-transform: none;
+		text-align: justify;
+		line-height: 1.rem;
+		width: 80%;
+		margin: 0 auto;
+	}
+
+	.result1 {
+	    float: left;
+	    width: 30%;
+	    position:relative;
+	    left: 10px;
+	    font-size:1.4em;
+
+	}
+
+	.result1 ul li{
+	    display: inline-block;
+	    list-style-type: none;
+	    padding: 1em;
+	    width: .4em;
+	    text-align: right;
+	    font-size:1em;
+	    position:relative;
+	    right:25px;
+	}
+
+	.result {
+	    float: left;
+	}
+
+	.result ul li{
+	    display: inline-block;
+	    list-style-type: none;
+	    padding: 1em;
+	    width: .4em;
+	    text-align: right;
+	    font-size:1.6em;
+	    position:relative;
+	    right:25px;
+	}
+
+	.result tr td table{
+		display: inline-block;
+		padding: 4em;
+		width: 1em;
+		display: ;
+	}
+
+	.result tr td table{
+		display: inline-block;
+		padding: 4em;
+		width: 1em;
+		display: ;
+	}
+
 	.flex-item-interests {
 
 	  padding: 0px;
@@ -499,12 +707,69 @@ nav {
 
 }
 
-.questions {
-	font-size: 1rem;
-	margin-bottom: 1rem;
-	line-height: 100%;
-	/*word-spacing: px;*/
-	/*letter-spacing: .05rem;*/
+.red { 
+	color: red;
+}
+
+.green {
+	color: green;
+}
+
+.comparison-true {
+
+}
+
+.comparison-false {
+
+}
+
+.comparison-list li
+{
+display: inline;
+list-style-type: none;
+padding-right: 20px;
+}
+
+.comparisonsOpinion {
+	font-size: .8em;
+	display: inline;
+	text-align: right;
+}
+
+.comparisonProfile {
+	display: inline;
+	text-align: left;
+}
+
+
+.comparisons-background {
+/*	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);*/
+	
+
+/*	-webkit-transform-origin: center top 0;
+	transform-origin: center top 0;*/
+	margin: 0 auto;
+	top: 3rem;
+	left:1.6rem;
+	width: 90%;
+	text-align:center;
+	float:center;
+	vertical-align: baseline;
+
+/*	position: absolute;
+
+*/	font-size: 1rem;
+	text-transform: uppercase;
+	font-weight: 700;
+	background-color: teal;
+	border-radius: 20px;
+	border: 1px solid black;
+	padding: .1rem 0;
+}
+
+.comparisons-background a {
+	text-align: center;
 }
 
 .talking-points {
@@ -572,7 +837,6 @@ form p {
 
 
 }
-
 
 form p.right {
 	text-align: right;
