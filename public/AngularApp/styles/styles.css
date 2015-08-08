@@ -355,16 +355,22 @@ footer {
 	overflow: scroll;
 }
 
-@media screen and (max-width: 550px){
-	.main{
-		width:22.5rem;
-		margin: 0 auto;
-		position: relative;
-	}
+/*.main{
+	width:40rem;
+	margin: 0 auto;
+	position: relative;
+	font-weight: 700;
+}*/
 
-	.currentUserAnswer div p {
-		font-size: 1.5em;
-	}
+.main{
+	width:30.5rem;
+	margin: 0 auto;
+	position: relative;
+}
+
+@media screen and (max-width: 767px){
+
+
 
 	.comparisons {
 		font-size: 1rem;
@@ -388,7 +394,9 @@ footer {
 	    display: inline-block
 	    ;
 	}
-
+	.center {
+		text-align: center;
+	}
 	.result ul li{
 	    display: inline-block;
 	    list-style-type: none;
@@ -398,6 +406,10 @@ footer {
 	    font-size:1em;
 	    position:relative;
 	    float:right ;
+	}
+
+	.brd {
+		border: 1px solid black;
 	}
 
 	.result tr td table{
@@ -453,10 +465,10 @@ footer {
 	.flex-item-interests {
 
 		padding: 0px;
-		min-height: 100px;
-		min-width: 100px;
-		max-height: 100px;
-		max-width: 100px;
+		min-height: 125px;
+		min-width: 125px;
+		max-height: 125px;
+		max-width: 125px;
 		width: 100%;
 		height: 100%;
 		margin-top: 10px;
@@ -477,23 +489,16 @@ footer {
 		-webkit-transition: all .2s ease-in-out;
 		-moz-transition: all .2s ease-in-out;
 		transition: all .2s ease-in-out;
-		min-height: 100px;
-		min-width: 100px;
-		width: 70%;
+		min-height: 125px;
+		min-width: 125px;
+		width: 100%;
 
 	}
 
 }
 
-@media screen and (min-width: 551px) and (max-width: 899px){
+@media screen and (min-width: 768px) and (max-width: 992px){
 	
-	.main{
-		width:40rem;
-		margin: 0 auto;
-		position: relative;
-		font-weight: 700;
-	}
-
 	.comparisons {
 		font-size: 1.4rem;
 		margin-bottom: 1rem;
@@ -588,7 +593,7 @@ footer {
 	}
 }
 
-@media screen and (min-width: 900px){
+@media screen and (min-width: 993px){
 	.flex-item-interests {
 
 	  padding: 0px;
@@ -657,10 +662,10 @@ footer {
 }
 
 nav {
-	width: 100%;
-	height: 2.5rem;
-	border-bottom: 10px solid #000;
-	margin-bottom: 1rem;
+  width: 100%;
+  height: 100%;
+  border-bottom: 10px solid #000080;
+  margin-bottom: 1rem;
 }
 
 .nav-link {

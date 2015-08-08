@@ -5,35 +5,39 @@
 		<li><a href="#/"><img class="portal" src="img/Question.png"></a></li>
 		<li><a href="#/"><img class="portal" src="img/EDUCATION.svg"></a></li>
 		<li><a href="#/"><img class="portal" src="img/Chat.png"></a></li>
-		<li class="hide"><a href="#/"><img class="portal" src="img/Politician-Info.png"></a></li>
+		<li><a href="#/"><img class="portal" src="img/Politician-Info.png"></a></li>
 		<li><a href="#/"><img class="portal" src="img/Settings.png"></a></li>
 	</ul>
 	</div>
 </nav>
 <div class="main box">
 <br>
-<div class="comparisons">
-	<p>{{set.question}}</p>
-  <br>
-  <div class="comparisons-background">
-  	<a href="#/cl-background">
-  		go to background
-  	</a>
-  </div>
-</div>
+	<div class="comparisons">
+		<p>{{set.question}}</p>
+	  <br>
+	  <div class="comparisons-background">
+	  	<a href="#/cl-background">
+	  		go to background
+	  	</a>
+	  </div>
+	</div>
 <br>
+</div>
 
 <div>
  
-    <div class="currentUserAnswer" style="display:inline; margin:0 auto">
-      <p style="font-size:1.5em; display:inline-block; margin:0 auto"> You: </p>
-      <div style="display:inline; float:right; position:relative; left: 20px">
-        <p class="fa fa-li" style="display:inline; position:relative" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[0], red:!currentUser.You.questionAnswer[0], 'fa-check-square':currentUser.You.questionAnswer[0], 'fa-square':!currentUser.You.questionAnswer[0]}">&nbsp&nbsp&nbsp</p> 
-        <p class="fa fa-li" style="display:inline; position:relative" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[1], red:!currentUser.You.questionAnswer[1], 'fa-check-square':currentUser.You.questionAnswer[1], 'fa-square':!currentUser.You.questionAnswer[1]}">&nbsp&nbsp&nbsp</p> 
-        <p class="fa fa-li" style="display:inline; position:relative" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[2], red:!currentUser.You.questionAnswer[2], 'fa-check-square':currentUser.You.questionAnswer[2], 'fa-square':!currentUser.You.questionAnswer[2]}">&nbsp&nbsp&nbsp</p> 
-        <p class="fa fa-li" style="display:inline; position:relative" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[3], red:!currentUser.You.questionAnswer[3], 'fa-check-square':currentUser.You.questionAnswer[3], 'fa-square':!currentUser.You.questionAnswer[3]}">&nbsp&nbsp&nbsp</p> 
-        <p class="fa fa-li" style="display:inline; position:relative" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[4], red:!currentUser.You.questionAnswer[4], 'fa-check-square':currentUser.You.questionAnswer[4], 'fa-square':!currentUser.You.questionAnswer[4]}">&nbsp&nbsp&nbsp</p>
-        <p class="fa fa-li" style="display:inline; position:relative" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[5], red:!currentUser.You.questionAnswer[5], 'fa-check-square':currentUser.You.questionAnswer[5], 'fa-square':!currentUser.You.questionAnswer[5]}"></p>
+    <div class="currentUserAnswer row brd" >
+      <div class="col-xs-2">
+		<p style="display:inline; position:relative; left: 30px" class="fa brd"> You: </p>
+	  </div>
+      <div class="col-xs-10 center" >
+      	
+        <p class="fa brd" style="display:inline; position:relative; font-size:1.85em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[0], red:!currentUser.You.questionAnswer[0], 'fa-check-square':currentUser.You.questionAnswer[0], 'fa-square':!currentUser.You.questionAnswer[0]}">&nbsp&nbsp&nbsp</p> 
+        <p class="fa brd" style="display:inline; position:relative; font-size:1.85em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[1], red:!currentUser.You.questionAnswer[1], 'fa-check-square':currentUser.You.questionAnswer[1], 'fa-square':!currentUser.You.questionAnswer[1]}">&nbsp&nbsp&nbsp</p> 
+        <p class="fa brd" style="display:inline; position:relative; font-size:1.85em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[2], red:!currentUser.You.questionAnswer[2], 'fa-check-square':currentUser.You.questionAnswer[2], 'fa-square':!currentUser.You.questionAnswer[2]}">&nbsp&nbsp&nbsp</p> 
+        <p class="fa brd" style="display:inline; position:relative; font-size:1.85em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[3], red:!currentUser.You.questionAnswer[3], 'fa-check-square':currentUser.You.questionAnswer[3], 'fa-square':!currentUser.You.questionAnswer[3]}">&nbsp&nbsp&nbsp</p> 
+        <p class="fa" style="display:inline; position:relative; font-size:1.85em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[4], red:!currentUser.You.questionAnswer[4], 'fa-check-square':currentUser.You.questionAnswer[4], 'fa-square':!currentUser.You.questionAnswer[4]}">&nbsp&nbsp&nbsp</p>
+        <p class="fa" style="display:inline; position:relative; font-size:1.85em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[5], red:!currentUser.You.questionAnswer[5], 'fa-check-square':currentUser.You.questionAnswer[5], 'fa-square':!currentUser.You.questionAnswer[5]}"></p>
       </div> 
     </div> 
     <br><br>
@@ -72,37 +76,36 @@
     <div class="result">
       
     </div>
-    <div ng-repeat="(key, profile) in profileCompare">
-        <div class="result">
+    <div ng-repeat="(key, profile) in profileCompare" class="row">
 
-        <ul> 
-
-            <li ng-repeat="answer in profile.questionAnswer track by $index" style="top:10px; right:30px;"><i class="fa" ng-class="{green:answer, red:!answer, 'fa-check-square':answer, 'fa-square':!answer}"></i></li>
-         	<li style="position: relative; width: 97px; right:28px"> 
-              {{key}}: <br> &nbsp&nbsp
+    	<div style="display:inline; text-align:right" class="col-xs-4 brd">
+    		{{key}}: <br> &nbsp&nbsp
               <i style="font-size: 80%; text-align:center">{{profile.questionImportance}}</i> <br>
               {{profile.office}}
               <br>
               Comments
-              </li> 
+    	</div>
+
+        <div class="result col-xs-8" style="display:inline">
+
+        <ul style="display:inline;"> 
+
+            <li ng-repeat="answer in profile.questionAnswer track by $index" style="top:10px; display:inline; font-size:1.2em"><i class="fa" ng-class="{green:answer, red:!answer, 'fa-check-square':answer, 'fa-square':!answer}"></i></li>
+         	<li style="position: relative; width: 97px; right:28px"> 
+              
+            </li> 
             <hr style="position: relative; width: 300px;">
 
            
         </ul>
+<!-- 
+        	<table style="display:inline">
+        	 <tr ng-repeat="answer in profile.questionAnswer track by $index" class="fa col-xs-7" style="display:inline" ng-class="{green:answer, red:!answer, 'fa-check-square':answer, 'fa-square':!answer}"></tr>
+        	</table> -->
+
         </div>
+        <!-- <div class="col-xs-1"> -->
+        <!-- </div> -->
 
     </div>
-</div>
-
-
-
-    <!-- <div class="result" style="display:inline">
-      <ul>
-        <li>Agree</li><li></li><li></li><li></li><li>Disagree</li>
-      </ul>
-    </div> -->
-
-
-
-
 </div>
