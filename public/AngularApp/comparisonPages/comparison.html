@@ -21,91 +21,91 @@
 	  	</a>
 	  </div>
 	</div>
-<br>
 </div>
 
-<div>
- 
-    <div class="currentUserAnswer row brd" >
-      <div class="col-xs-2">
-		<p style="display:inline; position:relative; left: 30px" class="fa brd"> You: </p>
-	  </div>
-      <div class="col-xs-10 center" >
-      	
-        <p class="fa brd" style="display:inline; position:relative; font-size:1.85em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[0], red:!currentUser.You.questionAnswer[0], 'fa-check-square':currentUser.You.questionAnswer[0], 'fa-square':!currentUser.You.questionAnswer[0]}">&nbsp&nbsp&nbsp</p> 
-        <p class="fa brd" style="display:inline; position:relative; font-size:1.85em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[1], red:!currentUser.You.questionAnswer[1], 'fa-check-square':currentUser.You.questionAnswer[1], 'fa-square':!currentUser.You.questionAnswer[1]}">&nbsp&nbsp&nbsp</p> 
-        <p class="fa brd" style="display:inline; position:relative; font-size:1.85em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[2], red:!currentUser.You.questionAnswer[2], 'fa-check-square':currentUser.You.questionAnswer[2], 'fa-square':!currentUser.You.questionAnswer[2]}">&nbsp&nbsp&nbsp</p> 
-        <p class="fa brd" style="display:inline; position:relative; font-size:1.85em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[3], red:!currentUser.You.questionAnswer[3], 'fa-check-square':currentUser.You.questionAnswer[3], 'fa-square':!currentUser.You.questionAnswer[3]}">&nbsp&nbsp&nbsp</p> 
-        <p class="fa" style="display:inline; position:relative; font-size:1.85em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[4], red:!currentUser.You.questionAnswer[4], 'fa-check-square':currentUser.You.questionAnswer[4], 'fa-square':!currentUser.You.questionAnswer[4]}">&nbsp&nbsp&nbsp</p>
-        <p class="fa" style="display:inline; position:relative; font-size:1.85em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[5], red:!currentUser.You.questionAnswer[5], 'fa-check-square':currentUser.You.questionAnswer[5], 'fa-square':!currentUser.You.questionAnswer[5]}"></p>
-      </div> 
-    </div> 
-    <br><br>
-    <div>
-      <p style="display:inline; float:left; position:relative; left: 80px; font-size:100%">&nbsp&nbsp&nbsp&nbspAgree&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<i style="font-size:70%">Ambivalent</i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDisagree</p>
-    </div>
-  
+	<div>
+	 	<br>
+	    <div class="currentUserAnswer row " >
+	      <div class="col-xs-2 center">
+			<p style="display:inline; position:relative; left: 10px; font-size:1.5em" class="fa  "> <b>You: </b> </p>
+		  </div>
+	      <div class="col-xs-10 center" >
+	      	
+	        <p class="fa" style="display:inline; position:relative; font-size:1.9em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[0], red:!currentUser.You.questionAnswer[0], 'fa-check-square':currentUser.You.questionAnswer[0], 'fa-square':!currentUser.You.questionAnswer[0]}">
+	        	&nbsp
+	        	<i style="position:absolute; bottom:30px; font-size:.4em; right: 8px; color:black;">
+	        		Agree
+        			<i style="position:absolute; font-size:1em; color:black; bottom: 0px; left:85px">
+	    				Ambivalent
+	    			</i>
+	        	</i>
+	        </p> 
+	        <p class="fa" style="display:inline; position:relative; font-size:1.9em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[1], red:!currentUser.You.questionAnswer[1], 'fa-check-square':currentUser.You.questionAnswer[1], 'fa-square':!currentUser.You.questionAnswer[1]}">
+	        	&nbsp
+	        </p> 
+	        <p class="fa" style="display:inline; position:relative; font-size:1.9em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[2], red:!currentUser.You.questionAnswer[2], 'fa-check-square':currentUser.You.questionAnswer[2], 'fa-square':!currentUser.You.questionAnswer[2]}">
+	        	&nbsp
+	        </p> 
+	        <p class="fa" style="display:inline; position:relative; font-size:1.9em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[3], red:!currentUser.You.questionAnswer[3], 'fa-check-square':currentUser.You.questionAnswer[3], 'fa-square':!currentUser.You.questionAnswer[3]}">
+	        	&nbsp
+	        </p> 
+	        <p class="fa" style="display:inline; position:relative; font-size:1.9em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[4], red:!currentUser.You.questionAnswer[4], 'fa-check-square':currentUser.You.questionAnswer[4], 'fa-square':!currentUser.You.questionAnswer[4]}">
+	        	&nbsp
+	        </p>
+	        <p class="fa" style="display:inline; position:relative; font-size:1.9em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[5], red:!currentUser.You.questionAnswer[5], 'fa-check-square':currentUser.You.questionAnswer[5], 'fa-square':!currentUser.You.questionAnswer[5]}">
+	        	<i style="position:absolute; font-size:.4em; color:black; bottom:30px; right:-5px">Disagree</i>
+	        </p>
+	      </div> 
+	    </div> 
+	    <br><br>
+	   
+	</div>
 
-  <!-- <div ng-repeat="(key, user) in currentUser track by $index" display="inline">
-      <div class="result">
-      <ul>
-          <li ng-repeat="answer in profile.questionAnswer track by $index"><i class="fa" ng-class="{green:answer, red:!answer, 'fa-check-square':answer, 'fa-square':!answer}"></i></li>
-          <hr style="position: relative; right: 115px; width: 320px">
-      </ul>
-      </div>
+<div class="overflow">
 
-  </div> -->
+	<div class="row">
+		<div class="col-xs-3">
+			<div style="line-height:70%; height:100px; width:300px" class="right" ng-repeat="(key,profile) in profileCompare track by $index">
+				<p style="font-size:1.5em; position:relative; top:10px; left:10px">{{profile.name}}:&nbsp
+					<i ng-if="profile.questionImportance=='Very Important'" style="font-size:.7em; color:red">
+						{{profile.questionImportance}}
+					</i>
+					<i ng-if="profile.questionImportance=='Important'" style="font-size:.7em; color:green">
+						{{profile.questionImportance}}
+					</i>
+					<i ng-if="profile.questionImportance=='Not Important'" style="font-size:.7em; color:grey">
+						{{profile.questionImportance}}
+					</i>
+				</p>
+				<p style="font-size:1em; position:relative; top:15px; left:10px">{{profile.office}}</p>
+				<p style="font-size:1em; position:relative; top:15px; left:10px;">Comments</p>
+			</div>
+		</div>
+		<div class="col-xs-9 center">
+			<div class="" style="height: 100px"ng-repeat="(key,profile) in profileCompare track by $index">
+				<ul style="position:relative; left:15px"> 
 
-</div>
+					<br style="line-height:300%">
+			        <li ng-repeat="answer in profile.questionAnswer track by $index" style="top:10px; display:inline; font-size:1.57em;right: 10px; width:25px">
 
+			        	<i class="fa center" ng-class="{green:answer, red:!answer, 'fa-check-square':answer, 'fa-square':!answer}">&nbsp&nbsp
+			        		<i ng-if="$first" style="position:absolute; font-size:.45em; color:black; right: 2px; top:25px">
+			        			Agree
+			        			<i style="position:absolute; font-size:1em; color:black; bottom: 0px; left:72px">
+			        				Ambivalent
+			        			</i>
+			        		</i>
+			        		<i ng-if="$last" style="position:absolute; font-size:.45em; color:black; right: 11px; top:25px;">
+			        			Disagree
+			        		</i>
+			        	</i>
+			        </li>
+			       <!--  <p style="position:relative; float:center; font-size:.8em; right: 23px; bottom:5px">Ambivalent</p> -->
+			     	<p style="position:relative; "
+			        <hr style="position: relative; width: 300px;">
+	       		</ul>
+			</div>	
+		</div>
+	</div>
 
-<div class="politicianAnswers">
-<!--   <div>
-    <div class="result1" style="display:inline; margin:0 auto">
-      <div><br><br><br>
-      </div>
-      <div ng-repeat="(key, profile) in profileCompare">
-        <p style="font-size:100%">{{key}}:</p>
-        <p style="font-size:80%">{{profile.questionImportance}},</p>
-        <p style="font-size:100%; font-weight: bold"> comments </p>
-        <br>
-      </div>
-    </div>
-  </div> -->
-
-    <div class="result">
-      
-    </div>
-    <div ng-repeat="(key, profile) in profileCompare" class="row">
-
-    	<div style="display:inline; text-align:right" class="col-xs-4 brd">
-    		{{key}}: <br> &nbsp&nbsp
-              <i style="font-size: 80%; text-align:center">{{profile.questionImportance}}</i> <br>
-              {{profile.office}}
-              <br>
-              Comments
-    	</div>
-
-        <div class="result col-xs-8" style="display:inline">
-
-        <ul style="display:inline;"> 
-
-            <li ng-repeat="answer in profile.questionAnswer track by $index" style="top:10px; display:inline; font-size:1.2em"><i class="fa" ng-class="{green:answer, red:!answer, 'fa-check-square':answer, 'fa-square':!answer}"></i></li>
-         	<li style="position: relative; width: 97px; right:28px"> 
-              
-            </li> 
-            <hr style="position: relative; width: 300px;">
-
-           
-        </ul>
-<!-- 
-        	<table style="display:inline">
-        	 <tr ng-repeat="answer in profile.questionAnswer track by $index" class="fa col-xs-7" style="display:inline" ng-class="{green:answer, red:!answer, 'fa-check-square':answer, 'fa-square':!answer}"></tr>
-        	</table> -->
-
-        </div>
-        <!-- <div class="col-xs-1"> -->
-        <!-- </div> -->
-
-    </div>
 </div>
