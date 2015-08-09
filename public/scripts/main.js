@@ -9,6 +9,7 @@ var angular = require('angular');
 require('angular-ui-router');
 var app = angular.module(namespace, [
     // inject:modules start
+    require('./votewise')(namespace).name
     // inject:modules end
 ]);
 

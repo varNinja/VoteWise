@@ -1,5 +1,8 @@
 # VoteWise
 
+### While transitioning...
+- Be sure to leave the transitioning folder in the repo. That folder is for moving the assets from the front end back into the project properly.
+
 ## Generator
 https://github.com/mcfly-io/generator-mcfly
 
