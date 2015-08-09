@@ -367,30 +367,43 @@ footer {
 	font-weight: 700;
 }*/
 
-.main{
-	width:30.5rem;
-	margin: 0 auto;
-	position: relative;
-}
+
 
 @media screen and (max-width: 767px){
 
-
+	.main{
+		width:90%;
+		margin: 0 auto;
+		position: relative;
+	}
 
 	.comparisons {
-		font-size: 1rem;
 		margin-bottom: 1rem;
-		line-height: 100%;
+		line-height: 2em;
 		/*word-spacing: px;*/
 		/*letter-spacing: .05rem;*/
+		width:100%;
+	}
+
+	.comparisonButton {
+	  display: block;
+	  width: 200px;
+	  height: 43px;
+	  background: navy;
+	  padding: 7px;
+	  text-align: center;
+	  border-radius: 20px;
+	  color: white;
+	  font-weight: bold;
 	}
 
 	.comparisons p {
 		text-transform: none;
 		text-align: justify;
-		line-height: 1.2rem;
-		width: 80%;
+		line-height: 2rem;
+		width: 85%;
 		margin: 0 auto;
+		font-size: 1.75rem;
 	}
 
 	.result {
@@ -731,7 +744,43 @@ nav {
 }
 
 .green {
-	color: green;
+	color: forestgreen;
+}
+
+._100pcnt {
+	color:#009900;
+}
+
+._80pcnt {
+	color: #99cc00;
+}
+
+._60pcnt {
+	color:#FCDC3B;
+}
+
+._40pcnt {
+	color:#ff9933;
+}
+
+._20pcnt {
+	color:#cc3300;
+}
+
+._0pcnt {
+	color:#990000;
+}
+
+.orange {
+	color:darkorange;
+}
+
+.black {
+	color:black;
+}
+
+.blue {
+	color: navy;
 }
 
 .comparison-true {

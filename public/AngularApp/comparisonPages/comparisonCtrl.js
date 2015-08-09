@@ -21,6 +21,26 @@ app.controller('ComparisonCtrl', function ($scope, $rootScope, $routeParams) {
             }
     }
 
+    $scope.checkboxClass = 0;
+
+    $scope.$watch('profileCompare', function(newVal, oldVal){
+        for(var i=0; i< newVal.length; i++){
+            if (i == 0){
+                $scope.checkboxClass = "_100pcnt"
+            } else if (i == 1){
+                $scope.checkboxClass = "_80pcnt"
+            } else if (i == 2){
+                $scope.checkboxClass = "_60pcnt"
+            } else if (i == 3){
+                $scope.checkboxClass = "_40pcnt"
+            } else if (i == 4){
+                $scope.checkboxClass = "_20pcnt"
+            } else if (i == 5){
+                $scope.checkboxClass = "_0pcnt"
+            }
+        }
+    });
+
     $scope.importanceEnum = function(input){
         importance = "";
         if (input == 1){
@@ -58,7 +78,7 @@ app.controller('ComparisonCtrl', function ($scope, $rootScope, $routeParams) {
 
         Pizza: {
             name: "Pizza",
-            questionAnswer: [false, true, true, false, false, false],
+            questionAnswer: [false, false, false, false, false, true],
             percent: ['0%', '20%', '40%', '60%', '80%', '100%'],
             questionImportance: "Important",
             match: "30%",
@@ -67,7 +87,7 @@ app.controller('ComparisonCtrl', function ($scope, $rootScope, $routeParams) {
         },
         GreenieBigNameGuy: {
             name: "Greenie Centipede",
-            questionAnswer: [false, true, false, false, true, false],
+            questionAnswer: [false, false, false, false, true, false],
             percent: ['0%', '20%', '40%', '60%', '80%', '100%'],
             questionImportance: "Very Important",
             match: "40%",
@@ -75,63 +95,63 @@ app.controller('ComparisonCtrl', function ($scope, $rootScope, $routeParams) {
         },
         Red: {
             name: "Seeing Red",
-            questionAnswer: [false, true, true, true, true, false],
+            questionAnswer: [false, false, false, true, false, false],
             questionImportance: "Not Important",
             match: "100%",
             office: "milk"
         },
         Yellow: {
             name: "Christmas Tree",
-            questionAnswer: [false, true, true, true, true, false],
+            questionAnswer: [false, false, true, false, false, false],
             questionImportance: "Not Important",
             match: "100%",
             office: "Elf"
         },
         Yellow2: {
             name: "Buffalo Bill",
-            questionAnswer: [false, true, true, true, true, false],
+            questionAnswer: [false, true, false, false, false, false],
             questionImportance: "Not Important",
             match: "100%", 
             office: "grass"
         },
         Yellow3: {
             name: "Ice Cream",
-            questionAnswer: [false, true, true, true, true, false],
+            questionAnswer: [false, false, true, false, false, false],
             questionImportance: "Not Important",
             match: "100%",
             office: "ping pong"
         },
         Yellow4: {
             name: "Antelope",
-            questionAnswer: [false, true, true, true, true, false],
+            questionAnswer: [false, false, false, true, false, false],
             questionImportance: "Not Important",
             match: "100%",
             office: "sneezing"
         },
         Yellow5: {
             name: "Boa Boa Boa",
-            questionAnswer: [false, true, true, true, true, false],
+            questionAnswer: [false, true, false, false, false, false],
             questionImportance: "Not Important",
             match: "100%",
             office: "Squirly Things"
         },
         Yellow6: {
             name: "Screw",
-            questionAnswer: [false, true, true, true, true, false],
+            questionAnswer: [false, false, true, false, false, false],
             questionImportance: "Not Important",
             match: "100%",
             office: "upside down"
         },
         Yellow7: {
             name: "Rainbow",
-            questionAnswer: [false, true, true, true, true, false],
+            questionAnswer: [false, false, false, false, true, false],
             questionImportance: "Not Important",
             match: "100%",
             office: "ghost"
         },
         Yellow33: {
             name: "Bugs",
-            questionAnswer: [false, true, true, true, true, false],
+            questionAnswer: [false, true, false, false, false, false],
             questionImportance: "Not Important",
             match: "100%",
             office: "pokemon"
