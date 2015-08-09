@@ -117,7 +117,7 @@ module.exports = function() {
             port: 5000,
             open: true,
             browser: ['google chrome'], // ['google chrome', 'firefox'],
-            localtunnel: false, // true, false or 'votewise-new-angular'
+            localtunnel: false, // true, false or 'votewise'
             ghostMode: {
                 clicks: false,
                 forms: false,

@@ -9,8 +9,6 @@
     "tests"
   ],
   "dependencies": {
-    "marked":"0.3.3"
-  },
-  "resolutions": {
+    "marked": "0.3.3"
   }
 }
