@@ -23,24 +23,6 @@ app.controller('ComparisonCtrl', function ($scope, $rootScope, $routeParams) {
 
     $scope.checkboxClass = 0;
 
-    $scope.$watch('profileCompare', function(newVal, oldVal){
-        for(var i=0; i< newVal.length; i++){
-            if (i == 0){
-                $scope.checkboxClass = "_100pcnt"
-            } else if (i == 1){
-                $scope.checkboxClass = "_80pcnt"
-            } else if (i == 2){
-                $scope.checkboxClass = "_60pcnt"
-            } else if (i == 3){
-                $scope.checkboxClass = "_40pcnt"
-            } else if (i == 4){
-                $scope.checkboxClass = "_20pcnt"
-            } else if (i == 5){
-                $scope.checkboxClass = "_0pcnt"
-            }
-        }
-    });
-
     $scope.importanceEnum = function(input){
         importance = "";
         if (input == 1){

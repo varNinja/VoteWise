@@ -18,48 +18,58 @@
 </div>
 
 <div class="row brd">
-	<div class="col-xs-4 col-xs-offset-4 brd">
+	<div class="col-xs-2" >
+		<p style="float:center">Previous</p>
+	</div>
+	<div class="col-xs-3">
+		<p style="position:relative; text-align:right">Question {{set.current}} of {{set.total}}</p>
+	</div>
+	<div class="col-xs-4 brd">
 	  	<a style="bottom:10px" href="#/cl-background">
 	  		read question background
 	  	</a>
+	</div>
+	<div class="col-xs-2">
+		<p "text-align:right">Next</p>
 	</div>
 </div>
 
 <div>
  	<br>
     <div class="currentUserAnswer row" >
-      <div class="col-xs-2 center">
-		<p style="display:inline; position:relative; left: 10px; font-size:1.5em" class="fa  "> <b>You: </b> </p>
+      <div class="col-xs-3 center" style="overflow-x:visible">
+		<p style="display:inline; position:relative; left: 10px; font-size:1.5em" class="fa"> <b>You: </b> <i style="font-size:.7em">{{currentUser.You.questionImportance}}</i> </p>
 	  </div>
-      <div class="col-xs-10 center" >
+      <div class="col-xs-9 center" style="position:relative; left:9px">
+      	<br>
       	
-        <p class="fa" style="display:inline; position:relative; font-size:1.9em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[0], blue:!currentUser.You.questionAnswer[0], 'fa-check-square':currentUser.You.questionAnswer[0], 'fa-square':!currentUser.You.questionAnswer[0]}">
+        <p class="fa" style="display:inline; position:relative; font-size:1.57em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[0], blue:!currentUser.You.questionAnswer[0], 'fa-check-square':currentUser.You.questionAnswer[0], 'fa-square':!currentUser.You.questionAnswer[0]}">
         	&nbsp
         	<i style="position:absolute; bottom:30px; font-size:.4em; right: 8px; color:black;">
         		Agree
-    			<i style="position:absolute; font-size:1em; color:black; bottom: 0px; left:85px">
+    			<i style="position:absolute; font-size:1em; color:black; bottom: 0px; left:72px">
     				Ambivalent
     			</i>
         	</i>
         </p> 
-        <p class="fa" style="display:inline; position:relative; font-size:1.9em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[1], blue:!currentUser.You.questionAnswer[1], 'fa-check-square':currentUser.You.questionAnswer[1], 'fa-square':!currentUser.You.questionAnswer[1]}">
+        <p class="fa" style="display:inline; position:relative; font-size:1.57em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[1], blue:!currentUser.You.questionAnswer[1], 'fa-check-square':currentUser.You.questionAnswer[1], 'fa-square':!currentUser.You.questionAnswer[1]}">
         	&nbsp
         </p> 
-        <p class="fa" style="display:inline; position:relative; font-size:1.9em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[2], blue:!currentUser.You.questionAnswer[2], 'fa-check-square':currentUser.You.questionAnswer[2], 'fa-square':!currentUser.You.questionAnswer[2]}">
+        <p class="fa" style="display:inline; position:relative; font-size:1.57em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[2], blue:!currentUser.You.questionAnswer[2], 'fa-check-square':currentUser.You.questionAnswer[2], 'fa-square':!currentUser.You.questionAnswer[2]}">
         	&nbsp
         </p> 
-        <p class="fa" style="display:inline; position:relative; font-size:1.9em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[3], blue:!currentUser.You.questionAnswer[3], 'fa-check-square':currentUser.You.questionAnswer[3], 'fa-square':!currentUser.You.questionAnswer[3]}">
+        <p class="fa" style="display:inline; position:relative; font-size:1.57em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[3], blue:!currentUser.You.questionAnswer[3], 'fa-check-square':currentUser.You.questionAnswer[3], 'fa-square':!currentUser.You.questionAnswer[3]}">
         	&nbsp
         </p> 
-        <p class="fa" style="display:inline; position:relative; font-size:1.9em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[4], blue:!currentUser.You.questionAnswer[4], 'fa-check-square':currentUser.You.questionAnswer[4], 'fa-square':!currentUser.You.questionAnswer[4]}">
+        <p class="fa" style="display:inline; position:relative; font-size:1.57em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[4], blue:!currentUser.You.questionAnswer[4], 'fa-check-square':currentUser.You.questionAnswer[4], 'fa-square':!currentUser.You.questionAnswer[4]}">
         	&nbsp
         </p>
-        <p class="fa" style="display:inline; position:relative; font-size:1.9em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[5], blue:!currentUser.You.questionAnswer[5], 'fa-check-square':currentUser.You.questionAnswer[5], 'fa-square':!currentUser.You.questionAnswer[5]}">
+        <p class="fa" style="display:inline; position:relative; font-size:1.57em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[5], blue:!currentUser.You.questionAnswer[5], 'fa-check-square':currentUser.You.questionAnswer[5], 'fa-square':!currentUser.You.questionAnswer[5]}">
         	<i style="position:absolute; font-size:.4em; color:black; bottom:30px; right:-5px">Disagree</i>
         </p>
       </div> 
     </div> 
-    <br><br>
+    <br>
    
 </div>
 
