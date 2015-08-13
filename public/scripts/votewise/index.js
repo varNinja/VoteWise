@@ -10,6 +10,7 @@ module.exports = function(namespace) {
     var angular = require('angular');
     var app = angular.module(fullname, ['ui.router', ]);
     // inject:folders start
+    require('./controllers')(app);
     // inject:folders end
 
     var configRoutesDeps = ['$stateProvider', '$urlRouterProvider'];
