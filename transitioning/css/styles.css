@@ -748,27 +748,27 @@ nav {
 }
 
 ._100pcnt {
-	color:#009900;
+	color:#990000;
 }
 
 ._80pcnt {
-	color: #99cc00;
+	color: #cc3300;
 }
 
 ._60pcnt {
-	color:#FCDC3B;
-}
-
-._40pcnt {
 	color:#ff9933;
 }
 
+._40pcnt {
+	color:#FCDC3B;
+}
+
 ._20pcnt {
-	color:#cc3300;
+	color:#99cc00;
 }
 
 ._0pcnt {
-	color:#990000;
+	color:#009900;
 }
 
 .orange {
