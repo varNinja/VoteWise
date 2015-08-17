@@ -6,9 +6,9 @@ module.exports = function(app) {
 
 
 
-    var deps = [];
+    var deps = ['$scope', '$rootScope', '$location', '$http'];
 
-    function controller($scope, $rootScope, $location, $http) {
+    function controller(scope, rootScope, location, http) {
         var vm = this;
         vm.controllername = fullname;
 
@@ -19,9 +19,9 @@ module.exports = function(app) {
         activate();
 
         console.log("inside AuthCtrl");
-        $scope.login = {};
-        $scope.signup = {};
-        $scope.signup = {
+        scope.login = {};
+        scope.signup = {};
+        scope.signup = {
             email:undefined,
             password:undefined,
             name:undefined,
@@ -29,21 +29,21 @@ module.exports = function(app) {
             address:undefined
         };
 
-        $scope.doLogin = function (customer) {
+        scope.doLogin = function (customer) {
             console.log("doLogin clicked with email: " + $scope.login.email +
              " and password: " + $scope.login.password);
         };
 
-        $scope.signUp = function (customer) {
+        scope.signUp = function (customer) {
             console.log("Signup clicked with parameters: " + 
              JSON.stringify($scope.signup));
         };
 
-        $scope.logout = function () {
+        scope.logout = function () {
 
         };
 
-        $scope.setAccountType = function(type){
+        scope.setAccountType = function(type){
             console.log("$scope.setAccountType activated");
             console.log(type);
             if (Number(type) == 1){

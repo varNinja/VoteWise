@@ -12,11 +12,11 @@ module.exports = function(app) {
     // How does this effect the system?
     // Where do the controllers come into play?
     //
-    var deps = [];
+    var deps = ['$scope', '$rootScope'];
     //  --> this is now apparently deprecated: $routeParams
 
 
-    function controller($scope, $rootScope) {
+    function controller(scope, rootScope) {
         var vm = this;
         vm.controllername = fullname;
 
