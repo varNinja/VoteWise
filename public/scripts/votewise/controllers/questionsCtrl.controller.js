@@ -1,4 +1,3 @@
-'use strict';
 var controllername = 'questionsCtrl';
 
 module.exports = function(app) {
@@ -13,18 +12,19 @@ module.exports = function(app) {
     // How does this effect the system?
     // Where do the controllers come into play?
     //
-    var deps = [$scope, $rootScope];
+    var deps = [];
     //  --> this is now apparently deprecated: $routeParams
 
 
-    function controller() {
+    function controller($scope, $rootScope) {
         var vm = this;
         vm.controllername = fullname;
 
         var activate = function() {
-
         };
         activate();
+        console.log("inside questionsCtrl");
+
     }
 
     controller.$inject = deps;

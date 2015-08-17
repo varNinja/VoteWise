@@ -1,30 +1,29 @@
-'use strict';
+'use srtict';
 var controllername = 'comparisonCtrl';
 
 module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = [$scope, $rootScope]; // $routeParams
+    var deps = []; // $routeParams
 
-    function controller() {
+    function controller($scope, $rootScope) {
         var vm = this;
         vm.controllername = fullname;
 
         var activate = function() {
-
-            $scope.questionSet = {}
-            $scope.questionSet.question = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum maximus metus urna. Vivamus sit amet mi eros. Cras fermentum enim eros, ac sodales lectus gravida ac. Nullam ex magna, luctus non massa id, aliquet blandit felis. Nulla dapibus non tellus ut finibus. Donec tristique tristique interdum.';
-            $scope.questionSet.topic = "privacy";
-            $scope.questionSet.current = 1;
-            $scope.questionSet.total = 20;
-
-            $scope.checkboxClass = 0;
-
-
         };
         activate();
 
+
+        $scope.questionSet = {}
+        $scope.questionSet.question = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum maximus metus urna. Vivamus sit amet mi eros. Cras fermentum enim eros, ac sodales lectus gravida ac. Nullam ex magna, luctus non massa id, aliquet blandit felis. Nulla dapibus non tellus ut finibus. Donec tristique tristique interdum.';
+        $scope.questionSet.topic = "privacy";
+        $scope.questionSet.current = 1;
+        $scope.questionSet.total = 20;
+
+        $scope.checkboxClass = 0;
+        console.log("inside comparisonCtrl")
 
         $scope.makeArrayFromDatabase = function(input){
             var myArray = []

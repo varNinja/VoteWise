@@ -1,4 +1,3 @@
-'use strict';
 require('angular-ui-router');
 
 var modulename = 'votewise';
@@ -15,11 +14,38 @@ module.exports = function(namespace) {
 
     var configRoutesDeps = ['$stateProvider', '$urlRouterProvider'];
     var configRoutes = function($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/home');
+
         $stateProvider.state('home', {
-            url: '/',
-            template: require('./views/home.html')
+                url: '/home',
+                template: require('./views/home.html'),
+                controller: 'main.votewise.navigationCtrl'
         });
+
+        $stateProvider.state('comparison', {
+                url: '/comparison',
+                template: require('./views/comparison.html'),
+                controller: 'main.votewise.comparisonCtrl'
+        });
+
+        $stateProvider.state('questions', {
+                url: '/questions',
+                template: require('./views/questions.html'),
+                controller: 'main.votewise.questionsCtrl'
+        })
+
+        $stateProvider.state('login', {
+                url: '/login',
+                template: require('./views/login.html'),
+                controller: 'main.votewise.userAuthCtrl'
+        })
+
+        $stateProvider.state('register', {
+                url: '/register',
+                template: require('./views/register.html'),
+                controller: 'main.votewise.userAuthCtrl'
+        })
+
     };
     configRoutes.$inject = configRoutesDeps;
     app.config(configRoutes);

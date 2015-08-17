@@ -1,4 +1,3 @@
-'use strict';
 var controllername = 'userAuthCtrl';
 
 module.exports = function(app) {
@@ -6,36 +5,29 @@ module.exports = function(app) {
     /*jshint validthis: true */
 
 
-    //
-    // Before, it was using $routeParams. 
-    // Now, in index.js for the votewise module, its $stateParams. 
-    // How is this going to effect the dependencies? 
-    // How does this effect the system?
-    // Where do the controllers come into play?
-    //
-    var deps = [$scope, $rootScope, $location, $http];
-    //  --> this is now apparently deprecated: $routeParams
 
+    var deps = [];
 
-    function controller() {
+    function controller($scope, $rootScope, $location, $http) {
         var vm = this;
         vm.controllername = fullname;
 
+        console.log($scope);
+
         var activate = function() {
-
-            console.log("inside AuthCtrl");
-            $scope.login = {};
-            $scope.signup = {};
-            $scope.signup = {
-                email:undefined,
-                password:undefined,
-                name:undefined,
-                phone:undefined,
-                address:undefined
-            };
-
         };
         activate();
+
+        console.log("inside AuthCtrl");
+        $scope.login = {};
+        $scope.signup = {};
+        $scope.signup = {
+            email:undefined,
+            password:undefined,
+            name:undefined,
+            phone:undefined,
+            address:undefined
+        };
 
         $scope.doLogin = function (customer) {
             console.log("doLogin clicked with email: " + $scope.login.email +

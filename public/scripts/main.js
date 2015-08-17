@@ -1,5 +1,3 @@
-'use strict';
-
 var namespace = 'main';
 // fix protractor issue
 if (window.location.toString().indexOf('localhost:5555') > 0) {
