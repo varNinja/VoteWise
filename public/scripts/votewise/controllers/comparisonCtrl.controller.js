@@ -49,91 +49,6 @@ module.exports = function(app) {
             }
         }
 
-
-        // findAnswerColorDiff finds the difference between the users answer and 
-        // answers of the politicians.
-        // After this is found, it calls $scope.setColorDifference to set this 
-        // property each property object in the main object.
-
-        scope.findAnswerColorDiff = function(){
-            var choice, differenceBetween, choice2
-            for (key in $scope.profileCompare){
-                if ($scope.profileCompare.hasOwnProperty(key)){
-                    for (var i = 0; i < $scope.currentUser.You.questionAnswer.length; i++){
-                        if ($scope.currentUser.You.questionAnswer[i] == true){
-                            choice = i;
-                            console.log(choice);
-                        }
-                    }
-                    for (var i = 0 ; i < $scope.profileCompare[key].questionAnswer.length; i++){
-                        if ($scope.profileCompare[key].questionAnswer[i] == true){
-                            choice2 = i;
-                            differenceBetween = 0;
-                        }
-                    }
-                    if (choice2 == choice) {
-                        $scope.profileCompare[key].difference = "_0pcnt";
-                        console.log("Difference for " + key
-                         + " is " + $scope.profileCompare[key].difference);
-                    } else if (choice2 < choice) {
-                        for (var i = 0; i < 6; i++){
-                            choice2++
-                            differenceBetween++
-                            if(choice2==choice){
-                                $scope.setColorDifference(differenceBetween) 
-                                break 
-                            }
-                        }
-                    } else if (choice < choice2) {
-                        for (var i = 0; i < 6; i++){
-                            choice++
-                            differenceBetween++
-                            if(choice2==choice){
-                                $scope.setColorDifference(differenceBetween)
-                                break 
-                            }
-                        }
-                    }
-                }
-            }
-        };
-
-
-        // this function actually sets the difference property of each user's answer
-        // to a string which is a css class. This is then binded in the HTML
-
-        scope.setColorDifference = function(differenceBetween){
-            if (differenceBetween == 1){
-                $scope.profileCompare[key].difference = "_20pcnt";
-                console.log("Difference for " + key
-                + " is " + $scope.profileCompare[key].difference);
-            } else if (differenceBetween == 2){
-                $scope.profileCompare[key].difference = "_40pcnt";
-                console.log("Difference for " + key
-                + " is " + $scope.profileCompare[key].difference);
-            } else if (differenceBetween == 3){
-                $scope.profileCompare[key].difference = "_60pcnt";
-                console.log("Difference for " + key
-                + " is " + $scope.profileCompare[key].difference);
-            } else if (differenceBetween == 4){
-                $scope.profileCompare[key].difference = "_80pcnt";
-                console.log("Difference for " + key
-                + " is " + $scope.profileCompare[key].difference);
-            } else if (differenceBetween == 5){
-                $scope.profileCompare[key].difference = "_100pcnt";
-                console.log("Difference for " + key
-                + " is " + $scope.profileCompare[key].difference);
-            }
-        }
-
-
-        scope.currentUser = {
-            You: {
-                questionAnswer: [false, false, true, false, false, false],
-                questionImportance: "Unimportant",
-            }
-        };
-
         scope.profileCompare = {
 
             Pizza: {
@@ -225,6 +140,93 @@ module.exports = function(app) {
                 index: undefined
             }
         };
+
+
+        // findAnswerColorDiff finds the difference between the users answer and 
+        // answers of the politicians.
+        // After this is found, it calls scope.setColorDifference to set this 
+        // property each property object in the main object.
+
+        scope.findAnswerColorDiff = function(){
+            var choice, differenceBetween, choice2
+            for (key in scope.profileCompare){
+                if (scope.profileCompare.hasOwnProperty(key)){
+                    for (var i = 0; i < scope.currentUser.You.questionAnswer.length; i++){
+                        if (scope.currentUser.You.questionAnswer[i] == true){
+                            choice = i;
+                            console.log(choice);
+                        }
+                    }
+                    for (var i = 0 ; i < scope.profileCompare[key].questionAnswer.length; i++){
+                        if (scope.profileCompare[key].questionAnswer[i] == true){
+                            choice2 = i;
+                            differenceBetween = 0;
+                        }
+                    }
+                    if (choice2 == choice) {
+                        scope.profileCompare[key].difference = "_0pcnt";
+                        console.log("Difference for " + key
+                         + " is " + scope.profileCompare[key].difference);
+                    } else if (choice2 < choice) {
+                        for (var i = 0; i < 6; i++){
+                            choice2++
+                            differenceBetween++
+                            if(choice2==choice){
+                                scope.setColorDifference(differenceBetween) 
+                                break 
+                            }
+                        }
+                    } else if (choice < choice2) {
+                        for (var i = 0; i < 6; i++){
+                            choice++
+                            differenceBetween++
+                            if(choice2==choice){
+                                scope.setColorDifference(differenceBetween)
+                                break 
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+
+        // this function actually sets the difference property of each user's answer
+        // to a string which is a css class. This is then binded in the HTML
+
+        scope.setColorDifference = function(differenceBetween){
+            if (differenceBetween == 1){
+                scope.profileCompare[key].difference = "_20pcnt";
+                console.log("Difference for " + key
+                + " is " + scope.profileCompare[key].difference);
+            } else if (differenceBetween == 2){
+                scope.profileCompare[key].difference = "_40pcnt";
+                console.log("Difference for " + key
+                + " is " + scope.profileCompare[key].difference);
+            } else if (differenceBetween == 3){
+                scope.profileCompare[key].difference = "_60pcnt";
+                console.log("Difference for " + key
+                + " is " + scope.profileCompare[key].difference);
+            } else if (differenceBetween == 4){
+                scope.profileCompare[key].difference = "_80pcnt";
+                console.log("Difference for " + key
+                + " is " + scope.profileCompare[key].difference);
+            } else if (differenceBetween == 5){
+                scope.profileCompare[key].difference = "_100pcnt";
+                console.log("Difference for " + key
+                + " is " + scope.profileCompare[key].difference);
+            }
+        }
+
+
+        scope.currentUser = {
+            You: {
+                questionAnswer: [false, false, true, false, false, false],
+                questionImportance: "Unimportant",
+            }
+        };
+
+        
 
     }
 
