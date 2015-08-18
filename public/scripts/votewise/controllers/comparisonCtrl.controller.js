@@ -196,30 +196,38 @@ module.exports = function(app) {
         // this function actually sets the difference property of each user's answer
         // to a string which is a css class. This is then binded in the HTML
 
-        $scope.setColorDifference = function(differenceBetween, key){
-            if (differenceBetween == 1){
-                $scope.profileCompare[key].difference = "_20pcnt";
-                console.log("Difference for " + key
-                + " is " + $scope.profileCompare[key].difference);
-            } else if (differenceBetween == 2){
-                $scope.profileCompare[key].difference = "_40pcnt";
-                console.log("Difference for " + key
-                + " is " + $scope.profileCompare[key].difference);
-            } else if (differenceBetween == 3){
-                $scope.profileCompare[key].difference = "_60pcnt";
-                console.log("Difference for " + key
-                + " is " + $scope.profileCompare[key].difference);
-            } else if (differenceBetween == 4){
-                $scope.profileCompare[key].difference = "_80pcnt";
-                console.log("Difference for " + key
-                + " is " + $scope.profileCompare[key].difference);
-            } else if (differenceBetween == 5){
-                $scope.profileCompare[key].difference = "_100pcnt";
-                console.log("Difference for " + key
-                + " is " + $scope.profileCompare[key].difference);
-            }
-        }
+        // $scope.setColorDifference = function(differenceBetween, key){
+        //     if (differenceBetween == 1){
+        //         $scope.profileCompare[key].difference = "_20pcnt";
+        //         console.log("Difference for " + key
+        //         + " is " + $scope.profileCompare[key].difference);
+        //     } else if (differenceBetween == 2){
+        //         $scope.profileCompare[key].difference = "_40pcnt";
+        //         console.log("Difference for " + key
+        //         + " is " + $scope.profileCompare[key].difference);
+        //     } else if (differenceBetween == 3){
+        //         $scope.profileCompare[key].difference = "_60pcnt";
+        //         console.log("Difference for " + key
+        //         + " is " + $scope.profileCompare[key].difference);
+        //     } else if (differenceBetween == 4){
+        //         $scope.profileCompare[key].difference = "_80pcnt";
+        //         console.log("Difference for " + key
+        //         + " is " + $scope.profileCompare[key].difference);
+        //     } else if (differenceBetween == 5){
+        //         $scope.profileCompare[key].difference = "_100pcnt";
+        //         console.log("Difference for " + key
+        //         + " is " + $scope.profileCompare[key].difference);
+        //     }
+        // }
 
+        $scope.setColorDifference = function(differenceBetween, key){
+            var setter
+            console.log(differenceBetween);
+            differenceBetween*=2
+            setter = differenceBetween.toString()
+            console.log(setter);
+            $scope.profileCompare[key].difference = "_" + setter + "0pcnt";
+        }
 
         $scope.currentUser = {
             You: {

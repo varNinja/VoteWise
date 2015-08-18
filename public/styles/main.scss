@@ -8,8 +8,6 @@
 
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
-
-
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -451,11 +449,12 @@ footer {
 		border: 1px solid black;
 	}
 
-	.result tr td table{
+	.result tr td table {
 		display: inline-block;
 		padding: 4em;
 		width: 1em;
 	}
+
 	.result-b {
 	    float: right;
 	    width: 100%;
@@ -547,7 +546,7 @@ footer {
 	.comparisons p {
 		text-transform: none;
 		text-align: justify;
-		line-height: 1 rem;
+		line-height: 1rem;
 		width: 80%;
 		margin: 0 auto;
 	}
@@ -585,12 +584,6 @@ footer {
 	    font-size:1.6em;
 	    position:relative;
 	    right:25px;
-	}
-
-	.result tr td table{
-		display: inline-block;
-		padding: 4em;
-		width: 1em;
 	}
 
 	.result tr td table{

@@ -1,7 +1,7 @@
 <nav>
 	<div class="nav-link">
 	<ul>
-		<li><a href="#/portals"><img class="portal" src="img/Expand-Tool.png"></a></li>
+		<li><a href="#/portals"><img class="portal" src="images/app/Expand-Tool.png"></a></li>
 		<li><a href="#/"><img class="portal" src="images/app/Question.png"></a></li>
 		<li><a href="#/"><img class="portal" src="images/app/EDUCATION.svg"></a></li>
 		<li><a href="#/"><img class="portal" src="images/app/Chat.png"></a></li>
@@ -40,11 +40,11 @@
 
 <div>
  	<br>
-    <div class="currentUserAnswer row" >
-      <div class="col-xs-3 center" style="overflow-x:visible">
+    <div class="currentUserAnswer row " >
+      <div class="col-xs-3 center brd" style="overflow-x:visible">
 		<p style="display:inline; position:relative; left: 10px; font-size:1.5em" class="fa"> <b>You: </b> <i style="font-size:.7em">{{currentUser.You.questionImportance}}</i> </p>
 	  </div>
-      <div class="col-xs-9 center" style="position:relative; left:9px">
+      <div class="col-xs-9 center brd" style="position:relative; left:9px">
       	<br>
       	
         <p class="fa" style="display:inline; position:relative; font-size:1.57em" ng-if="currentUser.You.questionAnswer" ng-class="{green:currentUser.You.questionAnswer[0], blue:!currentUser.You.questionAnswer[0], 'fa-check-square':currentUser.You.questionAnswer[0], 'fa-square':!currentUser.You.questionAnswer[0]}">
@@ -79,11 +79,11 @@
 
 <div class="overflow">
 
-	<div class="row">
-		<div class="col-xs-3">
-			<div style="line-height:70%; height:100px; width:300px" class="right" ng-repeat="(key,profile) in profileCompare track by $index">
+	<div class="row ">
+		<div class="col-xs-3 brd">
+			<div style="line-height:70%; height:100px; width:300px" class="left " ng-repeat="(key,profile) in profileCompare track by $index">
 				<p style="font-size:1.5em; position:relative; top:10px; left:10px">{{profile.name}}:&nbsp
-					<i ng-if="profile.questionImportance=='Very Important'" style="font-size:.7em;">
+					<i style="font-size:.7em;">
 						{{profile.questionImportance}}
 					</i>
 				</p>
@@ -91,21 +91,21 @@
 				<p style="font-size:1em; position:relative; top:15px; left:10px;">Comments</p>
 			</div>
 		</div>
-		<div class="col-xs-9 center">
+		<div class="col-xs-9 center brd">
 			<div class="" style="height: 100px"ng-repeat="(key,profile) in profileCompare track by $index">
 				<ul style="position:relative; left:15px"> 
-					<br style="font-size:1.3em">
+					<br style="font-size:1.8em">
 			        <li ng-repeat="answer in profile.questionAnswer track by $index" style="top:10px; display:inline; font-size:1.57em;right: 10px; width:25px" class="">
 
 			        	<i class="fa center {{profile.difference}}" ng-class="{'fa-check-square':answer, 'fa-square':!answer, 'black':!answer}">
 			        		&nbsp&nbsp
-			        		<i ng-if="$first" style="position:absolute; font-size:.45em; color:black; right: 2px; top:25px">
+			        		<i ng-if="$first" style="position:absolute; font-size:.45em; color:black; right: 2px; top:55px">
 			        			Agree
 			        			<i style="position:absolute; font-size:1em; color:black; bottom: 0px; left:72px">
 			        			Ambivalent
 			        			</i>
 			        		</i>
-			        		<i ng-if="$last" style="position:absolute; font-size:.45em; color:black; right: 11px; top:25px;">
+			        		<i ng-if="$last" style="position:absolute; font-size:.45em; color:black; right: 2px; top:55px;">
 			        			Disagree
 			        		</i>
 			        	</i>
