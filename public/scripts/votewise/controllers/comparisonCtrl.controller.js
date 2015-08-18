@@ -1,13 +1,13 @@
-'use srtict';
+
 var controllername = 'comparisonCtrl';
 
 module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = ['$scope', '$rootScope']; // $routeParams
+    var deps = ['$scope', '$rootScope']; // $routeParams '$rootscope'
 
-    function controller(scope, rootScope) {
+    function controller($scope, $rootScope) {
         var vm = this;
         vm.controllername = fullname;
 
@@ -16,16 +16,18 @@ module.exports = function(app) {
         activate();
 
 
-        scope.questionSet = {}
-        scope.questionSet.question = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum maximus metus urna. Vivamus sit amet mi eros. Cras fermentum enim eros, ac sodales lectus gravida ac. Nullam ex magna, luctus non massa id, aliquet blandit felis. Nulla dapibus non tellus ut finibus. Donec tristique tristique interdum.';
-        scope.questionSet.topic = "privacy";
-        scope.questionSet.current = 1;
-        scope.questionSet.total = 20;
+        $scope.questionSet = {}
+        $scope.questionSet.question = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum maximus metus urna. Vivamus sit amet mi eros. Cras fermentum enim eros, ac sodales lectus gravida ac. Nullam ex magna, luctus non massa id, aliquet blandit felis. Nulla dapibus non tellus ut finibus. Donec tristique tristique interdum.';
+        $scope.questionSet.topic = "privacy";
+        $scope.questionSet.current = 1;
+        $scope.questionSet.total = 20;
 
-        scope.checkboxClass = 0;
+        $scope.checkboxClass = 0;
         console.log("inside comparisonCtrl")
 
-        scope.makeArrayFromDatabase = function(input){
+        console.log($scope.questionSet.question);
+
+        $scope.makeArrayFromDatabase = function(input){
             var myArray = []
             for (var i = 0; i < 6; i++){
                 if (i != (input-1)){
@@ -38,7 +40,7 @@ module.exports = function(app) {
             };
         };
 
-        scope.setAnswerImportanceEnum = function(input){
+        $scope.setAnswerImportanceEnum = function(input){
             importance = "";
             if (input == 1){
                 importance = "Unimportant";
@@ -49,7 +51,7 @@ module.exports = function(app) {
             }
         }
 
-        scope.profileCompare = {
+        $scope.profileCompare = {
 
             Pizza: {
                 name: "Pizza",
@@ -144,35 +146,35 @@ module.exports = function(app) {
 
         // findAnswerColorDiff finds the difference between the users answer and 
         // answers of the politicians.
-        // After this is found, it calls scope.setColorDifference to set this 
+        // After this is found, it calls $scope.setColorDifference to set this 
         // property each property object in the main object.
 
-        scope.findAnswerColorDiff = function(){
+        $scope.findAnswerColorDiff = function(){
             var choice, differenceBetween, choice2
-            for (key in scope.profileCompare){
-                if (scope.profileCompare.hasOwnProperty(key)){
-                    for (var i = 0; i < scope.currentUser.You.questionAnswer.length; i++){
-                        if (scope.currentUser.You.questionAnswer[i] == true){
+            for (var key in $scope.profileCompare){
+                if ($scope.profileCompare.hasOwnProperty(key)){
+                    for (var i = 0; i < $scope.currentUser.You.questionAnswer.length; i++){
+                        if ($scope.currentUser.You.questionAnswer[i] == true){
                             choice = i;
                             console.log(choice);
                         }
                     }
-                    for (var i = 0 ; i < scope.profileCompare[key].questionAnswer.length; i++){
-                        if (scope.profileCompare[key].questionAnswer[i] == true){
+                    for (var i = 0 ; i < $scope.profileCompare[key].questionAnswer.length; i++){
+                        if ($scope.profileCompare[key].questionAnswer[i] == true){
                             choice2 = i;
                             differenceBetween = 0;
                         }
                     }
                     if (choice2 == choice) {
-                        scope.profileCompare[key].difference = "_0pcnt";
+                        $scope.profileCompare[key].difference = "_0pcnt";
                         console.log("Difference for " + key
-                         + " is " + scope.profileCompare[key].difference);
+                         + " is " + $scope.profileCompare[key].difference);
                     } else if (choice2 < choice) {
                         for (var i = 0; i < 6; i++){
                             choice2++
                             differenceBetween++
                             if(choice2==choice){
-                                scope.setColorDifference(differenceBetween) 
+                                $scope.setColorDifference(differenceBetween, key) 
                                 break 
                             }
                         }
@@ -181,7 +183,7 @@ module.exports = function(app) {
                             choice++
                             differenceBetween++
                             if(choice2==choice){
-                                scope.setColorDifference(differenceBetween)
+                                $scope.setColorDifference(differenceBetween, key)
                                 break 
                             }
                         }
@@ -194,32 +196,32 @@ module.exports = function(app) {
         // this function actually sets the difference property of each user's answer
         // to a string which is a css class. This is then binded in the HTML
 
-        scope.setColorDifference = function(differenceBetween){
+        $scope.setColorDifference = function(differenceBetween, key){
             if (differenceBetween == 1){
-                scope.profileCompare[key].difference = "_20pcnt";
+                $scope.profileCompare[key].difference = "_20pcnt";
                 console.log("Difference for " + key
-                + " is " + scope.profileCompare[key].difference);
+                + " is " + $scope.profileCompare[key].difference);
             } else if (differenceBetween == 2){
-                scope.profileCompare[key].difference = "_40pcnt";
+                $scope.profileCompare[key].difference = "_40pcnt";
                 console.log("Difference for " + key
-                + " is " + scope.profileCompare[key].difference);
+                + " is " + $scope.profileCompare[key].difference);
             } else if (differenceBetween == 3){
-                scope.profileCompare[key].difference = "_60pcnt";
+                $scope.profileCompare[key].difference = "_60pcnt";
                 console.log("Difference for " + key
-                + " is " + scope.profileCompare[key].difference);
+                + " is " + $scope.profileCompare[key].difference);
             } else if (differenceBetween == 4){
-                scope.profileCompare[key].difference = "_80pcnt";
+                $scope.profileCompare[key].difference = "_80pcnt";
                 console.log("Difference for " + key
-                + " is " + scope.profileCompare[key].difference);
+                + " is " + $scope.profileCompare[key].difference);
             } else if (differenceBetween == 5){
-                scope.profileCompare[key].difference = "_100pcnt";
+                $scope.profileCompare[key].difference = "_100pcnt";
                 console.log("Difference for " + key
-                + " is " + scope.profileCompare[key].difference);
+                + " is " + $scope.profileCompare[key].difference);
             }
         }
 
 
-        scope.currentUser = {
+        $scope.currentUser = {
             You: {
                 questionAnswer: [false, false, true, false, false, false],
                 questionImportance: "Unimportant",

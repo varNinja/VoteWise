@@ -16,7 +16,7 @@ module.exports = function(app) {
     //  --> this is now apparently deprecated: $routeParams
 
 
-    function controller(scope, rootScope) {
+    function controller($scope, $rootScope) {
         var vm = this;
         vm.controllername = fullname;
 
