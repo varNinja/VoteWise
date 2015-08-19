@@ -30,12 +30,10 @@ module.exports = function(app) {
         $scope.makeArrayFromDatabase = function(input){
             var myArray = []
             for (var i = 0; i < 6; i++){
-                if (i != (input-1)){
-                    myArray.push(false);
-                    console.log(myArray);
-                } else if (i == input-1){
+                if (i == (input-1)){
                     myArray.push(true);
-                    console.log(myArray);
+                } else {
+                    myArray.push(false);
                 };
             };
         };
@@ -51,8 +49,61 @@ module.exports = function(app) {
             }
         }
 
-        $scope.profileCompare = {
 
+        // findAnswerColorDiff finds the difference between the users answer and 
+        // answers of the politicians.
+        // After this is found, it calls $scope.setColorDifference to set this 
+        // property each property object in the main object.
+
+        $scope.findAnswerColorDiff = function(){
+            var choice, differenceBetween, choice2, i, k
+            for (var key in $scope.profileCompare){
+                differenceBetween = 0;
+                if ($scope.profileCompare.hasOwnProperty(key)){
+                    for (i = 0, k = 0; i < 6; i++, k++){
+                        if ($scope.currentUser.You.questionAnswer[i] == true){
+                            choice = i;
+                        } if ($scope.profileCompare[key].questionAnswer[k] == true){
+                            choice2 = k;
+                        }                        
+                    } if (choice2 == choice) {
+                        $scope.profileCompare[key].difference = "_0pcnt";
+                    } else if (choice2 < choice) {
+                        for (i = 0; i < 6; i++, choice2++, differenceBetween++){
+                            if(choice2==choice){
+                                $scope.setColorDifference(differenceBetween, key) 
+                                break 
+                            }
+                        }
+                    } else if (choice < choice2) {
+                        for (i = 0; i < 6; i++, choice++, differenceBetween++){
+                            if(choice2==choice){
+                                $scope.setColorDifference(differenceBetween, key)
+                                break 
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        // this function actually sets the difference property of each user's answer
+        // to a string which is a css class. This is then binded in the HTML
+
+        $scope.setColorDifference = function(differenceBetween, key){
+            var setter = (differenceBetween*2).toString()
+            $scope.profileCompare[key].difference = "_" + setter + "0pcnt";
+        }
+        
+        //User objects iterated over
+        $scope.currentUser = {
+            You: {
+                questionAnswer: [true, false, false, false, false, false],
+                questionImportance: "Unimportant",
+            }
+        };
+
+        $scope.profileCompare = {
             Pizza: {
                 name: "Pizza",
                 questionAnswer: [false, false, false, false, false, true],
@@ -142,74 +193,6 @@ module.exports = function(app) {
                 index: undefined
             }
         };
-
-
-        // findAnswerColorDiff finds the difference between the users answer and 
-        // answers of the politicians.
-        // After this is found, it calls $scope.setColorDifference to set this 
-        // property each property object in the main object.
-
-        $scope.findAnswerColorDiff = function(){
-            var choice, differenceBetween, choice2
-            for (var key in $scope.profileCompare){
-                if ($scope.profileCompare.hasOwnProperty(key)){
-                    for (var i = 0; i < $scope.currentUser.You.questionAnswer.length; i++){
-                        if ($scope.currentUser.You.questionAnswer[i] == true){
-                            choice = i;
-                            console.log(choice);
-                        }
-                    }
-                    for (var i = 0 ; i < $scope.profileCompare[key].questionAnswer.length; i++){
-                        if ($scope.profileCompare[key].questionAnswer[i] == true){
-                            choice2 = i;
-                            differenceBetween = 0;
-                        }
-                    }
-                    if (choice2 == choice) {
-                        $scope.profileCompare[key].difference = "_0pcnt";
-                        console.log("Difference for " + key
-                         + " is " + $scope.profileCompare[key].difference);
-                    } else if (choice2 < choice) {
-                        for (var i = 0; i < 6; i++){
-                            choice2++
-                            differenceBetween++
-                            if(choice2==choice){
-                                $scope.setColorDifference(differenceBetween, key) 
-                                break 
-                            }
-                        }
-                    } else if (choice < choice2) {
-                        for (var i = 0; i < 6; i++){
-                            choice++
-                            differenceBetween++
-                            if(choice2==choice){
-                                $scope.setColorDifference(differenceBetween, key)
-                                break 
-                            }
-                        }
-                    }
-                }
-            }
-        };
-
-
-        // this function actually sets the difference property of each user's answer
-        // to a string which is a css class. This is then binded in the HTML
-
-        $scope.setColorDifference = function(differenceBetween, key){
-            var setter = (differenceBetween*2).toString()
-            $scope.profileCompare[key].difference = "_" + setter + "0pcnt";
-        }
-
-        $scope.currentUser = {
-            You: {
-                questionAnswer: [true, false, false, false, false, false],
-                questionImportance: "Unimportant",
-            }
-        };
-
-        
-
     }
 
     controller.$inject = deps;
