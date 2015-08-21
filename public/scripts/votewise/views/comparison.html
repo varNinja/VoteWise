@@ -13,10 +13,9 @@
 
 <div class="container">
 <div class="row">
-
-	<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 
-	col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-		<p style="font-size: 1.4em">{{questionSet.question}}</p>
+	<br>
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<p style="font-size: 20px; text-align:center; width:100%">{{questionSet.question}}</p>
 		<br>
 	</div>
 
@@ -85,24 +84,24 @@
 </div>
 
 <div>
-
-	<div class="row ">
+	<div class="row" ng-repeat="(key,profile) in profileCompare track by $index">
 		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 brd">
-			<div style="line-height:70%; height:100px; width:300px;" ng-repeat="(key,profile) in profileCompare track by $index">
-				<p style="font-size:1.5em; position:relative; top:10px; float:left">{{profile.name}}:&nbsp
+			<div style="line-height:70%; height:100px; width:300px;">
+				<p style="font-size:1.5em; position:relative; top:10px; float:left; right:5px">{{profile.name}}:&nbsp
 					<i style="font-size:.5em;">
-						{{profile.questionImportance}}
+						{{profile.questionImportance}} 
 					</i>
 				</p>
-				<p style="font-size:1em; position:absolute; top:15px; left:10px; float:left">{{profile.office}}</p>
-				<p style="font-size:1em; position:absolute; top:40px; left:10px; float:left">Comments</p>
+				<p style="font-size:.75em; position:absolute; top:30px; left:10px; float:left">{{profile.office}}</p>
+				<p style="font-size:.75em; position:absolute; top:50px; left:10px; float:left">Comments</p>
 			</div>
 		</div>
 		<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 center brd">
-			<div class="" style="height: 100px"ng-repeat="(key,profile) in profileCompare track by $index">
-				<ul style="position:relative; left:15px"> 
+			<div class="" style="height: 100px">
+			
+				<ul style="position:relative; left:25px; top:10px"> 
 
-			        <li ng-repeat="answer in profile.questionAnswer track by $index" style="position:relative; top:30px; display:inline; font-size:1.57em; right:10px; width:100%" class="">
+			        <li ng-repeat="answer in profile.questionAnswer track by $index" style="position:relative; top:30px; display:inline; font-size:7.5vw; right:10px; width:100%" class="">
 
 			        	<i class="fa center {{profile.difference}}" ng-class="{'fa-check-square':answer, 'fa-square':!answer, 'black':!answer}" style="position:relative"> &nbsp
 			        		<i ng-if="$first" style="position:absolute; font-size:.45em; color:black; right:12px; top:25px ">

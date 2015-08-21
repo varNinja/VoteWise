@@ -17,8 +17,8 @@ module.exports = function(app) {
 
 
         $scope.questionSet = {}
-        $scope.questionSet.question = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum maximus metus urna. Vivamus sit amet mi eros. Cras fermentum enim eros, ac sodales lectus gravida ac. Nullam ex magna, luctus non massa id, aliquet blandit felis. Nulla dapibus non tellus ut finibus. Donec tristique tristique interdum.';
-        $scope.questionSet.topic = "privacy";
+        $scope.questionSet.question = 'We have branches of the armed forces designed for fast striking, air striking, sea striking, and ground striking. They are excellent at what they do. But we don’t have a branch of the armed forces that is designed for peace keeping - fighting more for the minds of the locals than the bodies. This is a very specialized task and requires specialized training in order to do it well. In addition, if we could have peacekeepers LOOK peaceful and have a level of separation from the branches that do all the killing, then they might be able to do a better job at being seen as people who are there to help. It makes sense, then, to create another branch of the military designed for peacekeeping.'
+
         $scope.questionSet.current = 1;
         $scope.questionSet.total = 20;
 
