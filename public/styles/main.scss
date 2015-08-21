@@ -189,7 +189,7 @@ footer {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
-	font-size: 1.2rem;
+	font-size: 1.2rem; 	
 	letter-spacing: 2px;
 }
 
@@ -225,11 +225,11 @@ footer {
 	clear: both;
 }
 
-.left {
+.floatLeft {
 	float: left;
 }
 
-.right {
+.floatRight {
 	float: right;
 }
 
@@ -339,10 +339,6 @@ footer {
 	float: right;
 }
 
-.overflow {
-	max-height:350px;
-	overflow:scroll;
-}
 
 .flex-container-interests {
   padding: 0;
@@ -379,6 +375,7 @@ footer {
 	font-weight: 700;
 }*/
 
+<<<<<<< HEAD
 .flex-item-interests p {
 
 }
@@ -400,6 +397,8 @@ footer {
 	transform: scale(1.05);
 }
 
+=======
+>>>>>>> origin/Angular
 
 .interest-group {
 	background-image: url("../img/INTEREST_GROUP.svg");
