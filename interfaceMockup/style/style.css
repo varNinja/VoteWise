@@ -1,0 +1,32 @@
+html, body {
+  width:   100%;
+  display: block;
+  margin:  0;
+  padding: 0;
+  border:  0;
+  font-family:      sans-serif;
+  background-color: #dedede;
+}
+
+header {
+  height:            50px;
+  width:             100%;
+  background-color:  #c4e2fa;
+}
+header #logo {
+  height:  40px;
+  margin:  5px;
+  width:   auto;
+}
+header #topBarButtons {
+  float:   right;
+}
+header #topBarButtons img {
+  height:  30px;
+  width:   auto;
+  margin:  10px;
+}
+
+.content {
+  
+}
