@@ -1,4 +1,5 @@
 # VoteWise
+<<<<<<< HEAD
 
 ### While transitioning...
 - Be sure to leave the transitioning folder in the repo. That folder is for moving the assets from the front end back into the project properly.
@@ -47,3 +48,6 @@ gulp dist           # Distribute the application
 Recent changes can be viewed on Github on the [Releases Page](https://github.com/spencersnygg/votewise/releases)
 
 ## License
+=======
+!
+>>>>>>> master
