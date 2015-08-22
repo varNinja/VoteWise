@@ -54,7 +54,6 @@ CREATE TABLE IF NOT EXISTS `alog` (
 -- Last update: Apr 11, 2015 at 10:18 PM
 --
 
-
 DROP TABLE IF EXISTS `answ`;
 CREATE TABLE IF NOT EXISTS `answ` (
   `answid` char(12) NOT NULL DEFAULT '0',
