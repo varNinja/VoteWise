@@ -5,7 +5,7 @@ var express = require('express'),
 var app = express();
 
 var db = mysql.createPool({
-    connectionLimit: 10,
+    connectionLimit: config.db.connectionLimit,
     host:            config.db.host,
     user:            config.db.user,
     password:        config.db.password,
@@ -21,7 +21,7 @@ app.get('/', function(req, res) {
     });
 });
 
-var server = app.listen(8080, function() {
+var server = app.listen(config.port, function() {
     var address = server.address();
 
     console.log('Example app listening at http://%s:%s',
