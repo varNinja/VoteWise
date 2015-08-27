@@ -1,3 +1,7 @@
+/* VoteWise CSS styles
+ *
+ */
+
 html, body {
   width:   100%;
   display: block;
@@ -8,25 +12,71 @@ html, body {
   background-color: #dedede;
 }
 
+/* Basic Layout Styles
+ *
+ * Used for Simple Organization.
+ */
+
 header {
-  height:            50px;
+  height:            60px;
   width:             100%;
   background-color:  #c4e2fa;
+  position: fixed;
+
 }
 header #logo {
-  height:  40px;
+  height:  50px;
   margin:  5px;
   width:   auto;
 }
 header #topBarButtons {
-  float:   right;
+  float: right;
 }
 header #topBarButtons img {
   height:  30px;
-  width:   auto;
-  margin:  10px;
+  width:   30px;
+  padding: 10px;
+  display: inline-block;
 }
+/* TEMPORARY */
+header #topBarButtons span {
+  font-size: 44px;
+  padding: 5px 10px;
+  display: inline-block;
+  color: black;
+}
+/* TEMPORARY BLOCK END */
 
 .content {
-  
+  padding-top: 88px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Topic Page Styles */
+.topicpage {
+
+}
+
+/* Secondary (Global) Design Styles
+ *
+ * Styles used between pages to convey information or as general design improvements.
+ */
+
+ .illuminateIcon {
+   box-shadow: 0 0 10px 10px #FFF;
+ }
+
+/* Media Queries
+ *
+ * Breakpoints only for major design differences
+ * between Desktop and Tablet/Mobile.
+ */
+
+@media (max-width: 310px){
+  header {
+    height: 100px;
+    width:  100%;
+  }
+
 }
