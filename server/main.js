@@ -12,7 +12,9 @@ var db = mysql.createPool({
     database:        config.db.database
 });
 
-app.get('/', function(req, res) {
+app.use(express.static('public'));
+
+app.post('/login', function(req, res) {
     db.query('select email from user where userid = 1',
         function(err, rows, fields) {
         if (err) console.error(err);

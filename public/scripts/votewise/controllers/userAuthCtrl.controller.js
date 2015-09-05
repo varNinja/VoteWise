@@ -12,7 +12,7 @@ module.exports = function(app) {
         var vm = this;
         vm.controllername = fullname;
 
-        console.log($scope);
+        console.log(scope);
 
         var activate = function() {
         };
@@ -30,13 +30,13 @@ module.exports = function(app) {
         };
 
         scope.doLogin = function (customer) {
-            console.log("doLogin clicked with email: " + $scope.login.email +
-             " and password: " + $scope.login.password);
+            console.log("doLogin clicked with email: " + scope.login.email +
+             " and password: " + scope.login.password);
         };
 
         scope.signUp = function (customer) {
             console.log("Signup clicked with parameters: " + 
-             JSON.stringify($scope.signup));
+             JSON.stringify(scope.signup));
         };
 
         scope.logout = function () {
@@ -48,16 +48,16 @@ module.exports = function(app) {
             console.log(type);
             if (Number(type) == 1){
                 $scope.signup.type = 'voter';
-                console.log($scope.signup.type);
+                console.log(scope.signup.type);
             } else if (Number(type) == 2){
                 $scope.signup.type = 'politician';
-                console.log($scope.signup.type);
+                console.log(scope.signup.type);
             } else if (Number(type) == 3){
                 $scope.signup.type = "interestGroup"
-                console.log($scope.signup.type);
+                console.log(scope.signup.type);
             } else if (Number(type) == 4){
                 $scope.signup.type = "media";
-                console.log($scope.signup.type);
+                console.log(scope.signup.type);
             }
         }
 
