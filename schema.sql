@@ -255,6 +255,7 @@ create table `users` (
 	`id`            integer primary key auto_increment,
 	`userName` 		text not null,
 	`passwordhash`	varchar(20) not null,
+    `passwordSalt`  varchar(20) not null,
 	`email` 		varchar(75) not null,
 	`phone` 		varchar(20),
 	`firstName` 	varchar(25),
