@@ -4,32 +4,51 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
+    var deps = ['$scope', '$rootScope', '$location', '$http', 'main.votewise.Login', 'main.votewise.Register' ];
 
-
-    var deps = ['$scope', '$rootScope', '$location', '$http'];
-
-    function controller(scope, rootScope, location, http) {
+    function controller(scope, rootScope, location, http, Login, Register) {
         var vm = this;
         vm.controllername = fullname;
 
         console.log(scope);
+        console.log('login works -> ' + Login);
 
         var activate = function() {
         };
         activate();
 
         console.log("inside AuthCtrl");
-        scope.login = {};
+        scope.login = {
+            username:undefined,
+            password:undefined
+        };
         scope.signup = {};
         scope.signup = {
-            email:undefined,
-            password:undefined,
-            name:undefined,
-            phone:undefined,
-            address:undefined
+            email:      undefined,
+            password:   undefined,
+            name:       undefined,
+            password2:  undefined
         };
 
-        scope.doLogin = function (customer) {
+        var hello = {};
+
+        scope.loginTest = function (){
+            Login.save(hello, function(){
+                ;
+            })
+        }
+
+        scope.registerTest = function() {
+            Register.save
+        }
+
+        scope.verifyScope = function (){
+            console.log("username " + scope.login.username);
+            console.log("password " + scope.login.password);
+        }
+
+
+        scope.doLogin = function () {
             console.log("doLogin clicked with email: " + scope.login.email +
              " and password: " + scope.login.password);
         };

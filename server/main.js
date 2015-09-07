@@ -1,26 +1,37 @@
 var express = require('express'),
     mysql   = require('mysql'),
-    config  = require('./config');
+    config  = require('./config'),
+    login   = require('./api/login')
 
 var app = express();
+
 
 var db = mysql.createPool({
     connectionLimit: config.db.connectionLimit,
     host:            config.db.host,
     user:            config.db.user,
     password:        config.db.password,
-    database:        config.db.database
+    database:        config.db.database,
+    port:            config.db.port
 });
 
-app.use(express.static('public'));
+app.use(express.static('../dist/app/dev'));
 
-app.post('/login', function(req, res) {
-    db.query('select email from user where userid = 1',
-        function(err, rows, fields) {
-        if (err) console.error(err);
 
-        res.end('email = ' + rows[0].email);
-    });
+app.post('/api/login', function(req, res) {
+    console.log("posted at login")
+    res.json({
+        'msg':'success'
+    })
+    res.end(console.log("Successfully posted at login"));
+});
+
+app.post('/api/register', function(req, res) {
+    console.log("posted at register")
+    res.json({
+        'msg':'success'
+    })
+    res.end(console.log("Successfully posted at register"));
 });
 
 var server = app.listen(config.port, function() {
