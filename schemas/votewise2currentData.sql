@@ -268,7 +268,7 @@ INSERT INTO `topics`
 (      146,             27, 'Gun Control General'                       );
 
 INSERT INTO `subtopics`
-(`subtopicId`, `parentid`, `childId`, `vieworder`) VALUES
+(`subtopicId`, `parentid`, `vieworder`) VALUES
 (           1,          0,           1),
 (           2,          1,           1),
 (           3,          1,           2),
