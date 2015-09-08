@@ -22,11 +22,10 @@ module.exports = function(app) {
             username:undefined,
             password:undefined
         };
-        scope.signup = {};
-        scope.signup = {
+        scope.signUp = {
             email:      undefined,
             password:   undefined,
-            name:       undefined,
+            userName:       undefined,
             password2:  undefined
         };
 
@@ -39,24 +38,32 @@ module.exports = function(app) {
         }
 
         scope.registerTest = function() {
-            Register.save
+            Register.save(scope.signUp, function(){
+                ;
+            })
         }
 
-        scope.verifyScope = function (){
+        scope.verifyLoginScope = function (){
             console.log("username " + scope.login.username);
             console.log("password " + scope.login.password);
         }
 
+        scope.verifyRegisterScope = function (){ 
+            console.log("Username " + scope.signUp.userName);
+            console.log("Email " + scope.signUp.email);
+            console.log("Password " + scope.signUp.password);
+            console.log("Password2 " + scope.signUp.password2);
+        }
 
         scope.doLogin = function () {
             console.log("doLogin clicked with email: " + scope.login.email +
              " and password: " + scope.login.password);
         };
 
-        scope.signUp = function (customer) {
-            console.log("Signup clicked with parameters: " + 
-             JSON.stringify(scope.signup));
-        };
+        // scope.signUp = function (customer) {
+        //     console.log("Signup clicked with parameters: " + 
+        //      JSON.stringify(scope.signup));
+        // };
 
         scope.logout = function () {
 
