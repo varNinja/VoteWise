@@ -1,9 +1,22 @@
-drop table if exists rankingAnswers;
 drop table if exists concurrenceQuestions;
 drop table if exists concurrenceAnswers;
 drop table if exists rankingQuestions;
 drop table if exists rankingQuestionItems;
 drop table if exists rankingAnswers;
+drop table if exists rankingAnswerItems;
+drop table if exists judgeQuestions;
+drop table if exists judgeAnswers;
+drop table if exists shortInputQuestions;
+drop table if exists shortInputAnswers;
+drop table if exists politicianEssays;
+drop table if exists answeredEssays;
+drop table if exists backgrounds;
+drop table if exists topics;
+drop table if exists admins;
+drop table if exists politicians;
+drop table if exists politicianAccounts;
+drop table if exists politicianDistricts;
+drop table if exists districts;
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -26,7 +39,7 @@ create table `concurrenceAnswers` (
     `changedComment` text,
     `changedConcurrence` integer,
     `changedImportance` integer,
-    `changeReason` text
+    `changeReason` text,
 
     unique (question, user)
 );
@@ -54,12 +67,12 @@ create table `rankingAnswerItems` (
     `item` 			integer not null references rankingQuestionItems(id),
     `rank` 			integer,
     `changedRank` 	integer,
-    `changeReason`  text
+    `changeReason`  text,
 
     unique (user, item)
 );
 
-create table `rankingAnswer` (
+create table `rankingAnswers` (
 	`id` 				integer primary key auto_increment,
 	`user` 				integer not null references users(id),
 	`question` 			integer not null references rankingQuestion(id),
@@ -68,7 +81,7 @@ create table `rankingAnswer` (
 	`changedImportance` integer,
 	`changedComment` 	text,
 	`changeReason` 		text
-)
+);
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -76,12 +89,12 @@ create table `rankingAnswer` (
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 create table `judgeQuestions` (
-	`id` 			integer primary key auto_increment,
-	`background` 	integer not null references backgrounds(id),
-	`description` 	text not null
+	`id` integer primary key auto_increment,
+    `background` integer not null references backgrounds(id),
+	`description` text not null
 );
 
-create table `judgeAnswer` (
+create table `judgeAnswers` (
 	`id` 					integer primary key auto_increment,
 	`user` 					integer not null references users(id),
 	`question` 				integer not null references rankingQuestion(id),
@@ -96,7 +109,7 @@ create table `judgeAnswer` (
 	`changedConcurrence`	integer,
 	`changedComment` 		text,
 	`changeReason`			text
-)
+);
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -190,7 +203,7 @@ create table `users` (
 -- Admin
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-create table `admin` (
+create table `admins` (
 	`id`            integer primary key auto_increment,
 	`userName` 		text not null,
 	`passwordhash`	varchar(20) not null,
