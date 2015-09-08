@@ -175,37 +175,6 @@ create table `shortInputAnswers` (
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--- Politician Essays
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-create table `politicianEssays` (
-	`id` 			integer primary key auto_increment,
-	`background`	integer not null references backgrounds(id),
-	`description` 	text not null,	
-
-	`createdOn` 	datetime default current_timestamp,
-	`createdBy` 	integer references users(id),
-	`updatedOn` 	datetime on update current_timestamp,
-	`updatedBy` 	integer references users(id)
-);
-
-create table `answeredEssays` (
-	`id` 				integer primary key auto_increment,
-	`question`			integer not null references politicianEssays,
-	`answer` 			text not null,
-	`changedAnswer` 	text not null,
-	`changeReason` 		text,
-
-
-	`createdOn` 		datetime default current_timestamp,
-	`createdBy` 		integer references users(id),
-	`updatedOn` 		datetime on update current_timestamp,
-	`updatedBy` 		integer references users(id)
-);
-
-
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- Backgrounds
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -262,30 +231,6 @@ create table `users` (
 	`updatedBy` 	integer references users(id)
 );
 
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--- Admin
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-create table `admin` (
-	`id`            integer primary key auto_increment,
-	`userName` 		text not null,
-	`passwordhash`	varchar(20) not null,
-    `passwordSalt`  varchar(20) not null,
-	`email` 		varchar(75) not null,
-	`phone` 		varchar(20),
-	`firstName` 	varchar(25),
-	`lastName` 		varchar(50),
-	`userType` 		char(1),
-	`userLevel` 	char(3),
-	`active` 		tinyint(1),
-	`createdOn` 	datetime default current_timestamp,
-	`createdBy` 	integer references users(id),
-	`updatedOn` 	datetime on update current_timestamp,
-	`updatedBy` 	integer references users(id)
-);
-
-
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -297,17 +242,12 @@ create table `politicians` (
     `party` text not null,
     `office` text not null,
     `incumbent` boolean not null,
-    `bio` text not null,
-    `endorements` text not null,
+    `bio` text not null
 );
 
 create table `politicianAccounts` (
     `username` text not null,
-    `password_hash` text not null,
-    `politicianInfo` integer not null references politicians(id),
-    `userLevel` char(3),
-    `active` tinyint(1),
-
+    `password_hash` text not null
 );
 
 create table `politicianDistricts` (
@@ -315,12 +255,7 @@ create table `politicianDistricts` (
     `district`   integer not null references districts(id)
 );
 
-
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--- Districts 
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+-- This would probably constaint stuff like zip, state, etc.
 create table `districts` (
     `id` integer primary key auto_increment,
     `name` text not null
