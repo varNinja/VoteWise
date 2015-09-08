@@ -13,12 +13,7 @@ drop table if exists rankingAnswers;
 create table `concurrenceQuestions` (
     `id` integer primary key auto_increment,
     `background` integer not null references backgrounds(id),
-    `description` text not null,
-
-    `createdOn` datetime default current_timestamp,
-	`createdBy` integer references users(id),
-	`updatedOn` datetime on update current_timestamp,
-	`updatedBy` integer references users(id)
+    `description` text not null
 );
 
 create table `concurrenceAnswers` (
@@ -31,12 +26,7 @@ create table `concurrenceAnswers` (
     `changedComment` text,
     `changedConcurrence` integer,
     `changedImportance` integer,
-    `changeReason` text,
-
-	`createdOn` datetime default current_timestamp,
-	`createdBy` integer references users(id),
-	`updatedOn` datetime on update current_timestamp,
-	`updatedBy` integer references users(id),
+    `changeReason` text
 
     unique (question, user)
 );
@@ -49,23 +39,13 @@ create table `concurrenceAnswers` (
 create table `rankingQuestions` (
     `id`          	integer primary key auto_increment,
     `background`  	integer not null references backgrounds(id),
-    `description` 	text not null,
-
-    `createdOn` 	datetime default current_timestamp,
-	`createdBy` 	integer references users(id),
-	`updatedOn` 	datetime on update current_timestamp,
-	`updatedBy` 	integer references users(id)
+    `description` 	text not null
 );
 
 create table `rankingQuestionItems` (
     `id`       		integer primary key auto_increment,
     `question` 		integer not null references rankingQuestions(id),
-    `item`     		text not null,
-
-    `createdOn` 	datetime default current_timestamp,
-	`createdBy` 	integer references users(id),
-	`updatedOn` 	datetime on update current_timestamp,
-	`updatedBy` 	integer references users(id)
+    `item`     		text not null
 );
 
 create table `rankingAnswerItems` (
@@ -74,12 +54,7 @@ create table `rankingAnswerItems` (
     `item` 			integer not null references rankingQuestionItems(id),
     `rank` 			integer,
     `changedRank` 	integer,
-    `changeReason`  text,
-
-    `createdOn` 	datetime default current_timestamp,
-	`createdBy` 	integer references users(id),
-	`updatedOn`		datetime on update current_timestamp,
-	`updatedBy` 	integer references users(id),
+    `changeReason`  text
 
     unique (user, item)
 );
@@ -92,13 +67,7 @@ create table `rankingAnswer` (
 	`comment` 			text,
 	`changedImportance` integer,
 	`changedComment` 	text,
-	`changeReason` 		text,
-
-	`createdOn` 		datetime default current_timestamp,
-	`createdBy` 		integer references users(id),
-	`updatedOn`			datetime on update current_timestamp,
-	`updatedBy` 		integer references users(id)
-
+	`changeReason` 		text
 )
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -109,12 +78,7 @@ create table `rankingAnswer` (
 create table `judgeQuestions` (
 	`id` 			integer primary key auto_increment,
 	`background` 	integer not null references backgrounds(id),
-	`description` 	text not null,
-
-	`createdOn` 	datetime default current_timestamp,
-	`createdBy` 	integer references users(id),
-	`updatedOn` 	datetime on update current_timestamp,
-	`updatedBy` 	integer references users(id)
+	`description` 	text not null
 );
 
 create table `judgeAnswer` (
@@ -131,12 +95,7 @@ create table `judgeAnswer` (
 	`changedImportance` 	integer,
 	`changedConcurrence`	integer,
 	`changedComment` 		text,
-	`changeReason`			text,
-
-	`createdOn` 			datetime default current_timestamp,
-	`createdBy`	 			integer references users(id),
-	`updatedOn` 			datetime on update current_timestamp,
-	`updatedBy` 			integer references users(id)
+	`changeReason`			text
 )
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -147,12 +106,7 @@ create table `judgeAnswer` (
 create table `shortInputQuestions` (
 	`id` 			integer primary key auto_increment,
 	`background`	integer not null references backgrounds(id),
-	`description` 	text not null,	
-
-	`createdOn` 	datetime default current_timestamp,
-	`createdBy` 	integer references users(id),
-	`updatedOn` 	datetime on update current_timestamp,
-	`updatedBy` 	integer references users(id)
+	`description` 	text not null
 );
 
 create table `shortInputAnswers` (
@@ -164,13 +118,7 @@ create table `shortInputAnswers` (
 	`changedAnswer` 	text not null,
 	`changeReason` 		text,
 	`changeComment` 	text,
-	`changeImportance` 	integer,
-
-
-	`createdOn` 		datetime default current_timestamp,
-	`createdBy` 		integer references users(id),
-	`updatedOn` 		datetime on update current_timestamp,
-	`updatedBy` 		integer references users(id)
+	`changeImportance` 	integer
 );
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -181,12 +129,7 @@ create table `shortInputAnswers` (
 create table `politicianEssays` (
 	`id` 			integer primary key auto_increment,
 	`background`	integer not null references backgrounds(id),
-	`description` 	text not null,	
-
-	`createdOn` 	datetime default current_timestamp,
-	`createdBy` 	integer references users(id),
-	`updatedOn` 	datetime on update current_timestamp,
-	`updatedBy` 	integer references users(id)
+	`description` 	text not null
 );
 
 create table `answeredEssays` (
@@ -194,13 +137,7 @@ create table `answeredEssays` (
 	`question`			integer not null references politicianEssays,
 	`answer` 			text not null,
 	`changedAnswer` 	text not null,
-	`changeReason` 		text,
-
-
-	`createdOn` 		datetime default current_timestamp,
-	`createdBy` 		integer references users(id),
-	`updatedOn` 		datetime on update current_timestamp,
-	`updatedBy` 		integer references users(id)
+	`changeReason` 		text
 );
 
 
@@ -213,11 +150,6 @@ create table `backgrounds` (
     `id` 				integer primary key auto_increment,
     `shortDescription` 	text not null,
     `description` 		text not null
-
-    `createdOn` 		datetime default current_timestamp,
-    `createdBy` 		integer not null references users(id),
-    `updatedOn` 		datetime on update current_timestamp,
-    `updatedBy` 		integer references users(id)
 );
 
 
@@ -230,12 +162,7 @@ create table `topics`(
 	`id` 			integer primary key auto_increment,
 	`description` 	text not null,
     `background`    integer not null references backgrounds(id),
-    `parent`        integer null references topics(id),
-
-	`createdOn` 	datetime default current_timestamp,
-	`createdBy` 	integer references users(id),
-	`updatedOn` 	datetime on update current_timestamp,
-	`updatedBy` 	integer references users(id)
+    `parent`        integer null references topics(id)
 );
 
 
@@ -255,11 +182,7 @@ create table `users` (
 	`lastName` 		varchar(50),
 	`userType` 		char(1),
 	`userLevel` 	char(3),
-	`active` 		tinyint(1),
-	`createdOn` 	datetime default current_timestamp,
-	`createdBy` 	integer references users(id),
-	`updatedOn` 	datetime on update current_timestamp,
-	`updatedBy` 	integer references users(id)
+	`active` 		tinyint(1)
 );
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -278,11 +201,7 @@ create table `admin` (
 	`lastName` 		varchar(50),
 	`userType` 		char(1),
 	`userLevel` 	char(3),
-	`active` 		tinyint(1),
-	`createdOn` 	datetime default current_timestamp,
-	`createdBy` 	integer references users(id),
-	`updatedOn` 	datetime on update current_timestamp,
-	`updatedBy` 	integer references users(id)
+	`active` 		tinyint(1)
 );
 
 
@@ -298,7 +217,7 @@ create table `politicians` (
     `office` text not null,
     `incumbent` boolean not null,
     `bio` text not null,
-    `endorements` text not null,
+    `endorsements` text not null
 );
 
 create table `politicianAccounts` (
@@ -306,8 +225,7 @@ create table `politicianAccounts` (
     `password_hash` text not null,
     `politicianInfo` integer not null references politicians(id),
     `userLevel` char(3),
-    `active` tinyint(1),
-
+    `active` tinyint(1)
 );
 
 create table `politicianDistricts` (
