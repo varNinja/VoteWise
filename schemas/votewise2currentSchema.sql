@@ -173,9 +173,10 @@ create table `backgrounds` (
 
 create table `topics`(
 	`id` 			integer primary key auto_increment,
-	`description` 	text not null,
     `background`    integer not null references backgrounds(id),
-    `parent`        integer null references topics(id)
+    `parent`        integer null references topics(id),
+    `viewOrder`     integer not null, 
+    `description`   text not null
 );
 
 
