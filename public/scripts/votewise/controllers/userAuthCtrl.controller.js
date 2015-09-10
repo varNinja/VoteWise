@@ -32,15 +32,13 @@ module.exports = function(app) {
         var hello = {};
 
         scope.loginTest = function (){
-            Login.save(hello, function(){
-                ;
-            })
+            console.log("loginTest called");
+            
         }
 
         scope.registerTest = function() {
-            Register.save(scope.signUp, function(){
-                ;
-            })
+            console.log("registerTest called");
+            
         }
 
         scope.verifyLoginScope = function (){

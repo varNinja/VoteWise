@@ -24,6 +24,12 @@ module.exports = function(namespace) {
                 controller: 'main.votewise.navigationCtrl'
         });
 
+        $stateProvider.state('topic', {
+                url: '/topic',
+                template: require('./views/topic.html'),
+                controller: 'main.votewise.navigationCtrl'
+        });
+
         $stateProvider.state('comparison', {
                 url: '/comparison',
                 template: require('./views/comparison.html'),

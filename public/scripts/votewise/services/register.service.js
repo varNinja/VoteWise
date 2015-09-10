@@ -7,7 +7,7 @@ module.exports = function(app) {
 
     function service($resource) {
     	console.log("Register service called")
-        return $resource("/api/register");
+        return $resource("/register");
     }
 
     service.$inject = dependencies;

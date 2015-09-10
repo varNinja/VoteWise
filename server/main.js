@@ -1,7 +1,8 @@
-var express = require('express'),
-    mysql   = require('mysql'),
-    config  = require('./config'),
-    login   = require('./api/login')
+var express = require('express');
+var mysql = require('mysql');
+var config = require('./config');
+var crypto = require('crypto');
+var bodyParser = require('body-parser');
 
 var app = express();
 
@@ -16,23 +17,71 @@ var db = mysql.createPool({
 });
 
 app.use(express.static('../dist/app/dev'));
+app.use(bodyParser.json());
+
+// app.get('/topics', function (req, res))
+
+app.get('/getTopicTree/:topic', function(req, res){
+    console.log("app.get at /getTopicTrees called");
+    var topic = req.params.topic;
+    console.log("req.params.topic: " + topic);
+    db.query('select id from topics where description = ?',
+    [topic], function(err, rows, fields) {
+       
+        if (err) {
+            console.error(err);
+            res.status(500).json({
+                error: 'Internal server error.'
+            });
+            return;
+        }
+
+        var parentTopic = rows[0];
+        var parentId = parentTopic.id;
+        console.log("parentTopic is: " + JSON.stringify(parentTopic));
 
 
-app.post('/api/login', function(req, res) {
-    console.log("posted at login")
-    res.json({
-        'msg':'success'
-    })
-    res.end(console.log("Successfully posted at login"));
-});
+        db.query('select id, viewOrder from topics where parent = ?',
+            [parentId],function(err, rows, fields) {
+       
+            if (err) {
+                console.error(err);
+                res.status(500).json({
+                    error: 'Internal server error.'
+                });
+                return;
+            }
+            var topicChildren = rows;
 
-app.post('/api/register', function(req, res) {
-    console.log("posted at register")
-    res.json({
-        'msg':'success'
-    })
-    res.end(console.log("Successfully posted at register"));
-});
+            console.log('rows from parent id query: ' + rows[0]);
+            for (var i = 0 ; i < topicChildren.length; i++){
+                console.log("topicChildren are: " + JSON.stringify(topicChildren[i]));
+            }
+            // res.status(200).json({
+            // })
+
+            var orderArray = function(){
+                var childrenByViewOrder = [];
+                for (var i = 0; i < topicChildren.length; i++){
+                    if (childrenByViewOrder[0] == undefined){
+                        childrenByViewOrder.push(topicChildren[i]);
+                    } else if (typeOf(childrenByViewOrder[0].viewOrder)=='number'){
+                        if (childrenByViewOrder[0]<topicChildren[i]){
+                            childrenByViewOrder.push(topicChildren[i])
+                        }
+                    }
+                }
+            }
+
+            orderArray()
+            console.log(childrenByViewOrder);
+
+            
+        });
+
+
+    });
+})
 
 var server = app.listen(config.port, function() {
     var address = server.address();
