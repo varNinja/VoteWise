@@ -40,4 +40,3 @@ var server = app.listen(config.port, function() {
     console.log('Example app listening at http://%s:%s',
                 address.address, address.port);
 });
-
