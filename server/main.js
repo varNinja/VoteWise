@@ -41,7 +41,7 @@ app.get('/getTopicTree/:topic', function(req, res){
         console.log("parentTopic is: " + JSON.stringify(parentTopic));
 
 
-        db.query('select id, viewOrder from topics where parent = ?',
+        db.query('select id, viewOrder, description from topics where parent = ? order by viewOrder',
             [parentId],function(err, rows, fields) {
        
             if (err) {
@@ -57,24 +57,11 @@ app.get('/getTopicTree/:topic', function(req, res){
             for (var i = 0 ; i < topicChildren.length; i++){
                 console.log("topicChildren are: " + JSON.stringify(topicChildren[i]));
             }
-            // res.status(200).json({
-            // })
+            res.status(200).json(
+                rows
+            )
 
-            var orderArray = function(){
-                var childrenByViewOrder = [];
-                for (var i = 0; i < topicChildren.length; i++){
-                    if (childrenByViewOrder[0] == undefined){
-                        childrenByViewOrder.push(topicChildren[i]);
-                    } else if (typeOf(childrenByViewOrder[0].viewOrder)=='number'){
-                        if (childrenByViewOrder[0]<topicChildren[i]){
-                            childrenByViewOrder.push(topicChildren[i])
-                        }
-                    }
-                }
-            }
 
-            orderArray()
-            console.log(childrenByViewOrder);
 
             
         });
