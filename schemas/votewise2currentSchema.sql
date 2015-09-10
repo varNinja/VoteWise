@@ -175,8 +175,13 @@ create table `topics`(
 	`id` 			integer primary key auto_increment,
     `background`    integer not null references backgrounds(id),
     `parent`        integer null references topics(id),
+<<<<<<< HEAD
     `viewOrder`     integer not null, 
     `description`   text not null
+=======
+    `viewOrder`     integer not null,
+    `description` 	text not null
+>>>>>>> James-Node
 );
 
 

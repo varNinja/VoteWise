@@ -1431,9 +1431,9 @@ LOCK TABLES `user` WRITE;
 INSERT INTO `user` 
 (`userid`, `uname`, `pwd`, `email`, `phone`, `bname`, `fname`, `lname`, `utype`, `ulevel`, `active`, `crdt`, `crdtid`, `updt`, `updtid`, `delmark`)
 VALUES
-('1', '', '', 'strimble@softyme.com', '', '', 'Sharon', 'Trimble', 'G', '0', 0, '2014-04-26 20:27:57', '1', '2014-04-26 20:27:57', '1', 0),
-('2', '', '', 'bcnagle2@gmail.com', '', '', 'Bill', 'Nagle', 'G', '0', 0, '2014-04-26 20:33:42', '1', '2014-04-26 20:33:42', '1', 0),
-('4', '', '', 'spencersnygg@silentmonkeys.com', '', '', 'joe', 'pigglywqiggly', 'G', '0', 0, '2014-05-21 16:32:19', '1', '2014-05-21 16:32:19', '1', 0);
+('1', 'strimble', 'votewise', 'strimble@softyme.com', '', '', 'Sharon', 'Trimble', 'G', '0', 0, '2014-04-26 20:27:57', '1', '2014-04-26 20:27:57', '1', 0),
+('2', 'bcnagle', 'votewise', 'bcnagle2@gmail.com', '', '', 'Bill', 'Nagle', 'G', '0', 0, '2014-04-26 20:33:42', '1', '2014-04-26 20:33:42', '1', 0),
+('3', 'spencer', 'votewise', 'spencersnygg@silentmonkeys.com', '', '', 'joe', 'pigglywqiggly', 'G', '0', 0, '2014-05-21 16:32:19', '1', '2014-05-21 16:32:19', '1', 0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 

@@ -46,6 +46,7 @@
     "eslint-plugin-nodeca": "1.0.3",
     "event-stream": "3.3.1",
     "exorcist": "0.4.0",
+    "express-generator": "^4.13.1",
     "github": "0.2.4",
     "github-username": "2.0.0",
     "growly": "1.2.0",

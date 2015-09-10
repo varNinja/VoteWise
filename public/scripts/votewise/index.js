@@ -1,4 +1,5 @@
 require('angular-ui-router');
+require('angular-resource');
 
 var modulename = 'votewise';
 
@@ -7,18 +8,25 @@ module.exports = function(namespace) {
     var fullname = namespace + '.' + modulename;
 
     var angular = require('angular');
-    var app = angular.module(fullname, ['ui.router', ]);
+    var app = angular.module(fullname, ['ui.router', 'ngResource']);
     // inject:folders start
     require('./controllers')(app);
+    require('./services')(app);
     // inject:folders end
 
     var configRoutesDeps = ['$stateProvider', '$urlRouterProvider'];
     var configRoutes = function($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/login');
+        $urlRouterProvider.otherwise('/register');
 
         $stateProvider.state('home', {
                 url: '/home',
                 template: require('./views/home.html'),
+                controller: 'main.votewise.navigationCtrl'
+        });
+
+        $stateProvider.state('topic', {
+                url: '/topic',
+                template: require('./views/topic.html'),
                 controller: 'main.votewise.navigationCtrl'
         });
 
