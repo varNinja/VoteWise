@@ -6,7 +6,8 @@ module.exports = {
         user:            '',
         password:        '',
         database:        'votewise_vw',
-        connectionLimit: 10
+        connectionLimit: 10,
+        port:             
     }
 };
 

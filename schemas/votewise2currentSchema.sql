@@ -8,8 +8,6 @@ drop table if exists judgeQuestions;
 drop table if exists judgeAnswers;
 drop table if exists shortInputQuestions;
 drop table if exists shortInputAnswers;
-drop table if exists politicianEssays;
-drop table if exists answeredEssays;
 drop table if exists backgrounds;
 drop table if exists topics;
 drop table if exists admins;
@@ -36,9 +34,9 @@ create table `concurrenceAnswers` (
     `concurrence` integer not null,
     `importance`  integer not null,
     `comment`     text,
-    `changedComment` text,
-    `changedConcurrence` integer,
-    `changedImportance` integer,
+    `previousComment` text,
+    `previousConcurrence` integer,
+    `previousImportance` integer,
     `changeReason` text,
 
     unique (question, user)
@@ -66,7 +64,7 @@ create table `rankingAnswerItems` (
     `user` 			integer not null references users(id),
     `item` 			integer not null references rankingQuestionItems(id),
     `rank` 			integer,
-    `changedRank` 	integer,
+    `previousRank` 	integer,
     `changeReason`  text,
 
     unique (user, item)
@@ -78,8 +76,8 @@ create table `rankingAnswers` (
 	`question` 			integer not null references rankingQuestion(id),
 	`importance` 		integer not null,
 	`comment` 			text,
-	`changedImportance` integer,
-	`changedComment` 	text,
+	`previousImportance` integer,
+	`previousComment` 	text,
 	`changeReason` 		text
 );
 
@@ -105,9 +103,9 @@ create table `judgeAnswers` (
 	`lawPrecedent`			integer,
 	`lawSocialNeed`			integer,
 	`comment` 				text,
-	`changedImportance` 	integer,
-	`changedConcurrence`	integer,
-	`changedComment` 		text,
+	`previousImportance` 	integer,
+	`previousConcurrence`	integer,
+	`previousComment` 		text,
 	`changeReason`			text
 );
 
@@ -128,31 +126,11 @@ create table `shortInputAnswers` (
 	`answer` 			text not null,
 	`comment`			text,
 	`importance` 		integer,
-	`changedAnswer` 	text not null,
+	`previousAnswer` 	text not null,
 	`changeReason` 		text,
-	`changeComment` 	text,
-	`changeImportance` 	integer
+	`previousComment` 	text,
+	`previousImportance` 	integer
 );
-
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--- Politician Essays
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-create table `politicianEssays` (
-	`id` 			integer primary key auto_increment,
-	`background`	integer not null references backgrounds(id),
-	`description` 	text not null
-);
-
-create table `answeredEssays` (
-	`id` 				integer primary key auto_increment,
-	`question`			integer not null references politicianEssays,
-	`answer` 			text not null,
-	`changedAnswer` 	text not null,
-	`changeReason` 		text
-);
-
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -175,13 +153,8 @@ create table `topics`(
 	`id` 			integer primary key auto_increment,
     `background`    integer not null references backgrounds(id),
     `parent`        integer null references topics(id),
-<<<<<<< HEAD
-    `viewOrder`     integer not null, 
-    `description`   text not null
-=======
     `viewOrder`     integer not null,
     `description` 	text not null
->>>>>>> James-Node
 );
 
 
@@ -193,7 +166,7 @@ create table `topics`(
 create table `users` (
 	`id`            integer primary key auto_increment,
 	`userName` 		text not null,
-	`passwordhash`	varchar(20) not null,
+	`passwordHash`	varchar(20) not null,
     `passwordSalt`  varchar(20) not null,
 	`email` 		varchar(75) not null,
 	`phone` 		varchar(20),
@@ -201,7 +174,9 @@ create table `users` (
 	`lastName` 		varchar(50),
 	`userType` 		char(1),
 	`userLevel` 	char(3),
-	`active` 		tinyint(1)
+	`active` 		tinyint(1),
+	`politicianInfo`integer references politicians(id)
+
 );
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -223,8 +198,6 @@ create table `admins` (
 	`active` 		tinyint(1)
 );
 
-
-
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- Politicians 
@@ -236,15 +209,8 @@ create table `politicians` (
     `office` text not null,
     `incumbent` boolean not null,
     `bio` text not null,
-    `endorsements` text not null
-);
-
-create table `politicianAccounts` (
-    `username` text not null,
-    `password_hash` text not null,
-    `politicianInfo` integer not null references politicians(id),
-    `userLevel` char(3),
-    `active` tinyint(1)
+    `endorsements` text not null,
+    `essay` text
 );
 
 create table `politicianDistricts` (

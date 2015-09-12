@@ -107,6 +107,7 @@
     "mocha": "2.2.5",
     "mocha-lcov-reporter": "0.0.2",
     "moment": "2.10.3",
+    "mysql-promise": "^1.4.0",
     "node-jsxml": "0.6.0",
     "node-libs-browser": "0.5.2",
     "node-sass": "3.2.0",
