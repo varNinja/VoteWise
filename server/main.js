@@ -26,6 +26,17 @@ app.get('/backgrounds/<id>/questions/:userId', function(req,res){
 })
 
 
+app.get('/questions/:id', function(req,res){
+    var questionSet = req.params.id;
+    console.log('questionSet from req.params: ', questionSet);
+    db.query('select description, id from concurrenceQuestions where background = ?',
+        [questionSet], function(err, rows){
+            console.log('rows: ', rows);
+        });
+})
+
+
+
 app.get('/getTopicTree/:topic', function(req, res){
     console.log("app.get at /getTopicTrees called");
     var topic = req.params.topic;
@@ -43,10 +54,10 @@ app.get('/getTopicTree/:topic', function(req, res){
             db.query('select id, background, viewOrder, description from topics where parent = ? order by viewOrder',
                 [query], function(err, rows){
                     callback(err, rows);
+
                 });
         },
         function(topics, callback){
-            
             async.forEachOf(topics, function(row, key, callback){
                 console.log('rows[key].id: ', topics[key].id);
                 if (topics[key].background == 0){
