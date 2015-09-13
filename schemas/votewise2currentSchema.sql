@@ -95,7 +95,7 @@ create table `judgeQuestions` (
 create table `judgeAnswers` (
 	`id` 					integer primary key auto_increment,
 	`user` 					integer not null references users(id),
-	`question` 				integer not null references rankingQuestion(id),
+	`question` 				integer not null references judgeQuestions(id),
 	`concurrence` 			integer not null,
 	`importance` 			integer not null,
 	`lawSpirit`				integer,
