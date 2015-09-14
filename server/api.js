@@ -178,7 +178,7 @@ function getTopicTrees(req, res){
     });
 }
 
-var questionsByBackgroundId = function(req,res){
+function questionsByBackgroundId(req, res){
     var questionSet = req.params.id;
     req.db.query('select description, id from concurrenceQuestions where background = ?',
         [questionSet], function(err, rows){
