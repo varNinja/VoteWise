@@ -1,7 +1,32 @@
 var config = require('./config');
 var makeAPI = require('../../server/api');
 var mysql = require('mysql');
-var test = require('tape');
+var stream = require('stream');
+var test = require('tape-catch');
+var util = require('util');
+
+util.inherits(Request, stream.Readable);
+
+function Request(options) {
+    stream.Readable.call(this, {});
+
+    this.method = options.method;
+    this.url = options.url;
+    this.headers = options.headers || {};
+
+    if (options.jsonbody) {
+        var json = JSON.stringify(options.jsonbody);
+
+        this.headers['content-encoding'] = 'identity';
+        this.headers['content-length']   = json.length;
+        this.headers['content-type']     = 'application/json';
+
+        this.push(json);
+        this.push(null);
+    }
+}
+
+Request.prototype._read = function() {};
 
 function call(req, done) {
     var db = mysql.createConnection({
@@ -14,8 +39,6 @@ function call(req, done) {
     });
 
     var app = makeAPI(db);
-
-    if (!req.headers) req.headers = {};
 
     var result = {
         headers: {},
@@ -44,11 +67,11 @@ function call(req, done) {
         }
     };
 
-    app(req, res, _done);
+    app(new Request(req), res, _done);
 }
 
 test('API calls', function(t) {
-    t.test('/backgrounds/:id/questions', function(t) {
+    t.skip('/backgrounds/:id/questions', function(t) {
         t.plan(2);
 
         call({
@@ -83,7 +106,7 @@ test('API calls', function(t) {
         });
     });
 
-    t.test('/topic-tree/3', function(t) {
+    t.skip('/topic-tree/3', function(t) {
         t.plan(2);
 
         call({
@@ -117,5 +140,29 @@ test('API calls', function(t) {
             ]);
         });
     });
+
+    t.test('/register creates a new user', function(t) {
+        t.plan(1);
+
+        call({
+            method: 'post',
+            url: '/register',
+            jsonbody: {username: 'tom', password: 'g00by'}
+        }, function(res) {
+            t.equal(res.status, 201);
+        });
+    });
+
+    t.test("/register doesn't recreate an existing user", function(t) {
+        t.plan(1);
+
+        call({
+            method: 'post',
+            url: '/register',
+            jsonbody: {username: 'tom', password: 'g00by'}
+        }, function(res) {
+            t.equal(res.status, 409);
+        });
+    })
 });
 

@@ -1,32 +1,35 @@
 var async = require('async');
 var bodyParser = require('body-parser');
-var crypto = require('crypto');
 var express = require('express');
+var auth = require('./auth');
+
+function internalServerError(res, err) {
+    console.error(err);
+    res.status(500).json({
+        message: 'Internal server error'
+    });
+}
 
 function register(req, res) {
     var username = req.body.username;
     var password = req.body.password;
 
-    auth.newPassword(password, function(err, passwordHash, salt) {
-        if (err) {
-            console.error(err);
-            return res.status(500).json({
-                error: 'Internal server error.'
-            });
-        }
+    auth.newPassword(password, function(err, hashed) {
+        if (err) return internalServerError(res, err);
 
-        db.query('insert into users (userName, salt, passwordHash)',
-                 [username, salt, key], function(err) {
-            // TODO: Check for integrity error to return a Conflict status (user
-            // already exists)
+        req.db.query('insert into users (userName, passwordHash) values (?, ?)',
+                 [username, hashed], function(err) {
             if (err) {
-                console.error(err);
-                return res.status(500).json({
-                    error: 'Internal server error.'
-                });
+                if (err.errno == 1062) {
+                    res.status(409).json({
+                        message: 'A user with that username already exists.'
+                    });
+                } else {
+                    internalServerError(res, err);
+                }
+            } else {
+                res.status(201).json({});
             }
-
-            res.status(200).json({});
         });
     });
 }
@@ -74,9 +77,7 @@ function login(req, res) {
 }
 
 function getTopicTree(req, res) {
-    console.log("app.get at /getTopicTrees called");
     var topic = req.params.topic;
-    console.log("req.params.topic: " + topic);
 
     async.waterfall([
         function(callback) {
@@ -95,7 +96,6 @@ function getTopicTree(req, res) {
         },
         function(topics, callback){
             async.forEachOf(topics, function(row, key, callback){
-                console.log('rows[key].id: ', topics[key].id);
                 if (topics[key].background == 0){
                     var query = topics[key].id
                     db.query('select id, background, viewOrder, description from topics where parent = ? order by viewOrder',
@@ -104,8 +104,6 @@ function getTopicTree(req, res) {
                                 return callback(err);
                             }
                             topics[key].subTopics = rows;
-                            console.log('rows from async.forEach db query: ', rows);
-                            console.log("from inside asnyc.foreach", topics);
                             callback();
                             });
                 } else {
@@ -113,22 +111,12 @@ function getTopicTree(req, res) {
                 }
             }, function(err){
                 callback(err, topics);
-                console.log('forEachOf callback called');
             });
-            // console.log(topics);
         }
     ], function(err, topics){
-       console.log("from end of waterfall: ", topics);
        res.status(200).json(
             topics
         );
-    });
-}
-
-function internalServerError(res, err) {
-    console.error(err);
-    res.status(500).json({
-        message: 'Internal server error'
     });
 }
 

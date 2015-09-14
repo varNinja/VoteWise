@@ -166,7 +166,7 @@ create table `topics`(
 
 create table `users` (
     `id`             integer primary key auto_increment,
-    `userName`       text not null,
+    `userName`       varchar(20) not null,
     `passwordHash`   varchar(20) not null,
     `passwordSalt`   varchar(20) not null,
     `email`          varchar(75) not null,
@@ -176,8 +176,8 @@ create table `users` (
     `userType`       char(1),
     `userLevel`      char(3),
     `active`         tinyint(1),
-    `politicianInfo` integer references politicians(id)
-
+    `politicianInfo` integer references politicians(id),
+    unique index (userName)
 );
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
