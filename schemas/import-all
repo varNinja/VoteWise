@@ -1,0 +1,5 @@
+#!/bin/bash -ue
+files="schema.sql currentBackgrounds.sql"
+files="$files currentConcurrenceQuestions.sql currentTopics.sql"
+files="$files currentUsers.sql"
+cat $files
