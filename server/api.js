@@ -120,52 +120,6 @@ function getTopicTree(req, res) {
     });
 }
 
-function getTopicTrees(req, res){
-    var topic = req.params.topic;
-
-    async.waterfall([
-    function(callback) {
-        req.db.query('select id from topics where description = ?',
-            [topic], function(err, rows){
-                callback(err, rows);
-            });
-    },
-    function(rows, callback) {
-        var query = rows[0].id
-        req.db.query('select id, background, viewOrder, description '+
-                     'from topics where parent = ? order by viewOrder',
-            [query], function(err, rows){
-            callback(err, rows);
-        });
-    },
-    function(topics, callback){
-        async.forEachOf(topics, function(row, key, callback){
-            if (topics[key].background == 0){
-                var query = topics[key].id
-                req.db.query('select id, background, viewOrder, description '+
-                             'from topics where parent = ? order by viewOrder',
-                    [query], function(err, rows){
-                        if (err) {
-                            return callback(err);
-                        }
-                        topics[key].subTopics = rows;
-                        callback();
-                });
-            } else {
-                callback();
-            }
-        }, function(err){
-            callback(err, topics);
-        });
-    }
-    ], function(err, topics){
-        if (err) return internalServerError(res, err);
-        res.status(200).json(
-            topics
-        );
-    });
-}
-
 function questionsByBackgroundId(req, res){
     var questionSet = req.params.id;
     req.db.query('select description, id from concurrenceQuestions where background = ?',
@@ -189,7 +143,7 @@ module.exports = function(db) {
     app.post('/login', login);
     app.post('/register', register);
     app.get('/backgrounds/:id/questions', questionsByBackgroundId);
-    app.get('/topic-tree/:topic', getTopicTrees);
+    app.get('/topic-tree/:topic', getTopicTree);
 
     return app;
 };
