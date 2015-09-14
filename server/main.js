@@ -1,5 +1,5 @@
 var config = require('./config');
-var createApp = require('./routes');
+var makeAPI = require('./api');
 var mysql = require('mysql');
 
 var db = mysql.createPool({
@@ -11,7 +11,7 @@ var db = mysql.createPool({
     port:            config.db.port
 });
 
-var server = createApp(db).listen(config.port, function() {
+var server = makeAPI(db).listen(config.port, function() {
     var address = server.address();
 
     console.log('Example app listening at http://%s:%s',
