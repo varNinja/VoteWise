@@ -62,7 +62,7 @@ create table `concurrenceAnswers` (
 create table `rankingQuestions` (
 	`id` integer primary key,
 	`type` enum('ranking') not null,
-	foreign key(id, type) references question(id, type)
+	foreign key(id, type) references questions(id, type)
 );
 
 create table `rankingQuestionItems` (
@@ -101,7 +101,7 @@ create table `rankingAnswers` (
 create table `judgeQuestions` (
 	`id` integer primary key,
 	`type` enum('concurrence') not null,
-	foreign key(id, type) references question(id, type)
+	foreign key(id, type) references questions(id, type)
 );
 
 create table `judgeAnswers` (
@@ -129,7 +129,7 @@ create table `judgeAnswers` (
 create table `shortInputQuestions` (
 	`id` integer primary key,
 	`type` enum('concurrence') not null,
-	foreign key(id, type) references question(id, type)
+	foreign key(id, type) references questions(id, type)
 );
 
 create table `shortInputAnswers` (
