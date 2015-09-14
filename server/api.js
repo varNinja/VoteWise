@@ -73,15 +73,6 @@ function login(req, res) {
     });
 }
 
-function question(req, res) {
-    var questionSet = req.params.id;
-    console.log('questionSet from req.params: ', questionSet);
-    db.query('select description, id from concurrenceQuestions where background = ?',
-        [questionSet], function(err, rows){
-        console.log('rows: ', rows);
-    });
-}
-
 function getTopicTree(req, res) {
     console.log("app.get at /getTopicTrees called");
     var topic = req.params.topic;
