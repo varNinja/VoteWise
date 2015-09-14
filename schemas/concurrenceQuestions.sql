@@ -1,5 +1,5 @@
 
-INSERT INTO `concurrencequestions` (`id`, `background`, `description`, `viewOrder`) VALUES
+INSERT INTO `concurrenceQuestions` (`id`, `background`, `description`, `viewOrder`) VALUES
 (1, 55, 'I’m fine with the government getting basic access to my Google and Facebook information.  Why should police and others trying to save lives NOT have access to the same information that spammers trying to sell me Viagra do?', 1),
 (2, 55, 'Collecting more data in any single location makes my private life more susceptible to hacking by unscrupulous individuals or government agencies.  Now my information is spread out over many companies, but if it was all in one place then one good hacker could destroy my life.', 2),
 (3, 55, 'The government should not listen to my phone calls.', 3),
@@ -950,3 +950,4 @@ INSERT INTO `concurrencequestions` (`id`, `background`, `description`, `viewOrde
 (950, 115, 'There should be a law against making firearms at home.  Right now, criminals, crazy people, and terrorists can’t buy weapons because they would fail background checks.  But if they could make their own at home by pressing a button, we are asking for a disaster.', 1),
 (951, 115, 'The ability to easily make firearms at home should be preserved in case we need in case the government gets out of control and we need to take them out.  Even if we don’t make the weapons, knowing that we potentially have untold millions of them is enough of a threat to keep them in check.', 2),
 (952, 115, 'Whether we have no ban, or make exceptions, we need to make sure that American home inventors and tinkerers are allowed to continue that inventive spirit and design new weapons.  We can’t leave everything to big business.', 3);
+
