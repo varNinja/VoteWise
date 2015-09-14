@@ -198,6 +198,8 @@ module.exports = function(db) {
         next();
     });
 
+    app.post('/login', login);
+    app.post('/register', register);
     app.get('/backgrounds/:id/questions', questionsByBackgroundId);
     app.get('/topic-tree/:topic', getTopicTrees);
 
