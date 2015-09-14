@@ -12,7 +12,8 @@ function checkPassword(password, expectedHash, done) {
     bcrypt.compare(password, expectedHash, done);
 }
 
-var secretAuthKey = nacl.random_bytes(32); // TODO: We need a better strategy for this, of course.
+// TODO: We need a better strategy for this key management.
+var secretAuthKey = nacl.random_bytes(32);
 
 function createToken(data) {
     var nonce = nacl.crypto_secretbox_random_nonce();
