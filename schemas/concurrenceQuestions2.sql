@@ -1,7 +1,7 @@
 
 INSERT INTO `concurrencequestions` (`id`, `background`, `description`, `viewOrder`) VALUES
 (1, 55, 'I’m fine with the government getting basic access to my Google and Facebook information.  Why should police and others trying to save lives NOT have access to the same information that spammers trying to sell me Viagra do?', 1),
-(2, 55, 'Collecting more data in any single location makes my private life more susceptible to hacking by unscrupulous individuals or government agencies.  Now my information is spread out over many companies, but if it was all in one place then one good hacker could destroy my life.', 2),
+(2, 55, 'Collecting more data in any single location makes my private life more susceptible to hacking by unscrupulous individuals or government agencies.  Now my information is spread out over many companies, but if it was all in one place then one good hacker could destroy my life.'),
 (3, 55, 'The government should not listen to my phone calls.', 3),
 (4, 55, 'The government should not read my emails.', 4),
 (5, 55, 'The government should not know who I’m calling.', 5),
@@ -237,7 +237,7 @@ INSERT INTO `concurrencequestions` (`id`, `background`, `description`, `viewOrde
 (235, 19, 'Water and air cross international boundaries. We should sue polluting nations for the damage they are doing to our country.', 6),
 (236, 19, 'Suing other nations would open up a can of worms. We pollute also, so if we sue one nation, more will sue us. It’ll only make the lawyers rich.', 7),
 (237, 84, 'Clean water is still plentiful in America and there are much more immediate problems we need to focus on.', 1),
-(238, 84, 'Clean water is still plentiful in America, but not in other nations. We should look into ways of managing our resources to make a profit off of that.', 2),
+(238, 84, 'Clean water is still plentiful in America, but not in other nations. We should look into ways of managing our resources to make a profit off of that.', 2);
 (239, 84, 'Clean water is not as plentiful in America as many would believe. Many communities are suffering now, and many more will suffer in the near future. We should seriously manage our resources now.', 3),
 (240, 84, 'Once a river is poisoned, it is often impossible to un-pollute it. We have to look at pollution standards now to prevent problems in the future.', 4),
 (241, 84, 'Don’t underestimate American scientists. While there may not be the technology now to filter the poison out of river soil, or water, if the price of water goes up to $4/gallon, we’ll figure out a way to do it.', 5),
@@ -464,7 +464,7 @@ INSERT INTO `concurrencequestions` (`id`, `background`, `description`, `viewOrde
 (462, 78, 'This is just step one. The companies buying these rights, will eventually build proper water treatment and pipes to ensure that the drinking supply stays clean and healthy.', 11),
 (463, 78, 'Water is the new "oil."', 12),
 (464, 78, 'American companies are seen to represent America. We should discourage them from doing anything that create enemies for us.', 13),
-(465, 27, 'It was written when we had bears, wolves, potentially violent locals and other enemies at the gate – before we had a professional police force or a permanent military.  Back then, the only way to defend your town was by having a group of armed mostly-untrained volunteers head out to the gates. A militia. It was important 200 years ago, but now it is antiquated and we should get rid of it.', 1),
+(465, 27, 'It was written when we had bears, wolves, potentially violent locals and other enemies at the gate – before we had a professional police force or a permanent military.  Back then, the only way to defend your town was by having a group of armed mostly-untrained volunteers head out to the gates. A militia. It was important 200 years ago, but now it is antiquated and we should get rid of it.', 1);
 (466, 27, 'While it doesn’t say it explicitly in the Constitution, if you go back and read the writings of the day, many of the voters that ratified the constitution did not trust the idea of a federal government. They feared that that the federal government would become just another oppressor like the king they just fought to get rid of. The reason these voters made sure the law was in place was to allow the people to have access to a stockpile of weapons so they could revolt if necessary. The right to bear arms keeps the government in check.', 2),
 (467, 27, 'The right to bear arms was meant to keep the government in check but at the same time, we have to balance that with other safety issues, so we have to put limits on what people can and can’t own -just like the freedom of speech doesn’t give you permission to get people trampled by yelling “fire” in a crowded theater if there isn’t one.', 3),
 (468, 27, 'In order for militia to be a credible deterrent to the government, they need to be able to have weapons on par or superior to that of the federal military. This means tanks, grenade launchers, chemical, biological and nuclear weapons. No infringement at all should be made on the second amendment.', 4),
@@ -674,7 +674,7 @@ INSERT INTO `concurrencequestions` (`id`, `background`, `description`, `viewOrde
 (672, 63, 'Our sewage treatment facility is costing us too much. We need to upgrade/update our system to a more efficient one.', 5),
 (673, 63, 'Our sewage system is leaking. We need to fix it.', 6),
 (674, 63, 'The sewer treatment plant is a smell annoyance. Something needs to be done.', 7),
-(675, 85, 'Our water pipes/delivery system is aging and needs a lot of work.', 1),
+(675, 85, 'Our water pipes/delivery system is aging and needs a lot of work.', 1);
 (676, 85, 'Our water supply is clean, plentiful, well maintained and cheap. No changes need to be made.', 2),
 (677, 85, 'We are close to reaching our capacity. We need to either figure out how to use less water or find other sources.', 3),
 (678, 85, 'Recreational motorboats or other pollutants are poisoning our reservoirs.', 4),
@@ -893,7 +893,7 @@ INSERT INTO `concurrencequestions` (`id`, `background`, `description`, `viewOrde
 (891, 74, 'We need to do projects like FDR’s WPA to get people employed, confident, hopeful and spending money again.', 7),
 (892, 74, 'Projects that hire people for long terms create a false economy.  Those people we put to work doing something we don’t need will not be available for the commercial contractors who need them.  So more people will train to do that job and then when the government program ends, we have more construction people (for example0 than the economy can support.  We are only delaying unemployment.', 8),
 (893, 74, 'Spending money on infrastructure can create opportunities for businesses to move in and create jobs.', 9),
-(894, 74, 'Spending money on events or the arts can make people happy and boost consumer confidence.', 10),
+(894, 74, 'Spending money on events or the arts can make people happy and boost consumer confidence.', 10);
 (895, 74, 'More money spent on quality education will bring in more tax dollars when those educated adults get better jobs or start successful businesses.', 11),
 (896, 74, 'We should create incentives for people with the skills we need to move here.  For example, we could create a scholarship for medical students in exchange for them doing service in our hospitals once they graduate.', 12),
 (897, 74, 'We need to delay/cut projects that are in the planning stages (be specific in the comments)', 13),

@@ -24,7 +24,8 @@ drop table if exists districts;
 create table `concurrenceQuestions` (
     `id` integer primary key auto_increment,
     `background` integer not null references backgrounds(id),
-    `description` text not null
+    `description` text not null,
+    `viewOrder` integer not null
 );
 
 create table `concurrenceAnswers` (
