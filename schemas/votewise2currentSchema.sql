@@ -12,10 +12,11 @@ drop table if exists backgrounds;
 drop table if exists topics;
 drop table if exists admins;
 drop table if exists politicians;
-drop table if exists politicianAccounts;
 drop table if exists politicianDistricts;
 drop table if exists districts;
 drop table if exists questions;
+drop table if exists voters;
+drop table if exists users;
 
 create table `questions`(
 	`id` integer primary key auto_increment,
@@ -176,20 +177,34 @@ create table `topics`(
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 create table `users` (
-	`id`            integer primary key auto_increment,
+	`id`            integer primary key not null auto_increment,
 	`userName` 		text not null,
 	`passwordHash`	varchar(20) not null,
     `passwordSalt`  varchar(20) not null,
 	`email` 		varchar(75) not null,
 	`phone` 		varchar(20),
+	`address` 		varchar(75),
 	`firstName` 	varchar(25),
 	`lastName` 		varchar(50),
-	`userType` 		char(1),
+	`type` 			enum('voter', 'politician', 'media', 'interestGroup', 'admin') not null,
 	`userLevel` 	char(3),
 	`active` 		tinyint(1),
-	`politicianInfo`integer references politicians(id)
+	unique index(id, type)
 
 );
+
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- Voters
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+create table `voters` (
+	`id`            integer primary key not null,
+	`type`			enum('voter') not null,
+	foreign key(id, type) references users(id, type)
+);
+
+
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -197,17 +212,9 @@ create table `users` (
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 create table `admins` (
-	`id`            integer primary key auto_increment,
-	`userName` 		text not null,
-	`passwordhash`	varchar(20) not null,
-    `passwordSalt`  varchar(20) not null,
-	`email` 		varchar(75) not null,
-	`phone` 		varchar(20),
-	`firstName` 	varchar(25),
-	`lastName` 		varchar(50),
-	`userType` 		char(1),
-	`userLevel` 	char(3),
-	`active` 		tinyint(1)
+	`id`            integer primary key not null,
+	`type`			enum('admin') not null,
+	foreign key(id, type) references users(id, type)
 );
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -216,13 +223,15 @@ create table `admins` (
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 create table `politicians` (
-    `id` integer primary key auto_increment,
+	`id` integer not null primary key,	
+	`type` enum('politician'),
     `party` text not null,
     `office` text not null,
     `incumbent` boolean not null,
     `bio` text not null,
     `endorsements` text not null,
-    `essay` text
+    `essay` text,
+    foreign key(id, type) references users(id, type)
 );
 
 create table `politicianDistricts` (
