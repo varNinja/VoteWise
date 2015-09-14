@@ -223,7 +223,8 @@ create table `admins` (
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 create table `politicians` (
-	`id` integer not null primary key,	
+	`id` integer not null primary key auto_increment,	
+	`userId` integer,
 	`type` enum('politician'),
     `party` text not null,
     `office` text not null,
@@ -231,7 +232,7 @@ create table `politicians` (
     `bio` text not null,
     `endorsements` text not null,
     `essay` text,
-    foreign key(id, type) references users(id, type)
+    foreign key(userId, type) references users(id, type)
 );
 
 create table `politicianDistricts` (
