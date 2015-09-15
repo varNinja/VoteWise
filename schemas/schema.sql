@@ -191,7 +191,6 @@ create table `users` (
     `type`          enum('voter', 'politician', 'media', 'interestGroup', 'admin') not null,
     `userLevel`     char(3),
     `active`        tinyint(1),
-    `politicianList` integer not null references politicianLists(user),
     unique index(id, type)
 );
 
@@ -205,6 +204,7 @@ create table `users` (
 create table `voters` (
     `id`            integer primary key not null,
     `type`          enum('voter') not null,
+    `politicianList` integer not null references politicianLists(user),
     foreign key(id, type) references users(id, type)
 );
 
