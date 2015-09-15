@@ -4,7 +4,7 @@ var express = require('express');
 var auth = require('./auth');
 
 function internalServerError(res, err) {
-    console.error(err);
+    console.error(err.stack);
     res.status(500).json({
         message: 'Internal server error'
     });
