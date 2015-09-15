@@ -125,6 +125,21 @@ function questionsByBackgroundId(req, res){
     });
 }
 
+
+function postPoliticianList(req,res){
+    var items = req.body.listItems
+    console.log('items: ', items);
+    console.log('/politician-list post call called')
+    async.forEachOf(items, function(item, key, callback){
+            console.log(items[key]);
+            db.query('INSERT INTO politicianLists SET ?', items[key], function(err, result){
+                console.log('result from insert query: ', result);
+                console.error('error: ', err);
+            });
+    } )
+})
+
+
 module.exports = function(db) {
     var app = express();
 
@@ -139,6 +154,7 @@ module.exports = function(db) {
     app.post('/register', register);
     app.get('/backgrounds/:id/questions', questionsByBackgroundId);
     app.get('/topic-tree/:topic', getTopicTree);
+    app.post('/politician-list', postPoliticianList);
 
     app.use(function(err, req, res, next) {
         internalServerError(res, err);
