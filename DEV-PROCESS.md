@@ -6,6 +6,7 @@ Development process
 2. Start by writing tests that describe what you are adding.  Your tests should
    make you confident that, when they pass, the feature you are adding is done
    and implemented properly.  Be thoughtful about corner cases, like failures.
+3. If you made a new test file, add it to `run-tests`.
 3. Now implement the feature until your tests pass.  If you think of any extra
    edge cases, add them.  Keep working until all the tests pass and you're happy 
    with your work.
