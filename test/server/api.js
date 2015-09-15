@@ -1,80 +1,15 @@
-var config = require('./config');
-var makeAPI = require('../../server/api');
-var mysql = require('mysql');
-var stream = require('stream');
 var test = require('tape-catch');
-var util = require('util');
+var util = require('./util');
 
-util.inherits(Request, stream.Readable);
-
-function Request(options) {
-    stream.Readable.call(this, {});
-
-    this.method = options.method;
-    this.url = options.url;
-    this.headers = options.headers || {};
-
-    if (options.jsonbody) {
-        var json = JSON.stringify(options.jsonbody);
-
-        this.headers['content-encoding'] = 'identity';
-        this.headers['content-length']   = json.length;
-        this.headers['content-type']     = 'application/json';
-
-        this.push(json);
-        this.push(null);
-    }
-}
-
-Request.prototype._read = function() {};
-
-function call(req, done) {
-    var db = mysql.createConnection({
-        connectionLimit: config.db.connectionLimit,
-        host:            config.db.host,
-        user:            config.db.user,
-        password:        config.db.password,
-        database:        config.db.database,
-        port:            config.db.port
-    });
-
-    var app = makeAPI(db);
-
-    var result = {
-        headers: {},
-        status:  200
-    };
-
-    function _done() {
-        db.end(function(err) {
-            if (err) throw err;
-            done(result);
-        });
-    }
-
-    var res = {
-        setHeader: function(name,value){
-            result.headers[name.toLowerCase()] = value
-            return this;
-        },
-        status: function(code) {
-            result.status = code;
-            return this;
-        },
-        json: function(data) {
-            result.body = data;
-            _done();
-        }
-    };
-
-    app(new Request(req), res, _done);
-}
+util.registerDBTest();
+var callAPI = util.callAPI;
 
 test('API calls', function(t) {
-    t.test('/backgrounds/:id/questions', function(t) {
+    t.dbtest('/backgrounds/:id/questions', function(t) {
         t.plan(2);
 
-        call({
+        callAPI({
+            db: t.db,
             method: 'get',
             url: '/backgrounds/3/questions'
         }, function(res) {
@@ -106,12 +41,13 @@ test('API calls', function(t) {
         });
     });
 
-    t.test('/topic-tree/3', function(t) {
+    t.dbtest('/topic-tree/3', function(t) {
         t.plan(2);
 
-        call({
+        callAPI({
             method: 'get',
-            url: '/topic-tree/Energy'
+            url: '/topic-tree/Energy',
+            db: t.db
         }, function(res) {
             t.equal(res.status, 200);
             t.deepEqual(res.body, [
@@ -141,28 +77,34 @@ test('API calls', function(t) {
         });
     });
 
-    t.skip('/register creates a new user', function(t) {
-        t.plan(1);
+    t.dbtest('/register', function(t) {
+        var db = t.db;
 
-        call({
-            method: 'post',
-            url: '/register',
-            jsonbody: {username: 'tom', password: 'g00by'}
-        }, function(res) {
-            t.equal(res.status, 201);
+        t.test('/register creates a new user', function(t) {
+            t.plan(1);
+
+            callAPI({
+                db: db,
+                method: 'post',
+                url: '/register',
+                jsonbody: {username: 'tom', password: 'g00by'}
+            }, function(res) {
+                t.equal(res.status, 201);
+            });
+        });
+
+        t.test("/register doesn't recreate an existing user", function(t) {
+            t.plan(1);
+
+            callAPI({
+                db: db,
+                method: 'post',
+                url: '/register',
+                jsonbody: {username: 'tom', password: 'g00by'}
+            }, function(res) {
+                t.equal(res.status, 409);
+            });
         });
     });
-
-    t.skip("/register doesn't recreate an existing user", function(t) {
-        t.plan(1);
-
-        call({
-            method: 'post',
-            url: '/register',
-            jsonbody: {username: 'tom', password: 'g00by'}
-        }, function(res) {
-            t.equal(res.status, 409);
-        });
-    })
 });
 

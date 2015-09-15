@@ -37,7 +37,7 @@ test('auth', function(t) {
     t.test('createToken/parseToken', function(t) {
         t.plan(2);
 
-        var data  = {id: 1};
+        var data = {id: 1};
         var token = auth.createToken(data);
         var parsed = auth.parseToken(token);
 
