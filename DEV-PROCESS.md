@@ -12,8 +12,10 @@ Development process
    with your work.
 4. Merge in the most recent Node branch.
 
-       $ git fetch
-       $ git merge origin/Node
+   ```
+      $ git fetch
+      $ git merge origin/Node
+   ```
 5. Fix any merge conflicts that may have resulted from the above.
 6. Run `./run-tests`.  They should all pass.
 7. Push your branch to GitHub.
