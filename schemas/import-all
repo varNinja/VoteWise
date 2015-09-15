@@ -1,5 +1,2 @@
 #!/bin/bash -ue
-files="schema.sql currentBackgrounds.sql"
-files="$files currentConcurrenceQuestions.sql currentTopics.sql"
-files="$files currentUsers.sql"
-cat $files
+cat schema.sql backgrounds.sql concurrenceQuestions.sql topics.sql users.sql
