@@ -1,4 +1,3 @@
-
 INSERT INTO `topics`
 (`id`, `background`, `parent`, `viewOrder`, `description`) VALUES
 (   1,            0,        0,           1, 'Civil Liberties'                           ),

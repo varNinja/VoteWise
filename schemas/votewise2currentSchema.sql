@@ -17,6 +17,8 @@ drop table if exists districts;
 drop table if exists questions;
 drop table if exists voters;
 drop table if exists users;
+drop table if exists politicianLists;
+
 
 create table `questions`(
 	`id` integer primary key auto_increment,
@@ -189,9 +191,11 @@ create table `users` (
 	`type` 			enum('voter', 'politician', 'media', 'interestGroup', 'admin') not null,
 	`userLevel` 	char(3),
 	`active` 		tinyint(1),
+	`politicianList` integer not null references politicianLists(user),
 	unique index(id, type)
-
 );
+
+
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -204,6 +208,11 @@ create table `voters` (
 	foreign key(id, type) references users(id, type)
 );
 
+create table `politicianLists` (
+	`id` integer primary key not null auto_increment,
+	`user` integer not null,
+	`politician` integer not null references politicians(id)
+);
 
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

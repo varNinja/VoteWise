@@ -26,14 +26,29 @@ app.use(bodyParser.json());
 
 app.get('/questions/:id', function(req,res){
     var questionSet = req.params.id;
-    var userId = req.params.userId;
     console.log(questionSet);
-    console.log(userId);
     console.log('questionSet from req.params: ', questionSet);
     db.query('select description, id, viewOrder from concurrenceQuestions where background = ?',
         [questionSet], function(err, rows){
             console.log('rows: ', rows);
         });
+})
+
+app.post('/politician-list', function(req,res){
+    var items = req.body.listItems
+    console.log('items: ', items);
+    console.log('/politician-list post call called')
+    async.forEachOf(items, function(item, key, callback){
+            console.log(items[key]);
+            db.query('INSERT INTO politicianLists SET ?', items[key], function(err, result){
+                console.log('result from insert query: ', result);
+                console.error('error: ', err);
+            });
+    } )
+})
+
+app.put('/politicianList', function(req, res){
+
 })
 
 app.get('/answers-by-user/:id', function(req,res){
@@ -43,6 +58,16 @@ app.get('/answers-by-user/:id', function(req,res){
             console.log('rows: ', rows); 
         });
 })
+
+// app.post('/questions/:id/answer', function(req,res){
+//     var questionId = req.params.id;
+//     db.query('select type from questions where id = ?', 
+//         [questionId], funciton(err, rows){
+//             console.log(rows);
+//         }
+// })
+
+
 
 
 app.get('/get-topic-tree/:topic', function(req, res){
@@ -65,7 +90,7 @@ app.get('/get-topic-tree/:topic', function(req, res){
                 });
         },
         function(topics, callback){
-            async.forEachOf(topics, function(row, key, callback){
+            async.forEachOf(topics, function(topic, key, callback){
                 console.log('rows[key].id: ', topics[key].id);
                 if (topics[key].background == 0){
                     var query = topics[key].id
