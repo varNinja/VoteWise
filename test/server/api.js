@@ -106,5 +106,59 @@ test('API calls', function(t) {
             });
         });
     });
+
+    t.dbtest('/login', function(t) {
+        var db = t.db;
+
+        t.test('/register creates a new user', function(t) {
+            t.plan(1);
+
+            callAPI({
+                db: db,
+                method: 'post',
+                url: '/register',
+                jsonbody: {username: 'tom', password: 'g00by'}
+            }, function(res) {
+                t.equal(res.status, 201);
+            });
+        });
+
+        t.test('/login matches password in database', function(t){
+            t.plan(1);
+
+            callAPI({
+                db:db,
+                method:'post',
+                url:'/login',
+                jsonbody: {username: 'tom', password: 'g00by'}
+           }, function(res) {
+               t.equal(res.status, 200);
+           });
+        });
+        t.test('/login fails with incorrect password', function(t){
+            t.plan(1);
+
+            callAPI({
+                db:db,
+                method:'post',
+                url:'/login',
+                jsonbody:{username: 'tom', password: 'glog'}
+            }, function(res) {
+                t.equal(res.status, 403)
+            });
+        });
+        t.test('/login fails with incorrect login', function(t){
+            t.plan(1);
+
+            callAPI({
+                db:db,
+                method:'post',
+                url:'/login',
+                jsonbody:{username: 'tooo', password: 'g00by'}
+            }, function(res){
+                t.equal(res.status, 404)
+            });
+        });
+    });
 });
 

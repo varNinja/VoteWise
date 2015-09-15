@@ -38,13 +38,9 @@ function login(req, res) {
     var username = req.body.username;
     var password = req.body.password;
 
-    db.query('select salt, passwordHash from users where userName = ?',
+    req.db.query('select passwordHash from users where userName = ?',
         [username], function(err, rows, fields) {
-        if (err) {
-            return res.status(500).json({
-                error: 'Internal server error.'
-            });
-        }
+        if (err) return internalServerError(res, err);
 
         if (rows.length < 1) {
             return res.status(404).json({
@@ -54,7 +50,7 @@ function login(req, res) {
 
         var user = rows[0];
 
-        checkPassword(password, user.passwordHash, user.salt, function(err, ok) {
+        auth.checkPassword(password, user.passwordHash, function(err, ok) {
             if (err) return internalServerError(res, err);
 
             if (!ok) {
@@ -64,7 +60,7 @@ function login(req, res) {
             }
 
             res.status(200).json({
-                token: createToken({id: user.id})
+                token: auth.createToken({id: user.id})
             });
         });
     });

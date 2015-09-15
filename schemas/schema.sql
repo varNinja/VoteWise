@@ -167,8 +167,7 @@ create table `topics`(
 create table `users` (
     `id`             integer primary key auto_increment,
     `userName`       varchar(20) not null,
-    `passwordHash`   varchar(20) not null,
-    `passwordSalt`   varchar(20) not null,
+    `passwordHash`   varchar(60) not null,
     `email`          varchar(75) not null,
     `phone`          varchar(20),
     `firstName`      varchar(25),
