@@ -41,7 +41,6 @@ function login(req, res) {
     db.query('select salt, passwordHash from users where userName = ?',
         [username], function(err, rows, fields) {
         if (err) {
-            console.error(err);
             return res.status(500).json({
                 error: 'Internal server error.'
             });
@@ -56,12 +55,7 @@ function login(req, res) {
         var user = rows[0];
 
         checkPassword(password, user.passwordHash, user.salt, function(err, ok) {
-            if (err) {
-                console.error(err);
-                return res.status(500).json({
-                    error: 'Internal server error.'
-                });
-            }
+            if (err) return internalServerError(res, err);
 
             if (!ok) {
                 return res.status(403).json({
@@ -81,14 +75,14 @@ function getTopicTree(req, res) {
 
     async.waterfall([
         function(callback) {
-            db.query('select id from topics where description = ?',
+            req.db.query('select id from topics where description = ?',
                 [topic], function(err, rows){
                     callback(err, rows);
                 });
         },
         function(rows, callback) {
             var query = rows[0].id
-            db.query('select id, background, viewOrder, description from topics where parent = ? order by viewOrder',
+            req.db.query('select id, background, viewOrder, description from topics where parent = ? order by viewOrder',
                 [query], function(err, rows){
                     callback(err, rows);
 
@@ -98,7 +92,7 @@ function getTopicTree(req, res) {
             async.forEachOf(topics, function(row, key, callback){
                 if (topics[key].background == 0){
                     var query = topics[key].id
-                    db.query('select id, background, viewOrder, description from topics where parent = ? order by viewOrder',
+                    req.db.query('select id, background, viewOrder, description from topics where parent = ? order by viewOrder',
                         [query], function(err, rows){
                             if (err){
                                 return callback(err);
@@ -114,7 +108,8 @@ function getTopicTree(req, res) {
             });
         }
     ], function(err, topics){
-       res.status(200).json(
+        if (err) return internalServerError(err);
+        res.status(200).json(
             topics
         );
     });
@@ -144,6 +139,10 @@ module.exports = function(db) {
     app.post('/register', register);
     app.get('/backgrounds/:id/questions', questionsByBackgroundId);
     app.get('/topic-tree/:topic', getTopicTree);
+
+    app.use(function(err, req, res, next) {
+        internalServerError(res, err);
+    });
 
     return app;
 };

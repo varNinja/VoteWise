@@ -71,7 +71,7 @@ function call(req, done) {
 }
 
 test('API calls', function(t) {
-    t.skip('/backgrounds/:id/questions', function(t) {
+    t.test('/backgrounds/:id/questions', function(t) {
         t.plan(2);
 
         call({
@@ -106,7 +106,7 @@ test('API calls', function(t) {
         });
     });
 
-    t.skip('/topic-tree/3', function(t) {
+    t.test('/topic-tree/3', function(t) {
         t.plan(2);
 
         call({
@@ -141,7 +141,7 @@ test('API calls', function(t) {
         });
     });
 
-    t.test('/register creates a new user', function(t) {
+    t.skip('/register creates a new user', function(t) {
         t.plan(1);
 
         call({
@@ -153,7 +153,7 @@ test('API calls', function(t) {
         });
     });
 
-    t.test("/register doesn't recreate an existing user", function(t) {
+    t.skip("/register doesn't recreate an existing user", function(t) {
         t.plan(1);
 
         call({
