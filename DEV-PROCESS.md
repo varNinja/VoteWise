@@ -14,9 +14,10 @@ Development process
    `git merge origin/Node`
 5. Fix any merge conflicts that may have resulted from the above.
 6. Run `./run-tests`.  They should all pass.
-7. Create a pull request on GitHub from your branch to Node.  Add at least one
+7. Push your branch to GitHub.
+8. Create a pull request on GitHub from your branch to Node.  Add at least one
    other programmer as a participant to review it.
-8. When you and the reviewer are happy with the changes, merge them into Node.
+9. When you and the reviewer are happy with the changes, merge them into Node.
 
 TODO: The `Node` branch should be changed to `dev` or something.
 
