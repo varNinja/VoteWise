@@ -1,32 +1,35 @@
 var async = require('async');
 var bodyParser = require('body-parser');
-var crypto = require('crypto');
 var express = require('express');
+var auth = require('./auth');
+
+function internalServerError(res, err) {
+    console.error(err);
+    res.status(500).json({
+        message: 'Internal server error'
+    });
+}
 
 function register(req, res) {
     var username = req.body.username;
     var password = req.body.password;
 
-    auth.newPassword(password, function(err, passwordHash, salt) {
-        if (err) {
-            console.error(err);
-            return res.status(500).json({
-                error: 'Internal server error.'
-            });
-        }
+    auth.newPassword(password, function(err, hashed) {
+        if (err) return internalServerError(res, err);
 
-        db.query('insert into users (userName, salt, passwordHash)',
-                 [username, salt, key], function(err) {
-            // TODO: Check for integrity error to return a Conflict status (user
-            // already exists)
+        req.db.query('insert into users (userName, passwordHash) values (?, ?)',
+                 [username, hashed], function(err) {
             if (err) {
-                console.error(err);
-                return res.status(500).json({
-                    error: 'Internal server error.'
-                });
+                if (err.errno == 1062) {
+                    res.status(409).json({
+                        message: 'A user with that username already exists.'
+                    });
+                } else {
+                    internalServerError(res, err);
+                }
+            } else {
+                res.status(201).json({});
             }
-
-            res.status(200).json({});
         });
     });
 }
@@ -38,7 +41,6 @@ function login(req, res) {
     db.query('select salt, passwordHash from users where userName = ?',
         [username], function(err, rows, fields) {
         if (err) {
-            console.error(err);
             return res.status(500).json({
                 error: 'Internal server error.'
             });
@@ -53,12 +55,7 @@ function login(req, res) {
         var user = rows[0];
 
         checkPassword(password, user.passwordHash, user.salt, function(err, ok) {
-            if (err) {
-                console.error(err);
-                return res.status(500).json({
-                    error: 'Internal server error.'
-                });
-            }
+            if (err) return internalServerError(res, err);
 
             if (!ok) {
                 return res.status(403).json({
@@ -73,53 +70,45 @@ function login(req, res) {
     });
 }
 
-function internalServerError(res, err) {
-    console.error(err);
-    res.status(500).json({
-        message: 'Internal server error'
-    });
-}
-
-function getTopicTree(req, res){
+function getTopicTree(req, res) {
     var topic = req.params.topic;
 
     async.waterfall([
-    function(callback) {
-        req.db.query('select id from topics where description = ?',
-            [topic], function(err, rows){
-                callback(err, rows);
-            });
-    },
-    function(rows, callback) {
-        var query = rows[0].id
-        req.db.query('select id, background, viewOrder, description '+
-                     'from topics where parent = ? order by viewOrder',
-            [query], function(err, rows){
-            callback(err, rows);
-        });
-    },
-    function(topics, callback){
-        async.forEachOf(topics, function(row, key, callback){
-            if (topics[key].background == 0){
-                var query = topics[key].id
-                req.db.query('select id, background, viewOrder, description '+
-                             'from topics where parent = ? order by viewOrder',
-                    [query], function(err, rows){
-                        if (err) {
-                            return callback(err);
-                        }
-                        topics[key].subTopics = rows;
-                        callback();
+        function(callback) {
+            req.db.query('select id from topics where description = ?',
+                [topic], function(err, rows){
+                    callback(err, rows);
                 });
-            } else {
-                callback();
-            }
-        }, function(err){
-            callback(err, topics);
-        });
-    }
+        },
+        function(rows, callback) {
+            var query = rows[0].id
+            req.db.query('select id, background, viewOrder, description from topics where parent = ? order by viewOrder',
+                [query], function(err, rows){
+                    callback(err, rows);
+
+                });
+        },
+        function(topics, callback){
+            async.forEachOf(topics, function(row, key, callback){
+                if (topics[key].background == 0){
+                    var query = topics[key].id
+                    req.db.query('select id, background, viewOrder, description from topics where parent = ? order by viewOrder',
+                        [query], function(err, rows){
+                            if (err){
+                                return callback(err);
+                            }
+                            topics[key].subTopics = rows;
+                            callback();
+                            });
+                } else {
+                    callback();
+                }
+            }, function(err){
+                callback(err, topics);
+            });
+        }
     ], function(err, topics){
-        if (err) return internalServerError(res, err);
+        if (err) return internalServerError(err);
         res.status(200).json(
             topics
         );
@@ -150,6 +139,10 @@ module.exports = function(db) {
     app.post('/register', register);
     app.get('/backgrounds/:id/questions', questionsByBackgroundId);
     app.get('/topic-tree/:topic', getTopicTree);
+
+    app.use(function(err, req, res, next) {
+        internalServerError(res, err);
+    });
 
     return app;
 };
