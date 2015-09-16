@@ -11,6 +11,7 @@ function NotFound(message) {
 function Forbidden(message) {
     Error.call(this, message);
     this.status = 403;
+}
 
 function Conflict(message) {
     Error.call(this, message);
@@ -189,4 +190,3 @@ module.exports = function(db) {
 
     return app;
 };
-
