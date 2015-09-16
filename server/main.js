@@ -2,6 +2,7 @@ var config = require('./config');
 var makeAPI = require('./api');
 var mysql = require('mysql');
 
+
 var db = mysql.createPool({
     connectionLimit: config.db.connectionLimit,
     host:            config.db.host,
@@ -12,9 +13,9 @@ var db = mysql.createPool({
 });
 
 var server = makeAPI(db).listen(config.port, function() {
+
     var address = server.address();
 
     console.log('Example app listening at http://%s:%s',
                 address.address, address.port);
 });
-
