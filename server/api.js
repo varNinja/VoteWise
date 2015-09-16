@@ -44,6 +44,7 @@ function register(req, res, next) {
 function login(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
+    console.log('username: ', username,' password: ', password);
 
     req.db.query('select id, passwordHash from users where userName = ?',
         [username], function(err, rows, fields) {
@@ -54,6 +55,7 @@ function login(req, res, next) {
         }
 
         var user = rows[0];
+        console.log('user: ', user);
 
         auth.checkPassword(password, user.passwordHash, function(err, ok) {
             if (err) return next(err);
@@ -65,6 +67,7 @@ function login(req, res, next) {
             res.json({
                 token: auth.createToken(JSON.stringify({id: user.id}))
             });
+            console.log('res: ', res);
         });
     });
 }
@@ -165,7 +168,7 @@ module.exports = function(db) {
         next();
     });
 
-    app.get('/login', login);
+    app.post('/login', login);
     app.post('/register', register);
     app.get('/backgrounds/:id/questions', questionsByBackgroundId);
     app.get('/topic-tree/:topic', getTopicTree);
