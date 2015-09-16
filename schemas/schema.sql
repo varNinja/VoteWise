@@ -210,7 +210,8 @@ create table `voters` (
 create table `politicianLists` (
     `id` integer primary key not null auto_increment,
     `user` integer not null,
-    `politician` integer not null references politicians(id)
+    `politician` integer not null references politicians(id),
+    unique (user, politician)
 );
 
 

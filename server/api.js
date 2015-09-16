@@ -117,7 +117,8 @@ function getTopicTree(req, res, next) {
 function questionsByBackgroundId(req, res, next){
     var questionSet = req.params.id;
 
-    req.db.query('select description, id, viewOrder from concurrenceQuestions where background = ?',
+    req.db.query('select description, id, viewOrder from concurrenceQuestions',
+    +' where background = ?',
         [questionSet], function(err, rows){
         if (err) return next(err);
 
@@ -125,22 +126,33 @@ function questionsByBackgroundId(req, res, next){
     });
 }
 
+
+// This is to create entries into the politicianList table
+// which takes a 'politician' and a 'user'
 function postPoliticianList(req,res){
     var items = req.body.listItems
     console.log('items: ', items);
     console.log('/politician-list post call called')
-    async.forEachOf(items, function(item, key, callback){
+    async.forEachOf(items, function (item, key, callback){
         console.log(items[key]);
-        db.query('INSERT INTO politicianLists SET ?', items[key], function(err, result){
+        req.db.query('SELECT * from politicianLists where user = ?',
+            items[key].user, function (err, rows){
+                console.log('rows from user already in politicianList: ',rows); 
+            })
+        req.db.query('INSERT INTO politicianLists SET ?',
+         items[key], function (err, result){
             console.log('result from insert query: ', result);
             console.error('error: ', err);
+
         });
     });
 }
 
 function meInfo(req, res) {
     var user = req.authorize();
-
+    console.log('meInfo called');
+    console.log('user: ', user);
+    console.log('authorization: ', req.headers.authorization);
     res.json(user);
 }
 
