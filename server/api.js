@@ -67,7 +67,6 @@ function login(req, res, next) {
             res.json({
                 token: auth.createToken(JSON.stringify({id: user.id}))
             });
-            console.log('res: ', res);
         });
     });
 }
@@ -118,7 +117,7 @@ function getTopicTree(req, res, next) {
 function questionsByBackgroundId(req, res, next){
     var questionSet = req.params.id;
 
-    req.db.query('select description, id from concurrenceQuestions where background = ?',
+    req.db.query('select description, id, viewOrder from concurrenceQuestions where background = ?',
         [questionSet], function(err, rows){
         if (err) return next(err);
 
