@@ -86,7 +86,7 @@ exports.callAPI = function(req, done) {
             return this;
         },
         json: function(data) {
-            result.body = data;
+            result.jsonbody = data;
             done(result);
         }
     };
