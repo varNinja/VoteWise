@@ -14,7 +14,7 @@ test('API calls', function(t) {
             url: '/backgrounds/3/questions'
         }, function(res) {
             t.equal(res.status, 200);
-            t.deepEqual(res.body,  [
+            t.deepEqual(res.jsonbody,  [
                 { description: 'All businesses should be required to provide ' +
                                'health insurance or contribute to a pool so '  +
                                'that everyone who is working gets health care.'
@@ -50,7 +50,7 @@ test('API calls', function(t) {
             db: t.db
         }, function(res) {
             t.equal(res.status, 200);
-            t.deepEqual(res.body, [
+            t.deepEqual(res.jsonbody, [
                 { description: 'General'
                 , background: 0, id: 49 , subTopics: [] , viewOrder: 1 },
                 { description: 'Conservation And Increased Efficiency'
@@ -104,6 +104,87 @@ test('API calls', function(t) {
             }, function(res) {
                 t.equal(res.status, 409);
             });
+        });
+    });
+
+    t.dbtest('/login', function(t) {
+        var db = t.db;
+
+        t.test('/register creates a new user', function(t) {
+            t.plan(1);
+
+            callAPI({
+                db: db,
+                method: 'post',
+                url: '/register',
+                jsonbody: {username: 'tom', password: 'g00by'}
+            }, function(res) {
+                t.equal(res.status, 201);
+            });
+        });
+
+        t.test('/login fails with incorrect password', function(t){
+            t.plan(1);
+
+            callAPI({
+                db:db,
+                method:'get',
+                url:'/login',
+                jsonbody:{username: 'tom', password: 'glog'}
+            }, function(res) {
+                t.equal(res.status, 403)
+            });
+        });
+        t.test('/login fails with incorrect login', function(t){
+            t.plan(1);
+
+            callAPI({
+                db:db,
+                method:'get',
+                url:'/login',
+                jsonbody:{username: 'tooo', password: 'g00by'}
+            }, function(res){
+                t.equal(res.status, 404)
+            });
+        });
+
+        t.test('/me/info requires valid auth token', function(t) {
+            t.plan(1);
+
+            callAPI({
+                db: db,
+                method: 'get',
+                url: '/me/info'
+            }, function(res) {
+                t.equal(res.status, 403);
+            });
+        });
+
+        t.test('/login matches password in database', function(t){
+            t.plan(3);
+
+            callAPI({
+                db:db,
+                method:'get',
+                url:'/login',
+                jsonbody: {username: 'tom', password: 'g00by'}
+           }, function(res) {
+               t.equal(res.status, 200);
+
+               var token = res.jsonbody.token;
+
+               callAPI({
+                   db:     db,
+                   method: 'get',
+                   url:    '/me/info',
+                   headers: {
+                       authorization: token
+                   }
+               }, function(res) {
+                   t.equal(res.status, 200);
+                   t.equal(typeof res.jsonbody.id, 'number');
+               });
+           });
         });
     });
 });

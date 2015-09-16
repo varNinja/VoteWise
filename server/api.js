@@ -3,29 +3,35 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var auth = require('./auth');
 
-function internalServerError(res, err) {
-    console.error(err.stack);
-    res.status(500).json({
-        message: 'Internal server error'
-    });
+function NotFound(message) {
+    Error.call(this, message);
+    this.status = 404;
 }
 
-function register(req, res) {
+function Forbidden(message) {
+    Error.call(this, message);
+    this.status = 403;
+
+function Conflict(message) {
+    Error.call(this, message);
+    this.status = 409;
+}
+
+function register(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
 
     auth.newPassword(password, function(err, hashed) {
-        if (err) return internalServerError(res, err);
+        if (err) return next(err);
 
         req.db.query('insert into users (userName, passwordHash) values (?, ?)',
                  [username, hashed], function(err) {
             if (err) {
+                // errno 1062 is what mysql returns for duplicate rows.
                 if (err.errno == 1062) {
-                    res.status(409).json({
-                        message: 'A user with that username already exists.'
-                    });
+                    next(new Conflict('A user with that username already exists.'));
                 } else {
-                    internalServerError(res, err);
+                    next(err);
                 }
             } else {
                 res.status(201).json({});
@@ -34,43 +40,38 @@ function register(req, res) {
     });
 }
 
-function login(req, res) {
+function login(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
+    console.log('username: ', username,' password: ', password);
 
-    db.query('select salt, passwordHash from users where userName = ?',
+    req.db.query('select id, passwordHash from users where userName = ?',
         [username], function(err, rows, fields) {
-        if (err) {
-            return res.status(500).json({
-                error: 'Internal server error.'
-            });
-        }
+        if (err) return next(err);
 
         if (rows.length < 1) {
-            return res.status(404).json({
-                error: 'No user with that username exists.'
-            });
+            return next(new NotFound('No user with that username exists.'));
         }
 
         var user = rows[0];
+        console.log('user: ', user);
 
-        checkPassword(password, user.passwordHash, user.salt, function(err, ok) {
-            if (err) return internalServerError(res, err);
+        auth.checkPassword(password, user.passwordHash, function(err, ok) {
+            if (err) return next(err);
 
             if (!ok) {
-                return res.status(403).json({
-                    error: 'Incorrect password.'
-                });
+                return next(new Forbidden('Incorrect password.'));
             }
 
-            res.status(200).json({
-                token: createToken({id: user.id})
+            res.json({
+                token: auth.createToken(JSON.stringify({id: user.id}))
             });
+            console.log('res: ', res);
         });
     });
 }
 
-function getTopicTree(req, res) {
+function getTopicTree(req, res, next) {
     var topic = req.params.topic;
 
     async.waterfall([
@@ -108,18 +109,17 @@ function getTopicTree(req, res) {
             });
         }
     ], function(err, topics){
-        if (err) return internalServerError(err);
-        res.status(200).json(
-            topics
-        );
+        if (err) return next(err);
+        res.json(topics);
     });
 }
 
-function questionsByBackgroundId(req, res){
+function questionsByBackgroundId(req, res, next){
     var questionSet = req.params.id;
+
     req.db.query('select description, id from concurrenceQuestions where background = ?',
         [questionSet], function(err, rows){
-        if (err) return internalServerError(res, err);
+        if (err) return next(err);
 
         res.json(rows);
     });
@@ -138,6 +138,12 @@ function postPoliticianList(req,res){
     });
 }
 
+function meInfo(req, res) {
+    var user = req.authorize();
+
+    res.json(user);
+}
+
 module.exports = function(db) {
     var app = express();
 
@@ -147,15 +153,38 @@ module.exports = function(db) {
         req.db = db;
         next();
     });
+    app.use(function(req, res, next) {
+        req.authorize = function() {
+            var token = req.headers.authorization;
+
+            if (token) {
+                console.log('parsed', auth.parseToken(token));
+                return JSON.parse(auth.parseToken(token));
+            } else {
+                throw new Forbidden('A valid authtoken is needed to access this page.');
+            }
+        };
+        next();
+    });
 
     app.post('/login', login);
     app.post('/register', register);
     app.get('/backgrounds/:id/questions', questionsByBackgroundId);
     app.get('/topic-tree/:topic', getTopicTree);
     app.post('/politician-list', postPoliticianList);
+    app.get('/me/info', meInfo);
 
     app.use(function(err, req, res, next) {
-        internalServerError(res, err);
+        if (err.status) {
+            res.status(err.status).json({
+                message: err.message
+            });
+        } else {
+            console.error(err.stack);
+            res.status(500).json({
+                message: 'Internal server error'
+            });
+        }
     });
 
     return app;

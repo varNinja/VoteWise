@@ -204,6 +204,7 @@ create table `voters` (
     `type`          enum('voter') not null,
     `politicianList` integer not null references politicianLists(user),
     foreign key(id, type) references users(id, type)
+
 );
 
 create table `politicianLists` (
