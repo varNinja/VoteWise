@@ -41,6 +41,28 @@ function register(req, res, next) {
     });
 }
 
+function postConcurrenceAnswer(req, res, next){
+    var answer = req.body.answer;
+    var question = answer.question;
+    var background = answer.background;
+    var concurrence = answer.concurrence;
+    var importance = answer.importance;
+    var user = answer.user; 
+    var comment = answer.comment;
+
+    console.log("quesiton ", question, " background ", background, " concurrence " , concurrence,
+        " importance ", importance, " user ", user);
+
+    req.db.query('INSERT INTO concurrenceAnswers (question, user, background, concurrence, importance, comment) values (?, ?, ?, ?, ?, ?)',
+        [question, user, background, concurrence, importance, comment],  function (err, result){
+            console.log('result from insert query: ', result);
+            console.error('error: ', err);
+    });
+
+    console.log("postConcurrenceAnswer called");
+    console.log("var answer = ", answer);
+};
+
 function login(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
@@ -150,10 +172,10 @@ function postPoliticianList(req,res){
 
 function meInfo(req, res) {
     var user = req.authorize();
-    console.log('meInfo called');
-    console.log('user: ', user);
-    console.log('authorization: ', req.headers.authorization);
-    res.json(user);
+    // console.log('meInfo called');
+    // console.log('user: ', user);
+    // console.log('authorization: ', req.headers.authorization);
+    // res.json(user);
 }
 
 module.exports = function(db) {
@@ -168,6 +190,7 @@ module.exports = function(db) {
     app.use(function(req, res, next) {
         req.authorize = function() {
             var token = req.headers.authorization;
+            console.log('token: ', token);
 
             if (token) {
                 console.log('parsed', auth.parseToken(token));
@@ -185,8 +208,11 @@ module.exports = function(db) {
     app.get('/topic-tree/:topic', getTopicTree);
     app.post('/politician-list', postPoliticianList);
     app.get('/me/info', meInfo);
+    app.post('/concurrence', postConcurrenceAnswer);
+
 
     app.use(function(err, req, res, next) {
+        console.error(err);
         if (err.status) {
             res.status(err.status).json({
                 message: err.message
