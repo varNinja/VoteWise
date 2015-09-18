@@ -29,7 +29,23 @@ create table `questions`(
     unique index(id,type)
 );
 
+create table `answers`(
+    `id`          integer primary key auto_increment,
+    `type`  enum('concurrence', 'ranking', 'judge', 'shortInput') not null,
+    `question`    integer not null references concurrenceQuestions(id),
+    `user`        integer not null references users(id),
+    `background`  integer not null references backgrounds(id),
+    `importance`  integer not null,
+    `comment`     text,    
+    `changeReason` text,
+    `date`        timestamp,
 
+    unique index(id,type)
+
+);
+
+
+    
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- Concurrence Questions
@@ -42,19 +58,12 @@ create table `concurrenceQuestions` (
 );
 
 create table `concurrenceAnswers` (
-    `id`          integer primary key auto_increment,
-    `question`    integer not null references concurrenceQuestions(id),
-    `user`        integer not null references users(id),
-    `background`  integer not null references concurrenceQuestions(background),
+    `id`          integer not null,
+    `type`        enum('concurrence') not null,
     `concurrence` integer not null,
-    `importance`  integer not null,
-    `comment`     text,
-    `previousComment` text,
-    `previousConcurrence` integer,
-    `previousImportance` integer,
-    `changeReason` text,
+    
+    foreign key(id, type) references answers(id, type)
 
-    unique (question, user)
 );
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -72,6 +81,8 @@ create table `rankingQuestionItems` (
     `id`            integer primary key auto_increment,
     `question`      integer not null references rankingQuestions(id),
     `item`          text not null
+
+
 );
 
 create table `rankingAnswerItems` (
@@ -81,19 +92,16 @@ create table `rankingAnswerItems` (
     `rank`          integer,
     `previousRank`  integer,
     `changeReason`  text,
+    `date`          timestamp, 
 
     unique (user, item)
 );
 
 create table `rankingAnswers` (
-    `id`                integer primary key auto_increment,
-    `user`              integer not null references users(id),
-    `question`          integer not null references rankingQuestion(id),
-    `importance`        integer not null,
-    `comment`           text,
-    `previousImportance` integer,
-    `previousComment`   text,
-    `changeReason`      text
+    `id`                integer primary key,
+    `type`              enum('ranking'),
+
+    foreign key(id, type) references answers(id, type)
 );
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -103,25 +111,19 @@ create table `rankingAnswers` (
 
 create table `judgeQuestions` (
     `id` integer primary key,
-    `type` enum('concurrence') not null,
+    `type` enum('judge') not null,
     foreign key(id, type) references questions(id, type)
 );
 
 create table `judgeAnswers` (
-    `id`                    integer primary key auto_increment,
-    `user`                  integer not null references users(id),
-    `question`              integer not null references judgeQuestions(id),
+    `id`                    integer primary key,
+    `type`                  enum('judge'),
     `concurrence`           integer not null,
-    `importance`            integer not null,
     `lawSpirit`             integer,
     `lawLetter`             integer,
     `lawPrecedent`          integer,
     `lawSocialNeed`         integer,
-    `comment`               text,
-    `previousImportance`    integer,
-    `previousConcurrence`   integer,
-    `previousComment`       text,
-    `changeReason`          text
+    foreign key (id, type) references answers(id,type)
 );
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -131,20 +133,15 @@ create table `judgeAnswers` (
 
 create table `shortInputQuestions` (
     `id` integer primary key,
-    `type` enum('concurrence') not null,
+    `type` enum('shortInput') not null,
     foreign key(id, type) references questions(id, type)
 );
 
 create table `shortInputAnswers` (
-    `id`                integer primary key auto_increment,
-    `question`          integer not null references shortInputQuestions,
-    `answer`            text not null,
-    `comment`           text,
-    `importance`        integer,
-    `previousAnswer`    text not null,
-    `changeReason`      text,
-    `previousComment`   text,
-    `previousImportance`    integer
+    `id`                integer primary key,
+    `type`              enum('shortInput'),
+
+    foreign key (id, type) references answers(id,type)
 );
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,5 +1,6 @@
 
 INSERT INTO `questions` (`type`, `id`, `background`, `description`, `viewOrder`) VALUES
+
 ('concurrence', 1, 55, 'I’m fine with the government getting basic access to my Google and Facebook information.  Why should police and others trying to save lives NOT have access to the same information that spammers trying to sell me Viagra do?', 1),
 ('concurrence', 2, 55, 'Collecting more data in any single location makes my private life more susceptible to hacking by unscrupulous individuals or government agencies.  Now my information is spread out over many companies, but if it was all in one place then one good hacker could destroy my life.', 2),
 ('concurrence', 3, 55, 'The government should not listen to my phone calls.', 3),

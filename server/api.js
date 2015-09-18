@@ -2,6 +2,7 @@ var async = require('async');
 var bodyParser = require('body-parser');
 var express = require('express');
 var auth = require('./auth');
+var dbutil = require('./dbutil');
 
 function NotFound(message) {
     Error.call(this, message);
@@ -50,18 +51,43 @@ function postConcurrenceAnswer(req, res, next){
     var user = answer.user; 
     var comment = answer.comment;
 
-    console.log("quesiton ", question, " background ", background, " concurrence " , concurrence,
+    console.log("question ", question, " background ", background, " concurrence " , concurrence,
         " importance ", importance, " user ", user);
 
-    req.db.query('INSERT INTO concurrenceAnswers (question, user, background, concurrence, importance, comment) values (?, ?, ?, ?, ?, ?)',
-        [question, user, background, concurrence, importance, comment],  function (err, result){
-            console.log('result from insert query: ', result);
-            console.error('error: ', err);
-    });
+    console.log('req.db ', req.db);
+
+    dbutil.transaction(req.db, 
+
+        function(done){
+
+            req.db.query('INSERT INTO answers (question, user, background, importance, comment) values (?, ?, ?, ?, ?)',
+                [question, user, background, concurrence, importance, comment],  function (err, result){
+                    console.log('result from insert query: ', result);
+                    console.error('error: ', err);
+                    done();
+                // req.db.query('INSERT INTO concurrenceAnswers (concurrence) values (?)',
+                //     [concurrence], function (err, result){
+                //         console.log('result form insert query: ', result);
+                //         console.error('error: ', err);
+
+                // })
+
+            });
+
+            
+        }, function(){}
+
+        );
+
+    
 
     console.log("postConcurrenceAnswer called");
     console.log("var answer = ", answer);
 };
+
+function getAnswers(req, res, next){
+    req.db.query('select * from concurrenceAnswers')
+}
 
 function login(req, res, next) {
     var username = req.body.username;
