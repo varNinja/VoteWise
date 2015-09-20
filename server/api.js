@@ -67,9 +67,10 @@ function postConcurrenceAnswer(req, res, next){
     console.log("var answer = ", answer);
 };
 
-function getAnswers(req, res, next){
-    req.db.query('select * from concurrenceAnswers')
-}
+// function getAnswers(req, res, next){
+//     req.db.query('select * from answers',
+//         function(err, rows, fields))
+// }
 
 function login(req, res, next) {
     var username = req.body.username;
@@ -195,12 +196,22 @@ function postPoliticianList(req,res){
         });
 }  
 
+function getPoliticianList(req,res){
+    var userId = req.params.id
+    console.log(userId);
+    req.db.query('select * from politicianLists where user = ?',
+        [userId], function (err, rows){
+        console.log('rows from getPoliticianList: ', rows);
+        res.json(rows);
+    });
+}
+
 function meInfo(req, res) {
     var user = req.authorize();
-    // console.log('meInfo called');
-    // console.log('user: ', user);
-    // console.log('authorization: ', req.headers.authorization);
-    // res.json(user);
+    console.log('meInfo called');
+    console.log('user: ', user);
+    console.log('authorization: ', req.headers.authorization);
+    res.json(user);
 }
 
 module.exports = function(db) {
@@ -232,6 +243,7 @@ module.exports = function(db) {
     app.get('/backgrounds/:id/questions', questionsByBackgroundId);
     app.get('/topic-tree/:topic', getTopicTree);
     app.post('/politician-list', postPoliticianList);
+    app.get('/politician-list/:id', getPoliticianList);
     app.get('/me/info', meInfo);
     app.post('/concurrence', postConcurrenceAnswer);
 
