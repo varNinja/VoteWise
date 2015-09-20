@@ -45,6 +45,7 @@ function register(req, res, next) {
 function postConcurrenceAnswer(req, res, next){
 
     var answers = req.body.answers
+    console.log("var answers = ", answers);
 
     async.forEachOf(answers, function(answer, key, callback){
          req.db.query('INSERT INTO answers (question, user, background, importance, comment) values (?, ?, ?, ?, ?)',
@@ -64,13 +65,36 @@ function postConcurrenceAnswer(req, res, next){
     })
 
     console.log("postConcurrenceAnswer called");
-    console.log("var answer = ", answer);
 };
 
-// function getAnswers(req, res, next){
-//     req.db.query('select * from answers',
-//         function(err, rows, fields))
-// }
+function getAnswers(req, res, next){
+    var userId = req.params.id;
+    var getComparison = req.params.compare;
+    console.log('userid: ', userId); 
+    console.log('getComparison: ', getComparison);
+
+    req.db.query('select * from answers where user = ?',
+        [userId], function(err, rows, fields){
+            console.log("before res.json.userAnswers = rows: ", rows);
+            res.json.usersAnswers = rows;
+        }); 
+
+    if (getComparison == 'yes'){
+        req.db.query('select * from politicianLists where user = ?',
+            [userId], function (err, rows){
+            console.log('rows from getPoliticianList: ', rows);
+            var comparisonAnswers
+            // async.forEachOf(list, function(row, key, callback){
+            //     req.db.query('select * from answers where user =?',
+            //         [list[key]], function(err, rows){
+
+            //         }
+            // },)
+        });
+    }
+};
+
+
 
 function login(req, res, next) {
     var username = req.body.username;
@@ -246,6 +270,7 @@ module.exports = function(db) {
     app.get('/politician-list/:id', getPoliticianList);
     app.get('/me/info', meInfo);
     app.post('/concurrence', postConcurrenceAnswer);
+    app.get('/answers/:id/:compare?', getAnswers);
 
 
     app.use(function(err, req, res, next) {
