@@ -18,6 +18,7 @@ drop table if exists questions;
 drop table if exists voters;
 drop table if exists users;
 drop table if exists politicianLists;
+drop table if exists answers;
 
 
 create table `questions`(
@@ -41,7 +42,6 @@ create table `answers`(
     `date`        timestamp,
 
     unique index(id,type)
-
 );
 
 
@@ -62,8 +62,7 @@ create table `concurrenceAnswers` (
     `type`        enum('concurrence') not null,
     `concurrence` integer not null,
     
-    foreign key(id, type) references answers(id, type)
-
+    foreign key(id, type) references answers(id,type)
 );
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

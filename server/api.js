@@ -43,43 +43,25 @@ function register(req, res, next) {
 }
 
 function postConcurrenceAnswer(req, res, next){
-    var answer = req.body.answer;
-    var question = answer.question;
-    var background = answer.background;
-    var concurrence = answer.concurrence;
-    var importance = answer.importance;
-    var user = answer.user; 
-    var comment = answer.comment;
 
-    console.log("question ", question, " background ", background, " concurrence " , concurrence,
-        " importance ", importance, " user ", user);
+    var answers = req.body.answers
 
-    console.log('req.db ', req.db);
-
-    dbutil.transaction(req.db, 
-
-        function(done){
-
-            req.db.query('INSERT INTO answers (question, user, background, importance, comment) values (?, ?, ?, ?, ?)',
-                [question, user, background, concurrence, importance, comment],  function (err, result){
-                    console.log('result from insert query: ', result);
-                    console.error('error: ', err);
-                    done();
-                // req.db.query('INSERT INTO concurrenceAnswers (concurrence) values (?)',
-                //     [concurrence], function (err, result){
-                //         console.log('result form insert query: ', result);
-                //         console.error('error: ', err);
-
-                // })
-
-            });
-
-            
-        }, function(){}
-
-        );
-
-    
+    async.forEachOf(answers, function(answer, key, callback){
+         req.db.query('INSERT INTO answers (question, user, background, importance, comment) values (?, ?, ?, ?, ?)',
+            [answers[key].question, answers[key].user, answers[key].background,
+             answers[key].concurrence, answers[key].importance, answers[key].comment],
+               function (err, result){
+                console.log('result from insert query: ', result);
+                console.error('error: ', err);
+                var insertId = result.insertId;
+             
+                req.db.query('INSERT INTO concurrenceAnswers (concurrence, id) values (?, ?)',
+                    [answers[key].concurrence, insertId], function (err, result){
+                        console.log('result form insert query: ', result);
+                        console.error('error: ', err);
+                })
+        });
+    })
 
     console.log("postConcurrenceAnswer called");
     console.log("var answer = ", answer);
@@ -175,26 +157,43 @@ function questionsByBackgroundId(req, res, next){
 }
 
 
+
+    
+
 // This is to create entries into the politicianList table
 // which takes a 'politician' and a 'user'
 function postPoliticianList(req,res){
-    var items = req.body.listItems
+    var items = req.body.list.politicians;
+    var user = req.body.list.user;
     console.log('items: ', items);
     console.log('/politician-list post call called')
-    async.forEachOf(items, function (item, key, callback){
-        console.log(items[key]);
-        req.db.query('SELECT * from politicianLists where user = ?',
-            items[key].user, function (err, rows){
-                console.log('rows from user already in politicianList: ',rows); 
-            })
-        req.db.query('INSERT INTO politicianLists SET ?',
-         items[key], function (err, result){
-            console.log('result from insert query: ', result);
-            console.error('error: ', err);
-
+    
+    req.db.query('DELETE FROM politicianLists WHERE user = ?',
+        [user], function (err, result){
+             if (err) throw err;
+            console.log('deleted ' + result.affectedRows + ' rows');
+            async.forEachOf(items, function (item, key, callback){
+                    req.db.query('INSERT INTO politicianLists (user, politician) values (?, ?)',
+                         [user, items[key]], function (err, result){
+                            console.log('result from insert query: ', result);
+                            console.error('error: ', err);       
+                    }); 
+                callback();  
+            },
+            function(err, result){
+                if (err) {
+                    // errno 1062 is what mysql returns for duplicate rows.
+                    if (err.errno == 1062) {
+                        next(new Conflict('A user with that username already exists.'));
+                    } else {
+                        next(err);
+                    }
+                } else {
+                    res.status(201).json({});
+                }
+            });
         });
-    });
-}
+}  
 
 function meInfo(req, res) {
     var user = req.authorize();
