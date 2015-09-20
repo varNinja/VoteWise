@@ -130,29 +130,37 @@ function questionsByBackgroundId(req, res, next){
 // This is to create entries into the politicianList table
 // which takes a 'politician' and a 'user'
 function postPoliticianList(req,res){
-    var politicians = req.body.list.politicians
-    var user = req.body.list.user
-    console.log('politicians: ', politicians);
+    var items = req.body.list.politicians;
+    var user = req.body.list.user;
+    console.log('items: ', items);
     console.log('/politician-list post call called')
-
-
+    
     req.db.query('DELETE FROM politicianLists WHERE user = ?',
         [user], function (err, result){
              if (err) throw err;
             console.log('deleted ' + result.affectedRows + ' rows');
-        });
-
-    async.forEachOf(politicians, function (item, key, callback){
-        console.log(politicians[key]);
-        var insert = {"user": user, "politician": politicians[key]}
-
-        req.db.query('INSERT INTO politicianLists SET ?',
-         [insert], function (err, result){
-            console.log('result from insert query: ', result);
-            console.error('error: ', err);
+            async.forEachOf(items, function (item, key, callback){
+                    req.db.query('INSERT INTO politicianLists (user, politician) values (?, ?)',
+                         [user, items[key]], function (err, result){
+                            console.log('result from insert query: ', result);
+                            console.error('error: ', err);       
+                    }); 
+                callback();  
+            },
+            function(err, result){
+                if (err) {
+                    // errno 1062 is what mysql returns for duplicate rows.
+                    if (err.errno == 1062) {
+                        next(new Conflict('A user with that username already exists.'));
+                    } else {
+                        next(err);
+                    }
+                } else {
+                    res.status(201).json({});
+                }
             });
-    });
-}
+        });
+}  
 
 function meInfo(req, res) {
     var user = req.authorize();
