@@ -6,7 +6,7 @@
 </head>
 <body>
   <header>
-    <img id="logo" src="images/votewiselogo.png" />
+    <a href="/"><img id="logo" src="images/votewiselogo.png" /></a>
     <div id="topBarButtons">
       <img src="images/expand-tool.png" />
       <img src="images/question.png" />
@@ -15,8 +15,17 @@
       <img src="images/settings.png" />
     </div>
   </header>
-  <div class="content">
-    <h1>Login</h1>
+  <div class="content authPage">
+    <h1 class="centerTx headerText">Login</h1>
+
+    <form class="loginForm centerEl">
+      <input type="text" id="username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
+      <button class="centerEl" type="submit">Go</button>
+    </form>
+
+    <button class="centerEl signupButton">Signup</button>
+
   </div>
 </body>
 </html>
