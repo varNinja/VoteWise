@@ -46,4 +46,3 @@ gulp dist           # Distribute the application
 
 Recent changes can be viewed on Github on the [Releases Page](https://github.com/spencersnygg/votewise/releases)
 
-## License
